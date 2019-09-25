@@ -1,0 +1,397 @@
+%\documentclass[referee]{aa}
+\documentclass{aa}
+
+
+\usepackage[utf8]{inputenc}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{url}
+\usepackage{amsmath}	% Advanced maths commands
+\usepackage{amssymb}	% Extra maths symbols
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{natbib}
+\usepackage{hyperref}
+
+%\usepackage{newtxtext,newtxmath}
+\usepackage{times,txfonts}
+\usepackage{bm}
+
+% Depending on your LaTeX fonts installation, you might get better results with one of these:
+%\usepackage{mathptmx}
+%\usepackage{txfonts}
+
+% Use vector fonts, so it zooms properly in on-screen viewing software
+% Don't change these lines unless you know what you are doing
+\usepackage[T1]{fontenc}
+\usepackage{ae,aecompl}
+
+
+%landscape figures
+%\usepackage{wrapfig}
+%\usepackage{lscape}
+%\usepackage{rotating}
+
+\bibpunct{(}{)}{;}{a}{}{,} % to follow the A&A style
+
+%Debug addition for collaborators
+%\usepackage[switch, modulo]{lineno}
+%\linenumbers
+%\renewcommand\linenumberfont{\color{red}\normalfont\tiny\sffamily}
+%\renewcommand\linenumberfont{\normalfont\tiny\sffamily}
+
+\DeclareUnicodeCharacter{00A0}{ }
+
+\usepackage{listingsutf8}
+
+% configure listings package
+\lstset{
+         basicstyle=\footnotesize\ttfamily, 
+         %numbers=left,               
+         numberstyle=\tiny,          
+         %stepnumber=2,             
+         numbersep=5pt,             
+         tabsize=2,                  
+         extendedchars=true,         
+         breaklines=true,            
+         keywordstyle=\color{red},
+         frame=b,
+ %        keywordstyle=[1]\textbf,   
+ %        keywordstyle=[2]\textbf,   
+ %        keywordstyle=[3]\textbf,   
+ %        keywordstyle=[4]\textbf,   
+         %stringstyle=\color{white}\ttfamily, % Farbe der String
+         showspaces=false,           
+         showtabs=false,            
+         xleftmargin=17pt,
+         framexleftmargin=17pt,
+         framexrightmargin=5pt,
+         framexbottommargin=4pt,
+         %backgroundcolor=\color{lightgray},
+         showstringspaces=false    
+}
+\lstloadlanguages{C++}
+\newcommand{\codeil}[1]{\lstinline!#1!}
+
+
+\input{defs.tex}
+
+\newcommand{\Cfl}{\hat{c}}
+\newcommand{\hf}{\frac{1}{2}}
+
+\newcommand{\Bhat}{\vec{\hat{B}}}
+\newcommand{\Ehat}{\vec{\hat{E}}}
+\newcommand{\Jhat}{\vec{\hat{J}}}
+\newcommand{\uhat}{\vec{\hat{u}}}
+\newcommand{\vhat}{\vec{\hat{v}}}
+\newcommand{\xhat}{\vec{\hat{x}}}
+\newcommand{\that}{\hat{t}}
+
+\newcommand{\gammam}{\langle \gamma \rangle}
+
+\newcommand{\Nppc}{N_{\mathrm{ppc}}}
+
+\newcommand{\f}[1]{\ensuremath{f_{\mathrm{ {#1} }}}}
+\newcommand{\dt}{\ensuremath{\Delta t}} %delta t
+\newcommand{\dd}{\mathrm{d}}
+
+
+%spesific additions
+\newcommand{\runko}{\textsc{Runko}}
+
+\newcommand{\corgi}{\textsc{corgi}}
+%\newcommand{\python}{\textsc{Python3}}
+\newcommand{\tristan}{\textsc{Tristan}}
+\newcommand{\tristanmp}{\textsc{Tristan-MP}}
+\newcommand{\pybind}{\textsc{Pybind11}}
+\newcommand{\eigen}{\textsc{Eigen}}
+\newcommand{\numpy}{\textsc{Numpy}}
+\newcommand{\scipy}{\textsc{Scipy}}
+\newcommand{\matplotlib}{\textsc{Matplotlib}}
+
+
+\newcommand{\todo}[1]{\red{#1}}
+
+
+%________________________________________________________________
+\begin{document}
+
+
+\title{Digital filtering}
+
+\author{J.\,N\"attil\"a\inst{1}}
+
+\institute{Nordita, KTH Royal Institute of Technology and Stockholm University, Roslagstullsbacken 23, SE-10691 Stockholm, Sweden. \email{joonas.nattila@su.se}
+}
+
+\date{Received XXX / Accepted XXX}
+
+
+\abstract{
+    Notes about digital (and frequency space) current filtering on particle-in-cell simulations.
+}
+
+\keywords{ Plasmas -- Turbulence -- Methods: numerical }
+
+
+\maketitle
+
+%________________________________________________________________
+%\section{Introduction}\label{sec:intro}
+%\citep{birdsall1985}
+
+%\section{Theory}\label{sect:theory}
+
+%\section{Results}\label{sect:results}
+
+%\section{Summary}\label{sect:summary}
+
+%\section*{Acknowledgments}
+%JN would like to thank XXX stimulating discussions on numerics and plasma simulations. 
+%The simulations were performed on resources provided by the Swedish National Infrastructure for Computing (SNIC) at PDC and HPC2N.
+
+
+
+%--------------------------------------------------
+\section{Current filtering}\label{app:filtering}
+
+See \citet{glasbey1995} for a general discussion about filters.
+Here we will mainly focus on linear filters.
+
+
+%Other citations:
+%Shapiro1970
+
+\subsection{Fourier-space filtering}
+
+Convolution of an image $f$ with kernel $w$ (also known as filter mask) to produce a new image $g$ can be expressed as 
+\be
+g = f \ast w = \int_{\infty}^{\infty} f(\tau) (t-\tau) d\tau. 
+\ee
+Discrete direct convolution, $g = f \circledast w$, valid for images that are defined on a grid can be expressed as
+\be
+g_{ij} = \sum_{k=-\frac{n}{2}}^{\frac{n}{2}-1}  \sum_{l=-\frac{n}{2}}^{\frac{n}{2}-1} w_{kl} f_{i+k, j+l},
+\ee
+for $i,j=1,\ldots,n$ where $(i+k)$ is replaced by $(i+k \pm n)$, if it falls outside the range from $1$ to $n$.
+Similar transformation needs to be applied to $(j+l)$.
+This is the so-called cyclic (wrapped) direct convolution.
+In this case, the design of filters reduces to finding expressions for the kernel $w$.
+
+Fourier transform of $f$, $g$, and $w$ satisfy
+\be
+g_{kl}^* = w_{kl}^* f_{kl}^*,
+\ee
+for $k,l = 1,\ldots,n$, provided that $w$ and $f$ are arrays of the same size.
+Therefore, filtering in the spatial domain can be expressed with a simple point-by-point multiplication in the frequency domain.
+Typically different sources claim that it is beneficial to use Fourier domain for filtering if the kernel is bigger than $7\times7$.
+This allows us to design filters in the frequency domains, finding expressions for the $w^*$. 
+
+Ideal low-pass filter is given by setting $w_{kl}^*$ to zero beyond certain distance $R$ from the origin, and otherwise to unity as
+\be
+w_{kl}^*  =
+\begin{cases}
+    1 \quad &\text{if } k^2 + l^2 < R^2, \\
+    0 \quad &\text{otherwise,} \\
+\end{cases}
+\ee
+for $k,l = -\frac{n}{2},\ldots,\frac{n}{2}-1$.
+This will, however, lead to ringing, as is evident from the spatial-domain weights of $w$ that have both negative and positive values.
+
+A filter that minimizes ringing is a Gaussian 
+\be
+w_{ij} = \frac{1}{\sqrt{2\pi\sigma^2}} \exp \left\{ \frac{-{i^2 + j^2}}{2\sigma^2} \right\},
+\ee
+where $\sigma$ is the standard deviation or a width of the filter in units of pixels.
+Fourier transform of the Gaussian weights can be expressed by
+\be
+w_{kl}^* = \exp \left\{ \frac{-{k^2 + l^2}}{2[n/(2\pi\sigma)]^2} \right\},
+\ee
+that is a scaled version of the spatial domain Gaussian, but with a different spread.
+
+In conclusion, a good filter should be resembling a Gaussian as close as possible.
+
+\subsection{Digital filtering}
+
+Digital filtering describes the process of filtering a quantity on the $x$-space (withouth any Fourier transforms to $k$-space).
+\red{Hamming1977}
+\red{Collatz1966}
+\citep{birdsall1985}
+
+Given a grid quantity $X_i \equiv X(i \Delta x)$ a simple digital filtering is performed by replacing
+\be
+X_i \leftarrow \frac{W X_{i-1} + X_i + W X_{j+1}}{1 + 2W},
+\ee
+where $W$ is the filter weight.
+Caution is needed to make sure that points on the right-hand side are the original values.
+
+Different compact filters can be obtained by selecting different weightings.
+A filter with $W=\frac{1}{2}$ is called a binomial filter and has a positive smoothing function in $k$-space.
+Selecting $W < 0$ produces a so-called compensation filter as it enhances the original signal.
+$W = -\frac{1}{6}$ gives a compensation that cancels second-order attenuation of a $W=\frac{1}{2}$ filter, i.e., applying a $W=\frac{1}{2}$ filter followed by a $W=-\frac{1}{6}$ produces a fourth-order attenuated filter corresponding to a broader stencil with weights of $(1/16)[-1\quad 4\quad 10\quad 4\quad -1]$.
+
+All of the filtering operations above need a temporary scratch array of the quantity being processed.
+A scratch-memory-free alternatives can be derived by assuming multiple passes with different filters.
+Simplest one can be obtained by replacing $X_i$ with a forward-pass of $X_i + U X_{i+1}$ and a backward-pass of $X_i + U X_{i-1}$, for a multi-pass filter parameter $U$.
+This is equal to the one-pass filter for
+\be
+W = \frac{U}{1+U^2}
+\ee
+or
+\be
+U = \frac{1}{2W} \pm \sqrt{ \frac{1}{(2W)^2} - 1}.
+\ee
+For $U$ to be real valued, we require $-\frac{1}{2} \leq W \leq \frac{1}{2}$.
+Binomial two-pass filter (equal to $\frac{1}{4}[1\quad 2\quad 1]$; $W=\frac{1}{2}$) corresponds to $U=1$ with a forward-pass of $\frac{1}{2}[0\quad1\quad1]$ and a return-pass with $\frac{1}{2}[1\quad1\quad0]$.
+The corresponding two-pass compensator ($W=-\frac{1}{6}$) has $U=-3+\sqrt{8} \approx -0.171573$ to be applied after the smoothing.
+
+Two-dimensional filters can be generated by using two one-dimensional filters (shown here for the second-order Binomial filter $B_2$) as 
+\be
+B_2^{(2D)} \equiv B_2 \otimes B_2^T = 
+\frac{1}{4} [1\quad 2\quad 1] \otimes 
+\frac{1}{4}
+\begin{bmatrix}
+    1 \\
+    2 \\
+    1 \\
+\end{bmatrix}
+= \frac{1}{16}
+\begin{bmatrix}
+    1 & 2 & 1 \\
+    2 & 4 & 1 \\
+    1 & 2 & 1 \\
+\end{bmatrix}.
+\ee
+A scratch-memory-free version also exists in a form of a four-pass filter (consisting of $C_{\rightarrow} \equiv \frac{1}{2}[0\quad 1\quad 1]$ and $C_{\leftarrow} \equiv \frac{1}{2}[1\quad 1\quad 0]$) as
+\begin{align}
+B_2^{(2D)} 
+    =& C_{\rightarrow} \otimes C_{\leftarrow} \otimes C_{\rightarrow}^T \otimes C_{\leftarrow}^T \\
+    =& 
+\frac{1}{2}
+\begin{bmatrix}
+    0 & 0 & 0 \\
+    0 & 1 & 1 \\
+    0 & 0 & 0 \\
+\end{bmatrix}
+\frac{1}{2}
+\begin{bmatrix}
+    0 & 0 & 0 \\
+    1 & 1 & 0 \\
+    0 & 0 & 0 \\
+\end{bmatrix}
+\frac{1}{2}
+\begin{bmatrix}
+    0 & 1 & 0 \\
+    0 & 1 & 0 \\
+    0 & 0 & 0 \\
+\end{bmatrix}
+\frac{1}{2}
+\begin{bmatrix}
+    0 & 0 & 0 \\
+    0 & 1 & 0 \\
+    0 & 1 & 0 
+\end{bmatrix}.
+\end{align}
+A possible choice for the compensator can be $(20,-1,-1)$ or $(36, -6, 1)$
+\red{check Birdsall filter notation assumed to be $(\mathrm{center}, \mathrm{middle}, \mathrm{corner})$} 
+\be
+\begin{bmatrix}
+    -1 & -1 & -1 \\
+    -1 & 20 & -1 \\
+    -1 & -1 & -1 
+\end{bmatrix}
+\quad
+\mathrm{or}
+\quad
+\begin{bmatrix}
+     1 & -6 &  1 \\
+    -6 & 36 & -6 \\
+     1 & -6 &  1 
+\end{bmatrix}.
+\ee
+Here, one should, however, note that scratch-free versions can not be vectorized, which means that for modern processing units are probably not the optimal choice.
+
+From the numerical point-of-view the filtering is always a balance between number of passes and size of the filter stencil.
+It also matters in what order we are asking the variables from the array; a modern processor has a prefetcher that can try to guess our memory access patterns. 
+A suitable selection for the $2D$ seems to be a two-pass filtering (up and down) with the compact $3$-point binomial (requiring $3$ values, $X_{i-1}, X_i$, and $X_{i+1}$).
+A modern prefetcher might even be able to cope with a one-pass compact Binomial (requiring $9$ values in $2D$).
+
+Note also that thanks to the usage of tiles (with a lenght of $3$ buffer zones for the current arrays), it can make sense to combine multiple compact Binomial passes into a fewer passes with an extended stencil (supporting a $6$ order stencil with $7$ [$3+1+3$] points with one MPI communication round).
+
+
+\subsection{Binomial filters}
+
+Binomial filters form a compact approximation for the (discretized) Gaussian.\footnote{\url{http://www.cse.yorku.ca/~kosta/CompVis_Notes/binomial_filters.pdf}} 
+    \red{Hamming 1977}
+Binomial coefficients are given by
+\be
+\begin{pmatrix}
+    N \\
+    n \\
+\end{pmatrix}
+= \frac{N!}{(N-n)! N!},
+\ee
+where $n=0,\ldots,N$ and $N$ is the order of the binomial filter $B_N$.
+It forms a rapid approximation for the Gaussian distribution as $\sigma \approx \sqrt{N}/2$.
+\footnote{Alternatively, binomial filters correspond to the rows of the Pascal's triangle.}
+First few are given as
+\begin{align}
+B_0 &=  [1] \\
+B_1 &= \frac{1}{2} [1\quad 1] \\
+B_2 &= \frac{1}{4} [1\quad 2\quad 1] \\
+B_3 &= \frac{1}{8} [1\quad 3\quad 3\quad 1] \\
+B_4 &= \frac{1}{16} [1\quad 4\quad 6\quad 4\quad 1] \\
+B_5 &= \frac{1}{32} [1\quad 5\quad 10\quad 10\quad 5\quad 1] \\
+B_6 &= \frac{1}{64} [1\quad 6\quad 15\quad 20\quad 15\quad 6\quad 1] \\
+\vdots
+\end{align}
+The binomial filter coefficients are applied for a quantity $X$ (defined on a grid as $X_i \equiv X(i\Delta x)$ as
+\be
+X_i^{f_2} = B_2\{ X_i \} = 
+    \frac{1}{4} X_{i-1} + 
+    \frac{1}{2} X_i  + 
+    \frac{1}{4} X_{i+1},
+\ee
+where $X_i^{f_2}$ the filtered quantity and $B_2\{X\}$ denotes an application of a $B_2$ filter on the original quantity.
+Applying higher-order binomial filters generalizes naturally from here.
+
+Discrete-time Fourier transform of the binomial filter $B_2 = \frac{1}{4}[1 \quad 2 \quad 1]$ is proportional to a single period of a cosine as 
+\be
+B_2^*[k] = \sum_n B_2[n] \cos[k n] = \frac{1}{2} + \frac{1}{2} \cos[k].
+\ee
+For higher-order filters of rank $N$ we similarly have
+\be
+B_N^*[k] = \left( \frac{1}{2} + \frac{1}{2}\cos(k) \right)^N.
+\ee
+
+
+
+%Tristan has 
+%binomial filters
+%optimized filters (x,y,z directions; y and z avoid cross-memory accesses)
+%chunk'd filters
+
+
+\subsection{Temporal filters}
+Another possibility, besides usage of spatial filters, is to filter electric field in time.
+This is known as the Friedman filter, defined as
+\be
+\vec{E}^{(n)} = 
+    \left(1+\frac{\theta}{2}\right) \vec{E}^{(n)}
+   -\left(1-\frac{\theta}{2}\right) \vec{E}^{(n-1)}
+   +\frac{1}{2} (1-\theta)^2 \bar{\vec{E}}^{(n-2)},
+\ee
+where $\bar{\vec{E}}^{(n-1)} = \vec{E}^{(n-2)} + \theta \vec{E}^{(n-3)}$, and the filtering parameter $\theta \in [0,1]$.
+
+
+\bibliographystyle{aa}
+\bibliography{refs}
+
+%\begin{thebibliography}{62}
+%\end{thebibliography}
+
+%\clearpage
+\onecolumn
+\begin{appendix}
+\end{appendix}
+
+\end{document}

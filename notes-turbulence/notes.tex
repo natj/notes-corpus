@@ -1,0 +1,342 @@
+%\documentclass[referee]{aa}
+\documentclass{aa}
+
+
+\usepackage[utf8]{inputenc}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{url}
+\usepackage{amsmath}	% Advanced maths commands
+\usepackage{amssymb}	% Extra maths symbols
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{natbib}
+\usepackage{hyperref}
+
+%\usepackage{newtxtext,newtxmath}
+\usepackage{times,txfonts}
+\usepackage{bm}
+
+% Depending on your LaTeX fonts installation, you might get better results with one of these:
+%\usepackage{mathptmx}
+%\usepackage{txfonts}
+
+% Use vector fonts, so it zooms properly in on-screen viewing software
+% Don't change these lines unless you know what you are doing
+\usepackage[T1]{fontenc}
+\usepackage{ae,aecompl}
+
+
+%landscape figures
+%\usepackage{wrapfig}
+%\usepackage{lscape}
+%\usepackage{rotating}
+
+\bibpunct{(}{)}{;}{a}{}{,} % to follow the A&A style
+
+%Debug addition for collaborators
+%\usepackage[switch, modulo]{lineno}
+%\linenumbers
+%\renewcommand\linenumberfont{\color{red}\normalfont\tiny\sffamily}
+%\renewcommand\linenumberfont{\normalfont\tiny\sffamily}
+
+\DeclareUnicodeCharacter{00A0}{ }
+
+\usepackage{listingsutf8}
+
+% configure listings package
+\lstset{
+         basicstyle=\footnotesize\ttfamily, 
+         %numbers=left,               
+         numberstyle=\tiny,          
+         %stepnumber=2,             
+         numbersep=5pt,             
+         tabsize=2,                  
+         extendedchars=true,         
+         breaklines=true,            
+         keywordstyle=\color{red},
+         frame=b,
+ %        keywordstyle=[1]\textbf,   
+ %        keywordstyle=[2]\textbf,   
+ %        keywordstyle=[3]\textbf,   
+ %        keywordstyle=[4]\textbf,   
+         %stringstyle=\color{white}\ttfamily, % Farbe der String
+         showspaces=false,           
+         showtabs=false,            
+         xleftmargin=17pt,
+         framexleftmargin=17pt,
+         framexrightmargin=5pt,
+         framexbottommargin=4pt,
+         %backgroundcolor=\color{lightgray},
+         showstringspaces=false    
+}
+\lstloadlanguages{C++}
+\newcommand{\codeil}[1]{\lstinline!#1!}
+
+
+\input{defs.tex}
+
+\newcommand{\Cfl}{\hat{c}}
+\newcommand{\hf}{\frac{1}{2}}
+
+\newcommand{\Bhat}{\vec{\hat{B}}}
+\newcommand{\Ehat}{\vec{\hat{E}}}
+\newcommand{\Jhat}{\vec{\hat{J}}}
+\newcommand{\uhat}{\vec{\hat{u}}}
+\newcommand{\vhat}{\vec{\hat{v}}}
+\newcommand{\xhat}{\vec{\hat{x}}}
+\newcommand{\that}{\hat{t}}
+
+\newcommand{\gammam}{\langle \gamma \rangle}
+
+\newcommand{\Nppc}{N_{\mathrm{ppc}}}
+
+\newcommand{\f}[1]{\ensuremath{f_{\mathrm{ {#1} }}}}
+\newcommand{\dt}{\ensuremath{\Delta t}} %delta t
+\newcommand{\dd}{\mathrm{d}}
+
+
+%spesific additions
+\newcommand{\runko}{\textsc{Runko}}
+
+\newcommand{\corgi}{\textsc{corgi}}
+%\newcommand{\python}{\textsc{Python3}}
+\newcommand{\tristan}{\textsc{Tristan}}
+\newcommand{\tristanmp}{\textsc{Tristan-MP}}
+\newcommand{\pybind}{\textsc{Pybind11}}
+\newcommand{\eigen}{\textsc{Eigen}}
+\newcommand{\numpy}{\textsc{Numpy}}
+\newcommand{\scipy}{\textsc{Scipy}}
+\newcommand{\matplotlib}{\textsc{Matplotlib}}
+
+
+\newcommand{\todo}[1]{\red{#1}}
+
+
+%________________________________________________________________
+\begin{document}
+
+
+\title{Turbulence}
+
+\author{J.\,N\"attil\"a\inst{1}}
+
+\institute{Nordita, KTH Royal Institute of Technology and Stockholm University, Roslagstullsbacken 23, SE-10691 Stockholm, Sweden. \email{joonas.nattila@su.se}
+}
+
+\date{Received XXX / Accepted XXX}
+
+
+\abstract{
+    Blaa blaa.
+}
+
+\keywords{ Plasmas -- Turbulence -- Methods: numerical }
+
+
+\maketitle
+
+%________________________________________________________________
+%\section{Introduction}\label{sec:intro}
+%\citep{birdsall1985}
+
+
+\section{Theory}\label{sect:theory}
+
+\citep{Sobacchi_2019} paragraphs: \\
+
+The most important property of MHD turbulence is its strong anisotropy, with the turbulent eddies becoming strongly elongated in the direction of the background magnetic field at small scales.
+As first proposed by Goldreich \& Sridhar (1995), in the course of the turbulent cascade the ratio of the longitudinal scale of the eddies, $\lambda_{\parallel}$, to the Alfven velocity remains equal to the ratio of the, perpendicular scale, $\lambda_{\perp}$,to the turbulent velocity 
+This condition is known as critical balance. 
+From this condition one finds
+\be
+\frac{\lambda_{\perp}}{\lambda_{\parallel}} \sim \sqrt{ \frac{\lambda_{\parallel}}{R} }
+\ee
+
+
+The statement that in collisionless plasmas the anisotropic MHD turbulence decays by heating/accelerating particles along the background magnetic field is general. 
+Indeed, the dissipation occurs at the wave-particle resonances
+\be
+\omega - \vec{k} \cdot \vec{v} = n \omega_B
+\ee
+where $\omega$ and $\vec{k}$ are the frequency and the wavenumber, $\vec{v}$ is the particle velocity, $\omega_B$ is the Larmor frequency, and $n$ is an integer.
+The cyclotron resonance condition $n \ne 0$ is satisfied when the longitudinal scale of the wave packet, $\lambda_{\parallel}$ is of the order of the particle Larmor radius, $r_L = c/\omega_B$.
+Since $r_L \ll R$, due to the strong anisotropy of the MHD turbulence a particle crosses many wave packerts during one Larmor orbit.
+It was first noticed by Gruzinov (1998), Quataert (1998), and Quataert \& Gruzinov (1999) that in this case the dissipation occurs at the Landau resonance $n = 0$.
+Since the two physical mechanisms of wave-particle interaction at the $n=0$ resonance are due to 
+i) the longitudinal electric field of the wave, and
+ii) the interaction between the effective particle's magnetic moment and the longitudinal magnetic perturbation, one is led to the conclusion that the turbulent energy is primarily dissipated on to the longitudinal particle motion.
+
+It has also been found that the turbulent fluctuations tend to align with one another forming small-scale current sheets (e.g. Beresnyak \& Lazarian 2006; Boldyrev 2006;Mason, Cattaneo \& Boldyrev 2006), which could be disrupted via magnetic reconnection thus providing an additional dissipation mechanism (e.g. Boldyrev \& Loureiro 2017; Loureiro \& Boldyrev 2017; Mallet, Schekochihin \& Chandran 2017a,b). 
+Note that the background magnetic field, which is much larger than the reconnecting field and lies in the same plane of the current sheet, plays the role of a guide field. 
+Since the magnetic energy is transferred to the plasma particles at the Landau resonance between the particles and the tearing mode that disrupts the current sheet, also in this case one would expect the particles to be heated in the longitudinal direction.
+
+Even if the perpendicular heating is negligible, in a weakly magnetized plasma the fire-hose instability quickly erases any momentum anisotropy (e.g. Parker 1958; Lerche 1966). 
+However, since the fire-hose instability develops once $P_{\parallel} - P_{\perp} > B^2/4\pi$, one immediately sees that this instability is not effective if the magnetic-to-plasma energy ratio exceeds $\frac{1}{2}$.
+
+
+
+
+\section{Literature}\label{sect:literature}
+
+Objects themselves:
+
+PWN: Woosley 1993 \\
+jets from AGNs: Reynolds 1996 \\
+GRBs: Wardle 1998 \\
+
+
+
+%--------------------------------------------------
+%plasma turbulence as a generator of non-thermal particles
+\subsection{Non-thermal particles from turbulence}
+Melrose 1980
+Petrosian 2012
+Lazarian 2012
+
+\subsection{Turbulence in astrophysics}
+
+
+turbulence in stellar coronae
+Matthaeus 1999, Cranmer 2007
+
+ISM
+Armstrong 1995, Lithwick \& Goldreich 2001
+
+SNRs 
+Weiler \& Sramek 1988, Roy 2009
+
+PWN
+Porth 2014, Lyutikov 2019
+
+BH disks
+Balbus \& Hawley 1998, Brandenburg \& Subramanian 2005
+
+jets from AGNs
+Marscher 2008, MacDonald \& Marscher 2018
+
+radio lobes
+Vogt \& Ensslin 2005, O'Sullivan 2009
+
+GRBs
+Wardle 1998
+Piran 2004, Kumar \& Narayan 2009
+
+Galaxy clusters 
+Zweibel \& Heiles 1997, Subramanian 2006
+
+Laser laboratory plasma
+Sarri 2015
+
+
+
+
+
+
+\subsection{Magnetically dominated turbulence}
+Sustained relativistic turbulence (force-free)
+\citep{Thompson_1998}: extension of Goldreich \& Sridhar 1995 to exterme relativistic limit (no plasma inertia; force-free MHD).
+Anisotropic cascade is formed, dissipation occurs at the scale of current starvation (when not enough charge carriers in plasma to maintain currents from Alf\'en waves).
+
+\citep{Cho_2005}
+Inoue 2011
+\citep{Cho_2014}
+\citep{Zrake_2016}
+
+Relativistic MHD
+\citep{Zrake_2012}
+\citep{Zrake_2014}
+
+\subsection{Bright non-thermal synchrotron and inverse Compton signatures}
+pulsar magnetospheres and winds 
+Buhler \& Blandford 2014
+
+jets from AGNs Begelman 1984
+
+coronae of accretion disks
+Yuan \& Narayan 2014
+
+\subsection{Kinetic turbulence}
+
+%Papers we need to cite on kinetic turbulence:\\
+Kinetic turbulence:
+\citep{Zhdankin_2017a} Letter\\
+\citep{Zhdankin_2017b} Paper\\
+\citep{Zhdankin_2018} System size convergence\\
+\citep{Zhdankin_2019a} electron-proton plasma\\
+\citep{Zhdankin_2019b} radiative turbulence\\
+\citep{Comisso_2018} acceleration\\
+\citep{Wong_2019} acceleration\\
+\citep{Nattila_2019} Runko and turbulence\\
+\citep{Comisso_2019} acceleration\\
+
+\subsection{Radiative turbulence}
+
+Analytic work on radiative turbulence
+\citep{Uzdensky_2018}
+\citep{Zrake_2018}; GRBs
+\citep{Sobacchi_2019}
+
+PIC simulations:
+\citep{Zhdankin_2019b} radiative turbulence\\
+
+Fokker-Planck equation in momentum space with radiative cooling term
+\citep{Schlickeiser_1984, Schlickeiser_1985}; not in original list \citep{Schlickeiser_1989}
+\citep{Stawarz_2008}
+
+
+\subsection{radiative PIC simulations}
+
+Reconnection:
+\citep{Jaroschek_2009}
+\citep{Cerutti_2013, Cerutti_2014, Cerutti_2014a}
+\citep{Kagan_2016, Kagan_2016b}
+\citep{Hakobyan_2019}
+\citep{Werner_2019}
+\citep{Schoeffler_2019}
+
+
+decay of magnetostatic equilibria 
+\citep{Yuan_2016}
+\citep{Nalewajko_2018}
+
+pulsar wind
+\citep{Cerutti_2017}
+
+pulsar magnetospheres
+\citep{Cerutti_2016a}
+\citep{Philippov_2018}
+
+
+Synchrotron and jitter radiative signatures of collisionless shocks
+\citep{Medvedev_2009}
+\citep{Sironi_2009}
+\citep{Kirk_2010}
+\citep{Nishikawa_2011}
+
+Radiative turbulence
+\citep{Zhdankin_2019}
+
+
+
+%\section{Results}\label{sect:results}
+
+%\section{Summary}\label{sect:summary}
+
+%\section*{Acknowledgments}
+%JN would like to thank XXX stimulating discussions on numerics and plasma simulations. 
+%The simulations were performed on resources provided by the Swedish National Infrastructure for Computing (SNIC) at PDC and HPC2N.
+
+
+\bibliographystyle{aa}
+\bibliography{refs}
+
+%\begin{thebibliography}{62}
+%\end{thebibliography}
+
+%\clearpage
+%\onecolumn
+%\begin{appendix}
+%\end{appendix}
+
+\end{document}

@@ -1,0 +1,190 @@
+%\documentclass[referee]{aa}
+\documentclass{aa}
+
+%\documentclass[usenatbib,onecolumn]{mnras}
+%\documentclass[usenatbib,twocolumn]{mnras}
+%\pdfoutput=1
+%\pdfminorversion=5
+
+\usepackage[utf8]{inputenc}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{url}
+\usepackage{amsmath}	% Advanced maths commands
+\usepackage{amssymb}	% Extra maths symbols
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{natbib}
+\usepackage{hyperref}
+
+\usepackage[T1]{fontenc}
+\usepackage{ae,aecompl}
+\usepackage{bm}
+
+%landscape figures
+%\usepackage{wrapfig}
+%\usepackage{lscape}
+%\usepackage{rotating}
+
+\input{defs.tex}
+
+%Debug addition for collaborators
+%\usepackage[switch, modulo]{lineno}
+%\linenumbers
+%\renewcommand\linenumberfont{\color{red}\normalfont\tiny\sffamily}
+%\renewcommand\linenumberfont{\normalfont\tiny\sffamily}
+
+\DeclareUnicodeCharacter{00A0}{ }
+
+%\newcommand{\red}[1]{\textcolor{red}{#1}}
+%\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+%\newcommand{\green}[1]{\textcolor{green}{#1}}
+%\newcommand{\Msun}{\ensuremath{\mathrm{M}_{\sun}}}
+%\newcommand{\D}[2]{\ensuremath{\frac{\partial {#1} }{\partial {#2} }}}
+
+
+%normal 3-vectors
+%\renewcommand{\vec}[1]{\ensuremath{\mathbf{#1}}}
+%\renewcommand{\vec}[1]{\ensuremath{\boldsymbol{#1}}}
+
+%four-vectors
+%\makeatletter
+%\def\fvec#1{\underline{\sbox\tw@{$#1$}\dp\tw@\z@\box\tw@}}
+%\makeatother
+
+% configure listings package
+\usepackage{listingsutf8}
+\lstset{
+         basicstyle=\footnotesize\ttfamily, 
+         %numbers=left,               
+         numberstyle=\tiny,          
+         %stepnumber=2,             
+         numbersep=5pt,             
+         tabsize=2,                  
+         extendedchars=true,         
+         breaklines=true,            
+         keywordstyle=\color{red},
+         frame=b,
+ %        keywordstyle=[1]\textbf,   
+ %        keywordstyle=[2]\textbf,   
+ %        keywordstyle=[3]\textbf,   
+ %        keywordstyle=[4]\textbf,   
+         %stringstyle=\color{white}\ttfamily, % Farbe der String
+         showspaces=false,           
+         showtabs=false,            
+         xleftmargin=17pt,
+         framexleftmargin=17pt,
+         framexrightmargin=5pt,
+         framexbottommargin=4pt,
+         %backgroundcolor=\color{lightgray},
+         showstringspaces=false    
+}
+
+\newcommand{\dt}{\ensuremath{\Delta t}}
+
+
+%________________________________________________________________
+\begin{document}
+
+%\title{Identifying current sheet structures in magnetically-dominated turbulent collisionless plasmas}
+\title{Force-free magnetohydrodynamics}
+%\titlerunning{Detecting current sheet structures}
+
+\author{J.\,N\"attil\"a\inst{1}}
+\institute{Nordita, KTH Royal Institute of Technology and Stockholm University, Roslagstullsbacken 23, SE-10691 Stockholm, Sweden \email{joonas.nattila@su.se}
+}
+
+\date{Received XXX / Accepted XXX}
+
+\abstract{
+    Force-free MHD equations.
+}
+
+
+\keywords{turbulence --- plasmas --- non-thermal particles}
+
+\maketitle
+
+%________________________________________________________________
+\section{Theory}\label{sec:theory}
+
+Blandford gives force-free equation set as Maxwell's equations
+\be
+\frac{1}{c} \frac{\partial \vec{E}}{\partial t} = \nabla \times \vec{B}
+- \frac{4\pi}{c} \vec{J}
+\ee
+and
+\be
+\frac{1}{c} \frac{\partial \vec{B}}{\partial t} = -\nabla \times \vec{E}
+\ee
+in addition to current term
+\be
+\vec{J} = \frac{c}{4\pi} (\nabla \cdot \vec{E}) \frac{\vec{E} \times \vec{B}}{B^2} 
++ \frac{c}{4\pi} \vec{B} \frac{\vec{B} \cdot \nabla \times \vec{B} - \vec{E} \cdot \nabla \times \vec{E}}{B^2}
+\ee
+
+
+The current can be represented as
+\be
+\vec{J} = \vec{J}_{\parallel} + \vec{J}_{\mathrm{drift}},
+\ee
+Here the first term  
+\be
+\vec{J}_{\parallel} = \vec{B} \frac{\vec{B} \cdot \nabla \times \vec{B} - \vec{E} \cdot \nabla \times \vec{E} }{B^2} 
+\ee
+is the parallel conduction current that maintains the force-free condition $\vec{E} \cdot \vec{B} = 0$ reducing to $(\nabla \times \vec{B})_{\parallel}$ in steady state.
+The second term
+\be
+\vec{J}_{\mathrm{drift}} = \nabla \cdot \vec{E} \frac{\vec{E} \times \vec{B}}{B^2}
+\ee
+is the drift current given by the $\vec{E} \times \vec{B}$ advection of the charge density.
+
+Effect of parallel current can be mimicked with an even simpler system by reseting values of $\vec{E}$ such that $\vec{E}_{\parallel}=0$.
+This is equivalent of replacing the parallel current with a resistive term $\sigma_{\parallel} E_{\parallel}$ where $\sigma_{\parallel} \rightarrow \infty$.
+Note that retention of the parallel current results in much lower diffusion error.
+
+Force-free evolution can lead to configurations in which $B^2 - E^2 > 0$ is violated.
+Therefore, we set
+\be
+\vec{E} \rightarrow \sqrt{ \frac{B^2}{E^2} } \vec{E}.
+\ee
+This acts like a small, highly localized source of dissipation in current sheets.
+Other simpler option is to set $E \leq B$ after every time step by reseting the electric field to $E = B$ in the regions where $E > B$.
+
+Physically these limiters can be thought of converting electromagnetic energy to thermal energy and radiation.
+This violation can happen during interaction of strong waves as the Alf\'en speed becomes imaginary and leads to exponential instability, which physically would be averted by dissipation. 
+If the $\vec{E} \times \vec{B}$ drift approximation is violated, particles will be accelerated while decoupling form the magnetic field lines. 
+This will restore the $E=B$ on plasma timescales (without taking any stance on the actual microphysics).
+This can be parameterized by tracking $J_{\perp} = \sigma_{\perp} E$ when $E>B$ and $J_{\perp} = 0$ otherwise where the perpendicular conductivity $\sigma_{\perp} \rightarrow \infty$.
+
+Another example is the formation of current sheets.
+In this case the magnetic dominance is invalid (magnetic field reverses and goes through zero) and the plasma pressure must sustain the sheet.
+However, in FFE pressure is not included so we try to keep the current sheets unresolved on the grid with a jump over one cell.
+
+
+
+Third-order Runge-Kutta time integration.
+We maintain time alignment of the fields.
+Linear interpolation of the fields to the same location on the grid.
+
+
+
+%\section*{Acknowledgments}
+%SNIC.
+
+%\bibliographystyle{aa}
+%\bibliography{refs}
+
+%\begin{thebibliography}{62}
+%\end{thebibliography}
+
+
+%\clearpage
+%\begin{appendix}
+%\section{Appendix}
+%
+%\end{appendix}
+
+
+
+\end{document}

@@ -1,0 +1,283 @@
+%\documentclass[referee]{aa}
+\documentclass{aa}
+
+
+\usepackage[utf8]{inputenc}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{url}
+\usepackage{amsmath}	% Advanced maths commands
+\usepackage{amssymb}	% Extra maths symbols
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{natbib}
+\usepackage{hyperref}
+
+%\usepackage{newtxtext,newtxmath}
+\usepackage{times,txfonts}
+\usepackage{bm}
+
+% Depending on your LaTeX fonts installation, you might get better results with one of these:
+%\usepackage{mathptmx}
+%\usepackage{txfonts}
+
+% Use vector fonts, so it zooms properly in on-screen viewing software
+% Don't change these lines unless you know what you are doing
+\usepackage[T1]{fontenc}
+\usepackage{ae,aecompl}
+
+
+%landscape figures
+%\usepackage{wrapfig}
+%\usepackage{lscape}
+%\usepackage{rotating}
+
+\bibpunct{(}{)}{;}{a}{}{,} % to follow the A&A style
+
+%Debug addition for collaborators
+%\usepackage[switch, modulo]{lineno}
+%\linenumbers
+%\renewcommand\linenumberfont{\color{red}\normalfont\tiny\sffamily}
+%\renewcommand\linenumberfont{\normalfont\tiny\sffamily}
+
+\DeclareUnicodeCharacter{00A0}{ }
+
+\usepackage{listingsutf8}
+
+% configure listings package
+\lstset{
+         basicstyle=\footnotesize\ttfamily, 
+         %numbers=left,               
+         numberstyle=\tiny,          
+         %stepnumber=2,             
+         numbersep=5pt,             
+         tabsize=2,                  
+         extendedchars=true,         
+         breaklines=true,            
+         keywordstyle=\color{red},
+         frame=b,
+ %        keywordstyle=[1]\textbf,   
+ %        keywordstyle=[2]\textbf,   
+ %        keywordstyle=[3]\textbf,   
+ %        keywordstyle=[4]\textbf,   
+         %stringstyle=\color{white}\ttfamily, % Farbe der String
+         showspaces=false,           
+         showtabs=false,            
+         xleftmargin=17pt,
+         framexleftmargin=17pt,
+         framexrightmargin=5pt,
+         framexbottommargin=4pt,
+         %backgroundcolor=\color{lightgray},
+         showstringspaces=false    
+}
+\lstloadlanguages{C++}
+\newcommand{\codeil}[1]{\lstinline!#1!}
+
+
+\input{defs.tex}
+
+\newcommand{\Cfl}{\hat{c}}
+\newcommand{\hf}{\frac{1}{2}}
+
+\newcommand{\Bhat}{\vec{\hat{B}}}
+\newcommand{\Ehat}{\vec{\hat{E}}}
+\newcommand{\Jhat}{\vec{\hat{J}}}
+\newcommand{\uhat}{\vec{\hat{u}}}
+\newcommand{\vhat}{\vec{\hat{v}}}
+\newcommand{\xhat}{\vec{\hat{x}}}
+\newcommand{\that}{\hat{t}}
+
+\newcommand{\gammam}{\langle \gamma \rangle}
+
+\newcommand{\Nppc}{N_{\mathrm{ppc}}}
+
+\newcommand{\f}[1]{\ensuremath{f_{\mathrm{ {#1} }}}}
+\newcommand{\dt}{\ensuremath{\Delta t}} %delta t
+\newcommand{\dd}{\mathrm{d}}
+
+
+%spesific additions
+\newcommand{\runko}{\textsc{Runko}}
+
+\newcommand{\corgi}{\textsc{corgi}}
+%\newcommand{\python}{\textsc{Python3}}
+\newcommand{\tristan}{\textsc{Tristan}}
+\newcommand{\tristanmp}{\textsc{Tristan-MP}}
+\newcommand{\pybind}{\textsc{Pybind11}}
+\newcommand{\eigen}{\textsc{Eigen}}
+\newcommand{\numpy}{\textsc{Numpy}}
+\newcommand{\scipy}{\textsc{Scipy}}
+\newcommand{\matplotlib}{\textsc{Matplotlib}}
+
+
+\newcommand{\todo}[1]{\red{#1}}
+
+
+%________________________________________________________________
+\begin{document}
+
+
+\title{Particle acceleration}
+
+\author{J.\,N\"attil\"a\inst{1}}
+
+\institute{Nordita, KTH Royal Institute of Technology and Stockholm University, Roslagstullsbacken 23, SE-10691 Stockholm, Sweden. \email{joonas.nattila@su.se}
+}
+
+\date{Received XXX / Accepted XXX}
+
+
+\abstract{
+    Blaa blaa.
+}
+
+\keywords{ Plasmas -- Turbulence -- Methods: numerical }
+
+
+\maketitle
+
+%________________________________________________________________
+%\section{Introduction}\label{sec:intro}
+\citep{birdsall1985}
+
+\section{Theory}\label{sect:theory}
+
+\subsection{Main particle acceleration questions}
+
+\begin{enumerate}
+    \item How efficient is the acceleration?
+    \item What is the slope of the power-law high-energy tail?
+    \item What is the maximum attainable energy?
+    \item Which physicala mechanisms govern the injection of particles from thermal pool to higher energies?
+    \item What timescales are particles accelerated?
+\end{enumerate}
+
+Fully-kinetic simulations allow to study the acceleration process and the possible subsequent back-reaction self-consistently.
+Albeit computationally heavy, very useful.
+
+
+\citep{Fermi_1949}
+\citep{Fermi_1954}
+
+\citep{Lemoine_2019}
+
+Fermi scheme can apply to any flow for which to electromagnetic $4-$scalers fulfil $\vec{E} \cdot \vec{B} = 0$ and $E^2 - B^2 < 0$.
+Under these conditions one can always boost to a frame for which $\vec{E}$ vanishes, by
+\be
+\vec{\beta}_{\vec{B}} = \frac{\vec{E} \times \vec{B}}{B^2}.
+\ee
+It is important to note here that this only occurs when ideal magnetohydrodynamics does not apply, since in that case the aforementioned velocity coincides with the local plasma bulk velocity.
+
+
+Mean $4$-momentum change $\langle \Delta p^\alpha / \Delta t \langle$.
+Diffusion tensor $\langle \Delta p^\alpha \Delta p^\beta / \Delta t \langle$ for $\alpha,\beta = 0,\ldots,4$.
+
+\subsection{Fermi-like diffusion}
+Based on Pelletiere 2017
+
+relative velocity $\beta_{rel}$ between upstream and downstream flows (velocity of the downstream plasma relative to the upstream frame).
+Pitch angle cosine $\mu_1$ before scattering and scattered pitch angle cosine $\mu_2$ when it is coming back (expressed in the upstream rest-frame).
+Its energy gain is 
+\be
+G = \frac{1-\beta_{rel} \mu_1}{1-\beta_{rel} \mu_2}
+\ee
+Choosing downstream reference frame, $\beta_{rel} \approx 1-1/\gamma_{sh}^2$.
+Pitch angle cosine of the crossing particle has $-1 < \mu_1 < \beta_{sh}$; 
+A particle coming back from downstream to upstream has $\beta_{sh} < \mu_2 < 1$.
+
+Average energy gain (assuming incorrectly) isotropic distribution functions and independent $\mu_1$ and $\mu_2$:
+\be
+\langle G \rangle = \left( 1 + \frac{2}{3} | \beta_{rel} | \right)^2.
+\ee
+Moreover, because the almost isotropic distirbution, probability of escapre through advection in the downstream plasma is $ P_{\mathrm{esc}} = 4 | \beta_d | $.
+The index of the powerlaw distribution $dN/dp \propto p^{-s}$ is then Bell 1978
+\be
+s = 1 - \frac{\ln (1 - P_{esc})}{\ln \langle G \rangle} 
+    \approx 1 + 3 |\frac{\beta_d}{\beta_{rel}}|
+\ee
+i.e., $s=2$ for strong adiabatic shocks where $|\beta_{rel} = 3 | \beta_d |$.
+In reality, the strong anisotropy of the distribution function complicates these calculations.
+
+Note that this means that escapre probability $P_{esc}$ controls the non-thermal slope.
+
+Fermi acceleration is possible if scattering frequency in the turbulence exceeds gyrofrequency in the background field.
+Turbulent scattering frequency
+\be
+\nu = \frac{e^2 \delta B_{|d}^2 \tau_{c|d}}{m^2 c^2 \gamma^2}.
+\ee
+This means that $\nu > \omega_p = e B_{|d}/m c \gamma$.
+Alternatively,
+\be
+\sqrt{\sigma} < \zeta_B
+\ee
+
+Here $\zeta_B$ is the fraction of energy going to the turbulence energy as
+\be
+W_{em} = \zeta_B \gamma_{sh}^2 n_u mc^2
+\ee
+
+
+
+
+\subsection{Diffusive shock acceleration (DSA)}
+Most widely accepted theory for non-thermal particle population generation 
+Blandford \& Eichler 1987
+DSA ssumes presence of turbulence in the upstream.
+Energetics particles scattered by MHD waves gain energy by diffusively crossing the shock front back and forth many times.
+Central problem is the injection since DSA is only effective for energetic particles that can interact with MHD waves.
+
+
+\subsection{Shock-surfing acceleration}
+Thought to be a pre-acceleration mechanism that can feed particles to the later-stage diffusive processes.
+
+Electrons can be accelerated by an interaction with electrostatic waves from Buneman instability.
+Shimada \& Hoshino 2000
+Hoshino \& Shimada 2002
+
+In turbulent ramp-overshoot region electrons undergo stochastic Fermi-like acceleration (Bohdan 2017) or stochastic shock drift acceleration in the quasi-perpendicular case (Matsumoto 2017)
+
+Sound speed
+\be
+c_s^2 = \frac{\Gamma_{\mathrm{AD}} k_{\mathrm{B}} T_i}{m_i}
+\ee
+and $k_{\mathrm{B}} T_i = \frac{1}{2} m_i v_{\mathrm{th},i}^2$ where $v_{\mathrm{th},i}$ is the most probable speed.
+
+
+
+
+
+
+\subsection{Shock mediators}
+low-magnetization: Weibel
+splits current and subsequently also charge into filaments
+
+high-magnetization: magnetic reflection
+magnetic reflection of the compressed downstream magnetic field.
+Initially everything is moving following $\vec{E} \times \vec{B}$ motion.
+Subsequently, a reflected particle sees a wrong sign of $\vec{E}$ field  and undergo Larmor gyration.
+This gyration causes positive and negative particles to go in opposite directions transverse to the flow and the associated transverse current increases the magnetic field.
+Incoming particles now see a jump in magnetic field and undergo gyration that deccelerates and so also increases the local density of the flow.
+In magnetized case, the transition therefore happens within a few Larmor radii in the compressed field.
+
+
+%\section{Results}\label{sect:results}
+
+%\section{Summary}\label{sect:summary}
+
+%\section*{Acknowledgments}
+%JN would like to thank XXX stimulating discussions on numerics and plasma simulations. 
+%The simulations were performed on resources provided by the Swedish National Infrastructure for Computing (SNIC) at PDC and HPC2N.
+
+
+\bibliographystyle{aa}
+\bibliography{refs}
+
+%\begin{thebibliography}{62}
+%\end{thebibliography}
+
+%\clearpage
+%\onecolumn
+%\begin{appendix}
+%\end{appendix}
+
+\end{document}

@@ -1,0 +1,432 @@
+%\documentclass[referee]{aa}
+\documentclass{aa}
+
+
+\usepackage[utf8]{inputenc}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{url}
+\usepackage{amsmath}	% Advanced maths commands
+\usepackage{amssymb}	% Extra maths symbols
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{natbib}
+\usepackage{hyperref}
+
+%\usepackage{newtxtext,newtxmath}
+\usepackage{times,txfonts}
+\usepackage{bm}
+
+% Depending on your LaTeX fonts installation, you might get better results with one of these:
+%\usepackage{mathptmx}
+%\usepackage{txfonts}
+
+% Use vector fonts, so it zooms properly in on-screen viewing software
+% Don't change these lines unless you know what you are doing
+\usepackage[T1]{fontenc}
+\usepackage{ae,aecompl}
+
+
+%landscape figures
+%\usepackage{wrapfig}
+%\usepackage{lscape}
+%\usepackage{rotating}
+
+\bibpunct{(}{)}{;}{a}{}{,} % to follow the A&A style
+
+%Debug addition for collaborators
+%\usepackage[switch, modulo]{lineno}
+%\linenumbers
+%\renewcommand\linenumberfont{\color{red}\normalfont\tiny\sffamily}
+%\renewcommand\linenumberfont{\normalfont\tiny\sffamily}
+
+\DeclareUnicodeCharacter{00A0}{ }
+
+\usepackage{listingsutf8}
+
+% configure listings package
+\lstset{
+         basicstyle=\footnotesize\ttfamily, 
+         %numbers=left,               
+         numberstyle=\tiny,          
+         %stepnumber=2,             
+         numbersep=5pt,             
+         tabsize=2,                  
+         extendedchars=true,         
+         breaklines=true,            
+         keywordstyle=\color{red},
+         frame=b,
+ %        keywordstyle=[1]\textbf,   
+ %        keywordstyle=[2]\textbf,   
+ %        keywordstyle=[3]\textbf,   
+ %        keywordstyle=[4]\textbf,   
+         %stringstyle=\color{white}\ttfamily, % Farbe der String
+         showspaces=false,           
+         showtabs=false,            
+         xleftmargin=17pt,
+         framexleftmargin=17pt,
+         framexrightmargin=5pt,
+         framexbottommargin=4pt,
+         %backgroundcolor=\color{lightgray},
+         showstringspaces=false    
+}
+\lstloadlanguages{C++}
+\newcommand{\codeil}[1]{\lstinline!#1!}
+
+
+\input{defs.tex}
+
+\newcommand{\Cfl}{\hat{c}}
+\newcommand{\hf}{\frac{1}{2}}
+
+\newcommand{\Bhat}{\vec{\hat{B}}}
+\newcommand{\Ehat}{\vec{\hat{E}}}
+\newcommand{\Jhat}{\vec{\hat{J}}}
+\newcommand{\uhat}{\vec{\hat{u}}}
+\newcommand{\vhat}{\vec{\hat{v}}}
+\newcommand{\xhat}{\vec{\hat{x}}}
+\newcommand{\that}{\hat{t}}
+
+\newcommand{\gammam}{\langle \gamma \rangle}
+
+\newcommand{\Nppc}{N_{\mathrm{ppc}}}
+
+\newcommand{\f}[1]{\ensuremath{f_{\mathrm{ {#1} }}}}
+\newcommand{\dt}{\ensuremath{\Delta t}} %delta t
+\newcommand{\dd}{\mathrm{d}}
+
+
+%spesific additions
+\newcommand{\runko}{\textsc{Runko}}
+
+\newcommand{\corgi}{\textsc{corgi}}
+%\newcommand{\python}{\textsc{Python3}}
+\newcommand{\tristan}{\textsc{Tristan}}
+\newcommand{\tristanmp}{\textsc{Tristan-MP}}
+\newcommand{\pybind}{\textsc{Pybind11}}
+\newcommand{\eigen}{\textsc{Eigen}}
+\newcommand{\numpy}{\textsc{Numpy}}
+\newcommand{\scipy}{\textsc{Scipy}}
+\newcommand{\matplotlib}{\textsc{Matplotlib}}
+
+
+\newcommand{\todo}[1]{\red{#1}}
+
+
+%________________________________________________________________
+\begin{document}
+
+
+\title{Relativistic plasma physics}
+
+\author{J.\,N\"attil\"a\inst{1}}
+
+\institute{Nordita, KTH Royal Institute of Technology and Stockholm University, Roslagstullsbacken 23, SE-10691 Stockholm, Sweden. \email{joonas.nattila@su.se}
+}
+
+\date{Received XXX / Accepted XXX}
+
+
+\abstract{
+    Basic plasma parameters are presented and succintly discussed here.
+}
+
+\keywords{ Plasmas -- Turbulence -- Methods: numerical }
+
+
+\maketitle
+
+%________________________________________________________________
+%\section{Introduction}\label{sec:intro}
+
+\section{Theory}\label{sect:theory}
+
+\subsection{Plasma parameters}
+
+Two important frequencies in a plasma are the plasma frequency,
+\be
+\omega_p \equiv \sqrt{\frac{4\pi n q^2 }{\gamma_0 m_e}},
+\ee
+and cyclotron frequency,
+\be
+\omega_B \equiv \frac{q B}{\gamma_0 m_e c}.
+\ee
+Particle Lorentz factor is defined as
+\be
+\gamma = \sqrt{ \frac{1}{1-\beta^2}} = \sqrt{1 + \frac{u^2}{c^2}},
+\ee
+where $\beta$ is the particle coordinate velocity and $u$ is the (spatial component of) four-velocity.
+Additionally, $u/c = \gamma \beta$.
+The relativistic Lorentz factor, $\gamma_0$, present in above formulae can either be some bulk Lorentz factor of the flow ($\gamma_0 = \Gamma$) or the mean thermal Lorentz factor of the plasma ($\gamma_0 = \langle \gamma \rangle$), depending on the problem at hand.
+
+The frequencies can be used to define two characteristic length scales, skin depth
+\be
+\lambda_p \equiv \frac{c}{\omega_p},
+\ee
+and Larmor radius (gyrorotation orbit)
+\be
+\lambda_L \equiv \frac{c}{\omega_B}.
+\ee
+
+Additionally, we note that the magnetization, defined more rigorously later on, is related to the above frequencies and length scales as
+\be
+\sigma = \frac{\omega_B^2}{\omega_p^2} = \frac{\lambda_p^2}{\lambda_L^2}.
+\ee
+
+Note also that relativistic time dilatation and length stretching work such that
+$\omega_{p,\mathrm{rel}} = \omega_p / \sqrt{\gamma_0}$,
+$\lambda_{p,\mathrm{rel}} = \lambda_p \sqrt{\gamma_0}$, and
+$\omega_{B,\mathrm{rel}} = \omega_B / \gamma_0$,
+where $X_{\mathrm{rel}}$ are the ``true'' relativistic counterparts to the classical plasma values.
+
+
+
+\subsection{Hot plasmas}
+
+Plasma temperature in units of electron rest mass is
+\be
+\theta = \frac{kT}{m_e c^2}.
+\ee
+Plasma is considered hot when $\theta \gtrsim 1$.
+
+Particle distribution of a relativistic plasma in thermodynamic equilibrium follows Maxwell-J\"uttner distribution,
+\be
+M(\vec{u}) = \frac{1}{4\pi K_2(\theta^{-1})} \exp \left( -\frac{\sqrt{1+\gamma^2 \beta^2}}{\theta} \right),
+\ee
+where $K_2$ is the modified Bessel function of the second kind.
+In terms of Lorentz factor it is
+\be
+M(\gamma) = \frac{\gamma^2 \beta }{K_2(\theta^{-1}) \theta} \exp\left( -\frac{\gamma}{\theta} \right).
+\ee
+
+Maxwell-J\"uttner distribution has a few useful averages that have a physical correspondence.
+First, we note that 
+\be
+\kappa_{ij}(x) = \frac{K_i(x)}{K_j(x)} = 
+\begin{cases}
+    1 + \frac{5}{2} \theta, & \text{for } \theta \rightarrow 0      \text{ (non-relativistic)}\\
+    4 \theta,               & \text{for } \theta \rightarrow \infty \text{ (ultra-relativistic)}\\
+\end{cases},
+\ee
+where $K_n$ is the modified Bessel function of the $n$th kind.
+
+A mean Lorentz factor is
+\be
+    %\langle \gamma \rangle = \frac{K_3(1/\theta)}{K_2(1/\theta)} - \frac{1}{\theta}.
+    \langle \gamma \rangle = \kappa_{32}(\theta^{-1}) - \theta^{-1} = 
+\begin{cases}
+    1 + \frac{3}{2} \theta, & \text{for } \theta \rightarrow 0      \text{ (non-relativistic)}\\
+    3 \theta,               & \text{for } \theta \rightarrow \infty \text{ (ultra-relativistic)}\\
+\end{cases}.
+\ee
+Note that $\langle \gamma \rangle \approx 1 + 3\theta$, which approximatively captures both limits and therefore mimicks the thermal Lorentz factor of a plasma particle.
+%In the cold non-relativistic limit, $\theta \rightarrow 0$, this approaches $\langle \gamma \rangle \rightarrow 1 + \frac{3}{2}\theta$ and in the hot ultra-relativistic limit, $\theta \rightarrow \infty$, $\langle \gamma \rangle \rightarrow 3\theta$.
+Similarly, 
+\be
+    \langle \gamma^2 \beta^2 \rangle = 3 \kappa_{32}(\theta^{-1}) = 
+\begin{cases}
+    3\theta,                   & \text{for } \theta \rightarrow 0      \text{ (non-relativistic)}\\
+    12 \theta^2,               & \text{for } \theta \rightarrow \infty \text{ (ultra-relativistic)}\\
+\end{cases}.
+\ee
+%that in the cold limit $\rightarrow 3\theta$ and hot limit $\rightarrow 12\theta^2$.
+
+Average Larmor radius of a thermal plasma is
+\be
+%\lambda_L' = \lambda_L \sqrt{2\theta \frac{K_3(1/\theta)}{K_2(1/\theta)} }.
+\lambda_L' = \lambda_L \sqrt{2\theta \kappa_{32}(\theta^{-1})}
+\ee
+Thermal pressure is
+\be
+P = \frac{1}{3} n \langle \vec{v} \cdot \gamma m \vec{v} \rangle = n \theta m_e c^2.
+\ee
+Enthalpy is
+\begin{align}
+%h = \frac{n \langle \gamma m c^2 \rangle + P }{n m c^2} = \frac{K_3(1/\theta)}{K_2(1/\theta)},
+    h &= \frac{n \langle \gamma m c^2 \rangle + P }{n m c^2} = \kappa_{32}(\theta^{-1}) \\
+    &= 
+\begin{cases}
+    1 + \frac{5}{2} \theta, & \text{for } \theta \rightarrow 0      \text{ (non-relativistic)}\\
+    4 \theta,               & \text{for } \theta \rightarrow \infty \text{ (ultra-relativistic)}\\
+\end{cases}.
+\end{align}
+%that in the cold limit $\rightarrow 1 + \frac{5}{2} \theta$ and in the hot limit $\rightarrow 4 \theta$. 
+Adiabatic exponent,
+\begin{align}
+    \Gamma_{\mathrm{ad}} &= 1 + \frac{P}{n \langle \gamma - 1 \rangle m c^2} 
+    %= 1 + \left( \frac{1}{\theta} \frac{K_3(1/\theta)}{K_2(1/\theta)} - \frac{1}{\theta} - 1 \right)^{-1},
+    = 1 + \left( \frac{1}{\theta} \kappa_{32}(\theta^{-1}) - \theta^{-1} - 1 \right)^{-1} \\
+    &= 
+\begin{cases}
+    \frac{5}{3}, & \text{for } \theta \rightarrow 0      \text{ (non-relativistic)}\\
+    \frac{4}{3},               & \text{for } \theta \rightarrow \infty \text{ (ultra-relativistic)}\\
+\end{cases}.
+\end{align}
+%that in the cold limit $\rightarrow \frac{5}{3}$ and in the hot limit $\rightarrow \frac{4}{3}$.
+
+
+A plasma moving with a bulk drift coordinate-velocity $\vec{V}_0$ (with Lorentz factor $\Gamma_0$) to the $y$ direction ($\vec{V}_0 = V_0 \hat{\vec{y}}$), on the other hand, has
+\be
+M(\vec{u})' = \frac{1}{4\pi K_2(\theta^{-1}) \Gamma_0} \exp \left( -\Gamma_0 \frac{-V_0^2 \Gamma_0 + \sqrt{1+\gamma^2 \beta^2}}{\theta} \right),
+\ee
+and number density in that frame is $n = \Gamma_0 n_0$.
+Mean four-velocity in this case is
+\begin{align}
+    \langle \gamma \vec{v} \rangle &= 
+        \kappa_{32}(\theta^{-1}) \Gamma_0 \vec{V}_0  \\
+    &= 
+\begin{cases}
+    \Gamma_0 \vec{V}_0,          & \text{for } \theta \rightarrow 0      \text{ (non-relativistic)}\\
+    4\theta \Gamma_0 \vec{V}_0,  & \text{for } \theta \rightarrow \infty \text{ (ultra-relativistic)}\\
+\end{cases}
+\end{align}
+and mean Lorentz factor is
+\begin{align}
+    \langle \gamma \rangle &= 
+        \kappa_{32}(\theta^{-1}) \Gamma_0 - (\Gamma_0 \theta )^{-1} \\
+    &= 
+\begin{cases}
+    \Gamma_0 ,          & \text{for } \theta \rightarrow 0      \text{ (non-relativistic)}\\
+    4\theta \Gamma_0 - (\Gamma_0 \theta)^{-1},  & \text{for } \theta \rightarrow \infty \text{ (ultra-relativistic)}\\
+\end{cases}
+\end{align}.
+Note that the perpendicular to the drift direction, the mean four-velocity fluxes (related to pressure) are
+\be
+    \langle u_x v_x \rangle = 
+    \langle u_z v_z \rangle = 
+    \theta/\Gamma_0,
+\ee
+whereas to the drift direction we have
+\be
+    \langle u_y v_y \rangle = 
+    \theta/\Gamma_0 + \Gamma_0 V_0^2 \kappa_{32}(\theta^{-1}).
+\ee
+
+
+
+
+\subsection{Magnetized plasmas}
+Magnetic field energy density is
+\be
+U_B \equiv \frac{B^2}{8\pi}
+\ee
+and electric field energy density is
+\be
+U_E \equiv \frac{E^2}{8\pi}.
+\ee
+Similarly, internal energy content density of the plasma can be quantified with the enthalpy density
+\be
+w \equiv \gamma n_e m_e c^2.
+\ee
+
+For magnetized plasmas it is useful to define the magnetization parameter that is the ratio of the magnetic energy density to the plasma enthalpy density.
+For a cold, non-relativistic plasma it reduces to 
+\be
+\sigma_c = \frac{B^2}{4\pi n m_e c^2}.
+\ee
+A hot plasma ($\theta \equiv kT/m_e c^2 \gtrsim 1$) carries a relativistic energy content and so the true ``hot'' magnetization is
+\be
+\sigma = \frac{B^2}{4\pi n \gamma_{\mathrm{th}} m_e c^2} 
+        \approx \frac{B^2}{4\pi n (1+3\theta) m_e c^2},
+\ee
+where $\gamma_{\mathrm{th}} = \langle \gamma \rangle$ is the average Lorentz factor of a hot plasma.
+Similarly, a plasma with a considerable relativistic bulk motion ($\Gamma > 1$) has a true ``relativistic'' magnetization of
+\be
+\sigma = \frac{B^2}{4\pi n \Gamma m_e c^2}.
+\ee
+
+
+\section{Plasma instabilities}
+
+\red{TODO:}
+
+\subsection{Plasma dispersion relations}
+
+\subsection{Two-stream instability}
+
+\subsection{Current filamentation instability}
+
+\subsection{Weibel instability}
+
+\subsection{Tearing mode instability}
+
+Tearing mode dispersion relation from the relativistic pair-plasma fluid equations (e.g., Koide 2009)\\
+by applying the standard tearing mode analysis\\
+Furth 1963\\
+Coppi 1976\\
+Ara 1978\\
+non-relativistic one Porcelli 1991\\
+
+
+%\section{Results}\label{sect:results}
+
+\section{Literature}\label{sect:summary}
+
+On PIC: \citet{birdsall1985}.
+On useful plasma parameters: \citet{Melzani_2014}
+
+
+%\section*{Acknowledgments}
+%JN would like to thank XXX stimulating discussions on numerics and plasma simulations. 
+%The simulations were performed on resources provided by the Swedish National Infrastructure for Computing (SNIC) at PDC and HPC2N.
+
+
+\bibliographystyle{aa}
+\bibliography{refs}
+
+%\begin{thebibliography}{62}
+%\end{thebibliography}
+
+\clearpage
+%\onecolumn
+\begin{appendix}
+
+\section{\textsc{Runko} code units}
+
+%Useful facts about code units: Electron plasma frequency in code units (inverse timesteps) is omega_pe = sqrt( q_e n / ((m/m_e) gamma)), where q is the charge of the particle, n density and gamma is the typical lorenz factor, m is particle’s mass. Note that here 4 pi = 1 compared to cgs, and q_e/m_e = 1 by definition. Cyclotron frequency: omega_c = B/(gamma (m/m_e) c) (in inverse time steps). Magnetization sigma = (omega_c)^2/ (omega_p)^2 (c/v)^2 = 1/M_A^2, where M_A is the alfvenic Mach #.
+
+Time in \textsc{Runko} code units is related to the plasma frequency as
+\be
+\hat{\omega}_{p} \Delta t = \sqrt{\frac{ \hat{n} \hat{q} }{ \gamma_0 \hat{m} } },
+\ee
+where $\hat{q}$ is the particle charge normalization (\texttt{qe} or \texttt{qi}), $\hat{n}$ is the (numerical) total particle number density (typically $2\times$\texttt{ppc}), and $\hat{m} = m/m_e$ is the  mass in units of electron masses.
+Note that here $4\pi = 1$ and $q_e/m_e = 1$ by definition.
+Cyclotron frequency is similarly 
+\be
+\hat{\omega}_B \Delta t = \frac{\hat{B}}{\gamma_0 \hat{m} \hat{C}},
+\ee
+    where $\hat{B}$ is the magnetic field in code units and $\hat{C}$ is the numerical speed of light in the simulation (CFL number; \texttt{cfl}).
+Magnetization is
+\be
+\sigma = \frac{\hat{\omega}_B^2}{\hat{\omega}_p^2}.
+\ee
+
+Typical number density per ``pixel'' is
+\be
+    \hat{n}_0 = 2 n_{\mathrm{ppc}} \mathcal{S}^2,
+\ee
+where $n_{\mathrm{ppc}}$ is the particle per cell per species (\texttt{ppc}), and $\mathcal{S}$ is the output striding factor (\texttt{stride}).
+A standard charge density normalization is then
+\be
+    \hat{\rho}_0 = \hat{q}_e \hat{n}_0.
+\ee
+
+Similarly, the current density can be normalized with
+\be
+    \hat{J}_0 = \hat{q}_e \hat{n}_0 \hat{\mathcal{C}}^2,
+\ee
+Resulting in current density units of $q_e n_0 c$.
+Note that the extra $\hat{\mathcal{C}}$ factor in the above equation originates from the fact that the numerical current stored in the memory is actually $\hat{J}\Delta t$.
+
+Fields can be normalized with
+\be
+    \hat{B}_0 = \frac{\hat{m}}{\hat{q}_e} \hat{\mathcal{C}}^2 \mathcal{R}_{\lambda},
+\ee
+where grid resolution in units of skin depth is $\mathcal{R}_{\lambda} = \lambda_p/\Delta x$ (\texttt{c\_omp}).
+This gives fields units of $\omega_p m_e / q_e$.
+
+
+\end{appendix}
+
+
+\end{document}

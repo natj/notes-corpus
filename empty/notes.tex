@@ -1,0 +1,169 @@
+%\documentclass[referee]{aa}
+\documentclass{aa}
+
+
+\usepackage[utf8]{inputenc}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{url}
+\usepackage{amsmath}	% Advanced maths commands
+\usepackage{amssymb}	% Extra maths symbols
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{natbib}
+\usepackage{hyperref}
+
+%\usepackage{newtxtext,newtxmath}
+\usepackage{times,txfonts}
+\usepackage{bm}
+
+% Depending on your LaTeX fonts installation, you might get better results with one of these:
+%\usepackage{mathptmx}
+%\usepackage{txfonts}
+
+% Use vector fonts, so it zooms properly in on-screen viewing software
+% Don't change these lines unless you know what you are doing
+\usepackage[T1]{fontenc}
+\usepackage{ae,aecompl}
+
+
+%landscape figures
+%\usepackage{wrapfig}
+%\usepackage{lscape}
+%\usepackage{rotating}
+
+\bibpunct{(}{)}{;}{a}{}{,} % to follow the A&A style
+
+%Debug addition for collaborators
+%\usepackage[switch, modulo]{lineno}
+%\linenumbers
+%\renewcommand\linenumberfont{\color{red}\normalfont\tiny\sffamily}
+%\renewcommand\linenumberfont{\normalfont\tiny\sffamily}
+
+\DeclareUnicodeCharacter{00A0}{ }
+
+\usepackage{listingsutf8}
+
+% configure listings package
+\lstset{
+         basicstyle=\footnotesize\ttfamily, 
+         %numbers=left,               
+         numberstyle=\tiny,          
+         %stepnumber=2,             
+         numbersep=5pt,             
+         tabsize=2,                  
+         extendedchars=true,         
+         breaklines=true,            
+         keywordstyle=\color{red},
+         frame=b,
+ %        keywordstyle=[1]\textbf,   
+ %        keywordstyle=[2]\textbf,   
+ %        keywordstyle=[3]\textbf,   
+ %        keywordstyle=[4]\textbf,   
+         %stringstyle=\color{white}\ttfamily, % Farbe der String
+         showspaces=false,           
+         showtabs=false,            
+         xleftmargin=17pt,
+         framexleftmargin=17pt,
+         framexrightmargin=5pt,
+         framexbottommargin=4pt,
+         %backgroundcolor=\color{lightgray},
+         showstringspaces=false    
+}
+\lstloadlanguages{C++}
+\newcommand{\codeil}[1]{\lstinline!#1!}
+
+
+\input{defs.tex}
+
+\newcommand{\Cfl}{\hat{c}}
+\newcommand{\hf}{\frac{1}{2}}
+
+\newcommand{\Bhat}{\vec{\hat{B}}}
+\newcommand{\Ehat}{\vec{\hat{E}}}
+\newcommand{\Jhat}{\vec{\hat{J}}}
+\newcommand{\uhat}{\vec{\hat{u}}}
+\newcommand{\vhat}{\vec{\hat{v}}}
+\newcommand{\xhat}{\vec{\hat{x}}}
+\newcommand{\that}{\hat{t}}
+
+\newcommand{\gammam}{\langle \gamma \rangle}
+
+\newcommand{\Nppc}{N_{\mathrm{ppc}}}
+
+\newcommand{\f}[1]{\ensuremath{f_{\mathrm{ {#1} }}}}
+\newcommand{\dt}{\ensuremath{\Delta t}} %delta t
+\newcommand{\dd}{\mathrm{d}}
+
+
+%spesific additions
+\newcommand{\runko}{\textsc{Runko}}
+
+\newcommand{\corgi}{\textsc{corgi}}
+%\newcommand{\python}{\textsc{Python3}}
+\newcommand{\tristan}{\textsc{Tristan}}
+\newcommand{\tristanmp}{\textsc{Tristan-MP}}
+\newcommand{\pybind}{\textsc{Pybind11}}
+\newcommand{\eigen}{\textsc{Eigen}}
+\newcommand{\numpy}{\textsc{Numpy}}
+\newcommand{\scipy}{\textsc{Scipy}}
+\newcommand{\matplotlib}{\textsc{Matplotlib}}
+
+
+\newcommand{\todo}[1]{\red{#1}}
+
+
+%________________________________________________________________
+\begin{document}
+
+
+\title{Title}
+
+\author{J.\,N\"attil\"a\inst{1}}
+
+\institute{Nordita, KTH Royal Institute of Technology and Stockholm University, Roslagstullsbacken 23, SE-10691 Stockholm, Sweden. \email{joonas.nattila@su.se}
+}
+
+\date{Received XXX / Accepted XXX}
+
+
+\abstract{
+    Blaa blaa.
+}
+
+\keywords{ Plasmas -- Turbulence -- Methods: numerical }
+
+
+\maketitle
+
+%________________________________________________________________
+%\section{Introduction}\label{sec:intro}
+\citep{birdsall1985}
+
+\section{Theory}\label{sect:theory}
+
+
+
+
+
+%\section{Results}\label{sect:results}
+
+%\section{Summary}\label{sect:summary}
+
+%\section*{Acknowledgments}
+%JN would like to thank XXX stimulating discussions on numerics and plasma simulations. 
+%The simulations were performed on resources provided by the Swedish National Infrastructure for Computing (SNIC) at PDC and HPC2N.
+
+
+\bibliographystyle{aa}
+\bibliography{refs}
+
+%\begin{thebibliography}{62}
+%\end{thebibliography}
+
+%\clearpage
+%\onecolumn
+%\begin{appendix}
+%\end{appendix}
+
+\end{document}

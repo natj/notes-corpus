@@ -1,0 +1,104 @@
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+
+%--------------------------------------------------
+%Basic commands
+\newcommand{\be}{\begin{equation}}
+\newcommand{\ee}{\end{equation}}
+\newcommand{\bea}{\begin{align}\begin{split}}
+\newcommand{\eea}{\end{split}\end{align}}
+
+\newcommand{\fig}[1]{Fig.~\ref{#1}}
+\newcommand{\eq}[1]{~(\ref{#1})}
+\newcommand{\sect}[1]{Sect.~\ref{#1}}
+\newcommand{\appnd}[1]{Appendix \ref{#1}}
+
+\newcommand{\Ten}[2]{\ensuremath{#1 \times 10^{#2}} }
+
+
+%-------------------------------------------------- 
+% Units with proper unit spacing
+\newcommand{\unitspace}{\,}
+
+\newcommand{\km}{\ensuremath{\unitspace \mathrm{km}}}
+\newcommand{\cm}{\ensuremath{\unitspace \mathrm{cm}}}
+\newcommand{\g}{\ensuremath{\unitspace \mathrm{g}}}
+\newcommand{\Hz}{\ensuremath{\unitspace \mathrm{Hz}}}
+\newcommand{\gcm}{\ensuremath{\unitspace \mathrm{g}\,\mathrm{cm}^{-3}}}
+\newcommand{\cms}{\ensuremath{\unitspace \mathrm{cm}\,\mathrm{s}^{-1}}}
+\newcommand{\cmss}{\ensuremath{\unitspace \mathrm{cm}\,\mathrm{s}^{-2}}}
+\newcommand{\dyncm}{\ensuremath{\unitspace \mathrm{dyn}\,\mathrm{cm}^{-2}}}
+\newcommand{\erg}{\ensuremath{\unitspace \mathrm{erg}}}
+\newcommand{\ergs}{\ensuremath{\unitspace \mathrm{erg}\,\mathrm{s}^{-1}}}
+
+\newcommand{\Gauss}{\ensuremath{\unitspace \mathrm{G}}}
+\newcommand{\Kelvin}{\ensuremath{\unitspace \mathrm{K}}}
+
+%\newcommand{\Msun}{\ensuremath{\unitspace M_{\odot}}}
+\newcommand{\Msun}{\ensuremath{\unitspace \mathrm{M}_{\odot}}}
+
+
+%--------------------------------------------------
+% colors
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\green}[1]{\textcolor{green}{#1}}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+
+
+
+%--------------------------------------------------
+% vectors
+
+%normal 3-vectors
+%\renewcommand{\vec}[1]{\ensuremath{\mathbf{#1}}}
+%\renewcommand{\vec}[1]{\ensuremath{\boldsymbol{#1}}}
+\renewcommand{\vec}[1]{\ensuremath{\bm{\mathit{#1}}}}
+
+%four-vectors
+\makeatletter
+\def\fvec#1{\underline{\sbox\tw@{$#1$}\dp\tw@\z@\box\tw@}}
+\makeatother
+
+
+%--------------------------------------------------
+% math
+
+% integrals
+\newcommand{\ud}{\mathrm{d}} % differential d
+
+% derivatives
+\newcommand{\pD}[2]{\ensuremath{\partial_{#1}}} %partial derivative
+\newcommand{\fracpD}[2]{\ensuremath{\frac{\partial {#1} }{\partial {#2} }}} %frac partial
+
+\newcommand{\derfrac}[2]{\frac{\ud #1}{\ud #2}} % fractional deriv
+\newcommand{\parfrac}[2]{\frac{\partial #1}{\partial #2}} %fractional partial deriv
+\newcommand{\parD}[1]{\partial_{#1}} %partial derivative shorthand
+
+%misc
+\newcommand{\osim}{\mathord{\sim}} % ordo O
+
+% statistics
+\newcommand{\bra}[1]{\ensuremath{\langle #1 \rangle}}
+\newcommand{\braket}[2]{\ensuremath{ \langle #1 ~|~ #2 \rangle}}
+
+
+%--------------------------------------------------
+% programming
+
+% writing c++ is highly non-trivial
+%\newcommand{\cpp}{C\nolinebreak\hspace{-.05em}\raisebox{.4ex}{\tiny\bf +}\nolinebreak\hspace{-.10em}\raisebox{.4ex}{\tiny\bf +{rbrace}{rbrace}}}
+%\newcommand{\cpp}{C\nolinebreak\hspace{-.05em}\raisebox{.4ex}{\tiny\bf +}\nolinebreak\hspace{-.10em}\raisebox{.4ex}{\tiny\bf +}}
+%\def\cpp{{C\nolinebreak[4]\hspace{-.05em}\raisebox{.4ex}{\tiny\bf ++}}}
+%\def\CC{lbrace}{lbrace}C\nolinebreak[4]\hspace{-.05em}\raisebox{.4ex}{\tiny\bf ++{rbrace}{rbrace}{rbrace}
+%\usepackage{relsize}
+%\newcommand\cpp{C\nolinebreak\hspace{-.05em}\raisebox{.4ex}{\relsize{-3}{\textbf{+}}}\nolinebreak\hspace{-.10em}\raisebox{.4ex}{\relsize{-3}{\textbf{+}}}}
+%\newcommand\cpp{C\nolinebreak[4]\hspace{-.05em}\raisebox{.4ex}{\relsize{-3}{\textbf{++}}}}
+
+\newcommand{\cpp}{C\texttt{++}}
+\newcommand{\cppv}[1]{C\texttt{++}$#1$}
+
+\newcommand{\python}{\textsc{Python}}
+
+
+
