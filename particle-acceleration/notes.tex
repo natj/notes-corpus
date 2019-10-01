@@ -140,7 +140,131 @@
 %\section{Introduction}\label{sec:intro}
 \citep{birdsall1985}
 
+
+
+Standard Fermi-like acceleration is
+\be
+\langle \frac{\Delta p^2}{2\Delta t} \rangle \sim \beta_u^2 \frac{p^2}{t_{\mathrm{int}}},
+\ee
+where acceleration time is then
+\be
+t_{\mathrm{acc}} \sim \frac{ t_{\mathrm{int}} }{\beta_u^2}.
+\ee
+Quasi-linear theory here says that $t_{\mathrm{int}} = t_{\mathrm{scatt}}$.
+
+Generally, the particle interacts with a broad spectrum of compressive, shearing, accelerating and vortical motions, leading to stochastic acceleration.
+
+\citealt{Lemoine_2019} then predicts that
+\be
+D_{pp}^{\mathrm{non-res}} \approx \langle \delta u^2 \rangle \frac{p^2}{l_0 (\frac{t_{\mathrm{scatt}}}{l_0})^{2-q_u}} \propto p^{2-\epsilon},
+\ee
+where $q_u$ is the index of $4$-velocity spectrum, $l_0$ is the stirring scale, and $\langle \delta u^2 \rangle$ is the combination of $4$-velocity perturbation modes.
+Then
+\be
+t_{\mathrm{acc}}^{\mathrm{non-res}} \sim \frac{l_0}{\langle \delta u^2 \rangle}.
+\ee
+
+
+
 \section{Theory}\label{sect:theory}
+
+
+Macroscopic turbulence:
+large-scale mass motion, long-period large amplitude hydromagnetic waves or shock waves.
+
+Microscopic turbulence:
+intensities of the various wave modes which propagate in the medium are above thermal equilibrium value
+
+\citep{Fermi_1949}
+\citep{Fermi_1954}
+\citep{Lemoine_2019}
+
+Scattering depends on the length of the weakly damped turbulent wave along the mean magnetic field direction, $\lambda_{\parallel}$, and energetic particle scattering mean-free path, $\lambda_{\mathrm{mfp}}$.
+In the weak scattering limit $\lambda_{\parallel} \ll \lambda_{\mathrm{mfp}}$.
+In this case, particle's velocity along the mean magnetic field, $v_{\parallel}$ is almost constant.
+Interaction is of resonant type and gyrofrequency is an integer multiple of the wave length.
+In the opposing case of strong scattering, $\lambda_{\parallel} \gg \lambda_{\mathrm{mfp}}$ (Ptuskin 1988).
+Particle interacts non-resonantly with the wave traveling diffusively accross a wave.
+
+
+Basics
+\citep{Melrose_1968}
+\citep{Schlickeiser_1988}
+
+effect of plasma waves on charged particles are studied by expanding Vlasov equation to second order phase space density perturbations, and ensebmle averaging over the statistical properties of the plasma waves.
+This is the quasi-linear theory, QLT.
+
+
+In a very general way, the diffusion coefficient is given as
+\citep{Lynn_2014}
+\be
+D_{p_{\parallel}} = \frac{p_{\perp}^2 v_{\perp}^2}{4 B_0^2} 
+    \int d^3 k k_{\parallel}^2 I_B(\vec{k}) R(\vec{k}),
+\ee
+where $I_B(\vec{k})$ is the three-dimensional power spectrum of magnetic field fluctuations, and 
+\be
+R(\vec{k}) \propto \int_0^\infty dt \exp[ i(\omega(\vec{k}) - v_{\parallel} k_{\parallel})t] f(t),
+\ee
+is a resonance function that describes the interaction of the particle and the wave;
+$f(t)$ is the time correlation function for wave-particle interactions.
+
+
+\subsection{Slow stochastic diffusion}
+
+Standard models assume exponential or Gaussian wave decay in time due to nonlinear interactions.
+In this case, $f(t) = \exp[-\omega_{\mathrm{nl}}^2 t^2]$.
+One such a selection is, for example, \citep{Lynn_2012,Lynn_2014}
+\be
+R(\vec{k}) = \frac{\sqrt{\pi}}{2 \omega_{\mathrm{nl}}} \exp\left[ -\frac{k_{\parallel}^2 (v_{\parallel} - v_p )^2}{4\omega_{\mathrm{nl}}^2} \right],
+\ee
+where a dispersion relation of $\omega = k_{\parallel} v_p$ for the waves is assumed.
+Physically this means that particle couples to a spectrum of perturbations as it passes a wave,i.e., $k_{\parallel}(v_{\parallel} - v_p) \lesssim \omega_{\mathrm{nl}}$.
+
+Let us assume a strong anisotropic magnetic turbulence spectrum 
+\be
+I(\vec{k}) = \frac{\delta B^2 l_0^3}{12 \pi} (k_{\perp} l_0)^{-10/3} g\left( \frac{k_{\parallel} }{k_{\perp}^{2/3}} l_0^{1/3} \right)
+\ee
+where a sharp cutoff function of $g(x) \propto \exp(-x)$ is favored by simulations \citep{Cho_2002}.
+The cutoff means that there is not much power outside the anisotropic Goldreich-Sridhar cone \citep{Goldreich_1995} in a weakly compressible turbulence.
+Nonlinear frequency in this case is $\omega_{\mathrm{nl}} \approx (v_A/l_0) ( k_{\perp} l_0)^{2/3}$ that is about one eddy turnover time.
+
+Under these assumptions, the total momentum diffusion coefficient becomes
+\be
+D_p = \frac{\sqrt{\pi} p_{\perp}^2 v_{\perp}^2 }{48 v_A} \frac{\delta B^2}{B_0^2} \left( \frac{v_{\parallel}}{v_{\perp}} \right)^2 
+\int d k_{\parallel} d k_{\perp} \frac{k_{\parallel}^2}{k_{\perp}^3} g \left( \frac{ k_{\parallel}}{k_{\perp}^{2/3}} \right) 
+\exp\left( -\frac{k_{\parallel}^2 l_0^2 v_{\parallel}^2}{4(k_{\perp} l_0)^4 v_A^2} \right),
+\ee
+Both the exponential and $g(x)$ tend to limit the high $k_{\parallel}$ perturbation modes for a given $k_{\perp}$.
+Then,
+\be
+D_p = p^2 \frac{\pi}{24} \frac{v_A^2}{c l_0} \frac{\delta B^2 }{B_0^2} \frac{(1-\mu^2)^2}{\mu^3} \log(k_{\mathrm{max}} l_0),
+\ee
+where $\mu = v_{\parallel}/v_{\perp}$.
+
+Acceleration time is then
+\be
+t_{\mathrm{acc}} \sim \left( \frac{\delta B^2}{B_0^2} \right)^{-2} \frac{l_0}{v_A} \frac{c}{v_A},
+\ee
+that importantly is independent of the particle energy.
+Physically this corresponds to about one eddy turnover time divided by the fraction of the magnteic energy at low $k_{\parallel}$ that satisfy $k_{\parallel} \lesssim \omega_{\mathrm{nl}}/c$.
+
+
+\subsection{Fast ballistic diffusion}
+
+If the particle trajectory is ballistic it can scatter via linear resonances.
+The resonance function is then a $\delta$-function like,
+\be
+R(\vec{k}) = \pi \delta(k v_p \pm k_{\parallel} v_{\parallel}),
+\ee
+where $v_p$ is the isotropic phase velocity of fast modes; 
+$v_A$ for $\beta \ll 1$ and $c_s$ for $\beta \gg 1$.
+Performing the integral over the $\delta$-function and $(\delta B/B)^{-q}$ spectrum of perturbation amplitudes then gives
+\be
+D_p = p^2 \frac{v_p^2}{c l_0} \left( \frac{\delta B^2}{B_0^2} \right)^{-q}
+\ee
+
+
+
 
 \subsection{Main particle acceleration questions}
 
@@ -158,7 +282,6 @@ Albeit computationally heavy, very useful.
 
 \citep{Fermi_1949}
 \citep{Fermi_1954}
-
 \citep{Lemoine_2019}
 
 Fermi scheme can apply to any flow for which to electromagnetic $4-$scalers fulfil $\vec{E} \cdot \vec{B} = 0$ and $E^2 - B^2 < 0$.
