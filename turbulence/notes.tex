@@ -117,7 +117,7 @@
 \begin{document}
 
 
-\title{Turbulence}
+\title{MHD turbulence}
 
 \author{J.\,N\"attil\"a\inst{1}}
 
@@ -128,10 +128,10 @@
 
 
 \abstract{
-    Blaa blaa.
+   Quick historical review on MHD turbulence theory.
 }
 
-\keywords{ Plasmas -- Turbulence -- Methods: numerical }
+\keywords{ Plasmas -- Turbulence}
 
 
 \maketitle
@@ -141,8 +141,118 @@
 %\citep{birdsall1985}
 
 
-\section{Theory}\label{sect:theory}
+\section{Theory of turbulence}\label{sect:theory}
 
+\subsection{Kolmogorovian theory}\label{sect:K41}
+
+Energy is pumped into a homogenous conducting medium with a fixed rate $\epsilon$.
+Dimensionless analysis gives for the energy spectrum \citep{Kolmogov_1941}
+\be
+E(k) \sim \epsilon^{2/3} k^{-5/3}.
+\ee
+Same can be written in terms of average velocity increments
+\be
+\delta u_\lambda \sim (\epsilon \lambda)^{1/3}.
+\ee
+
+\subsection{Iroshnikov-Kraichan theory}\label{sect:K65}
+
+If the $\vec{B}$ field has an important role in energy transfer, than similar dimensionless analysis gives Iroshnikov Kraichnan 1965
+\be
+E(k) \sim (\epsilon v_A)^{1/2} k^{-3/2}
+\ee
+and
+\be
+\delta u_\lambda \sim (\epsilon v_A \lambda)^{1/4},
+\ee
+for the Alf\'ven speed with density $\rho$
+\be
+v_A = \frac{B}{\sqrt{4\pi \rho}}.
+\ee
+The reasoning is based on the fact that Alf\'ven time, $\tau_A \sim 1/k v_A$ is the time which interactions occur so the energy must come with a combination $\epsilon v_A$.
+
+The theory is incorrect because it assumes a uniform scale $k$ whereas in reality in a presence of a strong guide field $\vec{B}_0$ the scales split into $k_{\parallel}$ and $k_{\perp}$.
+
+\subsection{Goldreich-Sridhar critical balance}\label{sect:GS95}
+
+In a strong magnetic field $k_{\parallel} \ll k_{\perp}$.
+Parallel direction variation propagation velocity corresponds to Alf\'ven waves with 
+\be
+\tau_A = \frac{l_{\parallel}}{v_A},
+\ee
+whereas perpendicular variation is governed by nonlinear intearctions with characteristic times
+\be
+\tau_{\mathrm{nl}} \sim \frac{l_{\perp}}{\delta u_{\lambda}}.
+\ee
+
+For Alf\'venic perturbations $\delta u_{\lambda} \sim \delta b_{\lambda}$.
+The two times, $\tau_A$ and $\tau_{\mathrm{nl}}$, are assumed to be equal.
+The natural ``cascade time'' must also be of same order, $\tau_c \sim \tau_A \sim \tau_{\mathrm{nl}}$
+This gives 
+\be
+\frac{\delta u_{\lambda}^2}{\tau_c} \sim \epsilon \quad\mathrm{and}\quad
+\tau_c \sim \tau_{\mathrm{nl}} \sim \frac{\lambda}{\delta u_{\lambda}},
+\ee
+so that
+\be
+\delta u_{\lambda} \sim (\epsilon \lambda)^{1/3}
+\ee
+and equally \citep{Goldreich_1995, 1997}
+\be
+E(k_\perp) \sim \epsilon^{2/3} k_{\perp}^{-5/3},
+\ee
+yielding a Kolmogov scaling for the perpendicular scales.
+Simultaneously, along the field the velocity increment satisfy
+\be
+\frac{\delta u_{\parallel}^2}{\tau_c} \sim \epsilon \quad\mathrm{and}\quad
+\tau_c \sim \tau_A \sim \frac{l_{\parallel}}{v_A}
+\ee
+so that
+\be
+\delta u_{l \parallel} \sim \left( \frac{\epsilon l_{\parallel}}{v_A} \right)^{1/2}.
+\ee
+From here it follows
+\be
+l_{\parallel} \sim v_A \epsilon^{-1/3} \lambda^{2/3}.
+\ee
+Physically $l_{\parallel}$ is the distance an Alfv\'enic pulse travels along the field at speed $v_A$ over time $\tau_{\mathrm{nl}}$.
+
+\subsection{Reduced MHD and Elsasser fields}
+Elsasser fields are given as $\vec{Z} = \vec{u} \pm \vec{b}$.
+Here $b = B_0/\sqrt{4\pi \rho}$.
+
+\subsection{Weak turbulence}
+
+Weak turbulence theory stems from a perturbation in a (assumedly) small ratio $\tau_A/\tau_{\mathrm{nl}}$.
+WT scaling originates from
+\be
+\delta Z_{\lambda} \sim \left( \frac{\epsilon}{\tau_A} \right)^{1/4} \lambda^{1/2}
+\ee
+where $\delta Z_{\lambda}$ is perturbed Elsasser field.
+This gives a scaling
+\be
+E(k_{\perp}) \sim \left( \frac{\epsilon}{\tau_A} \right)^{1/2} k_{\perp}^{-2}.
+\ee
+
+Eventually weak turbulence will transition to strong turbulence.
+For balanced turbulence this happens when the perturbation parameter becomes of order unity,
+\be
+\frac{\tau_A}{\tau_{\mathrm{nl}}} \sim \frac{\tau_A^{3/4} \epsilon^{1/4}}{\lambda^{1/2}} \sim 1
+\ee
+corresponding to a scale (assuming critical balance)
+\be
+\lambda_{\mathrm{CB}} \sim \epsilon^{1/2} \tau_A^{3/2}.
+\ee
+
+\subsection{Critical balance}
+
+In a strong turbulence, $2D$ structures with $\tau_{\mathrm{nl}} \ll \tau_A$ are unsustainable because of causality:
+Information propagates along $\vec{B}$ at $v_A$ so no structure longer than $l_{\parallel} \sim v_A \tau_{\mathrm{nl}}$ can be kept coherent \citep{Boldyrev_2005}.
+
+
+
+
+\section{MHD etc notes}
 \citep{Sobacchi_2019} paragraphs: \\
 
 The most important property of MHD turbulence is its strong anisotropy, with the turbulent eddies becoming strongly elongated in the direction of the background magnetic field at small scales.
