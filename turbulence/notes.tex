@@ -128,7 +128,8 @@
 
 
 \abstract{
-   Quick historical review on MHD turbulence theory.
+   Quick historical review on MHD turbulence theories.
+   Theory is heavily influeced by Schekochihin 2018 (MHD Turbulence: A Biased Review).
 }
 
 \keywords{ Plasmas -- Turbulence}
@@ -141,7 +142,7 @@
 %\citep{birdsall1985}
 
 
-\section{Theory of turbulence}\label{sect:theory}
+\section{History of MHD turbulence}\label{sect:theory}
 
 \subsection{Kolmogorovian theory}\label{sect:K41}
 
@@ -250,126 +251,161 @@ In a strong turbulence, $2D$ structures with $\tau_{\mathrm{nl}} \ll \tau_A$ are
 Information propagates along $\vec{B}$ at $v_A$ so no structure longer than $l_{\parallel} \sim v_A \tau_{\mathrm{nl}}$ can be kept coherent \citep{Boldyrev_2005}.
 
 
+Alfv\'en wave is a basic element of MHD motion.
+Because of this, strong magnetic perturbations would ``want'' to resemble Alfv\'ven waves as closely as possible.
+Critical balance relates to this:
+An Alfv\'enic perturbation decorrelates in roughly one wave period.
 
+\subsection{Dynamical alignement}
 
-\section{MHD etc notes}
-\citep{Sobacchi_2019} paragraphs: \\
+Dynamic alignment derives from the same assumption of MHD tendency towards Alfv\'enic nature.
+In an Alfv\'en wave $\vec{u}_\perp$ and $\vec{b}_\perp$ are the same, i.e., plasma flows drag field with them or the field accelerates flows to relax under tension.
+However, if the two fields are exactly parallel, there would be no non-linearity.
 
-The most important property of MHD turbulence is its strong anisotropy, with the turbulent eddies becoming strongly elongated in the direction of the background magnetic field at small scales.
-As first proposed by Goldreich \& Sridhar (1995), in the course of the turbulent cascade the ratio of the longitudinal scale of the eddies, $\lambda_{\parallel}$, to the Alfven velocity remains equal to the ratio of the, perpendicular scale, $\lambda_{\perp}$,to the turbulent velocity 
-This condition is known as critical balance. 
-From this condition one finds
+Boldyrev's theory on dynamical alignement states that the angle, $\theta_{\lambda}$ between the two fields can not be known more precisely than 
 \be
-\frac{\lambda_{\perp}}{\lambda_{\parallel}} \sim \sqrt{ \frac{\lambda_{\parallel}}{R} }
+\sin \theta_{\lambda} \sim \theta_\lambda \sim \frac{\delta b}{v_A} \ll 1
+\ee
+Then the non-linear time is modified to be
+\be
+\tau_{\mathrm{nl}} \sim \frac{\lambda}{\delta Z_\lambda^\mp \sin\theta_\lambda}
+\ee
+This leads to Kraichnan-type of $3/2$ scaling
+\be
+E(k_\perp) \sim (\epsilon v_A)^{1/2} k_\perp^{-3/2}
+\ee
+and 
+\be
+l_\parallel \sim v_A^{3/2} \epsilon^{-1/2} \lambda^{1/2}.
 \ee
 
-
-The statement that in collisionless plasmas the anisotropic MHD turbulence decays by heating/accelerating particles along the background magnetic field is general. 
-Indeed, the dissipation occurs at the wave-particle resonances
+Yet another way to rewrite the scaling relations in terms of the critical balance scale, $\lambda_{\mathrm{CB}}$, is 
 \be
-\omega - \vec{k} \cdot \vec{v} = n \omega_B
+E(k_\perp) \sim \epsilon^{2/3} \lambda_{\mathrm{CB}}^{1/6} k_\perp^{-3/2},
 \ee
-where $\omega$ and $\vec{k}$ are the frequency and the wavenumber, $\vec{v}$ is the particle velocity, $\omega_B$ is the Larmor frequency, and $n$ is an integer.
-The cyclotron resonance condition $n \ne 0$ is satisfied when the longitudinal scale of the wave packet, $\lambda_{\parallel}$ is of the order of the particle Larmor radius, $r_L = c/\omega_B$.
-Since $r_L \ll R$, due to the strong anisotropy of the MHD turbulence a particle crosses many wave packerts during one Larmor orbit.
-It was first noticed by Gruzinov (1998), Quataert (1998), and Quataert \& Gruzinov (1999) that in this case the dissipation occurs at the Landau resonance $n = 0$.
-Since the two physical mechanisms of wave-particle interaction at the $n=0$ resonance are due to 
-i) the longitudinal electric field of the wave, and
-ii) the interaction between the effective particle's magnetic moment and the longitudinal magnetic perturbation, one is led to the conclusion that the turbulent energy is primarily dissipated on to the longitudinal particle motion.
-
-It has also been found that the turbulent fluctuations tend to align with one another forming small-scale current sheets (e.g. Beresnyak \& Lazarian 2006; Boldyrev 2006;Mason, Cattaneo \& Boldyrev 2006), which could be disrupted via magnetic reconnection thus providing an additional dissipation mechanism (e.g. Boldyrev \& Loureiro 2017; Loureiro \& Boldyrev 2017; Mallet, Schekochihin \& Chandran 2017a,b). 
-Note that the background magnetic field, which is much larger than the reconnecting field and lies in the same plane of the current sheet, plays the role of a guide field. 
-Since the magnetic energy is transferred to the plasma particles at the Landau resonance between the particles and the tearing mode that disrupts the current sheet, also in this case one would expect the particles to be heated in the longitudinal direction.
-
-Even if the perpendicular heating is negligible, in a weakly magnetized plasma the fire-hose instability quickly erases any momentum anisotropy (e.g. Parker 1958; Lerche 1966). 
-However, since the fire-hose instability develops once $P_{\parallel} - P_{\perp} > B^2/4\pi$, one immediately sees that this instability is not effective if the magnetic-to-plasma energy ratio exceeds $\frac{1}{2}$.
+that follows the prediction for the spectrum by Perez et al 2012, 2014b.
+This is sometimes known as aligned turbulence.
 
 
+\subsection{Intermittency}
+
+Classical turbulence theories rely on self-similarity of the structures. 
+Intermittency means that this assumption is broken and instead we introduce all three length scale directions: 
+perpendicular $\lambda$, parallel $l_\parallel$, and fluctuation direction $\zeta$.
+
+Intermittency states that eddies are not completely space-filling, but have more rare fluctuations on top of the ``typica'' ones.
+In hydrodynamic turbulence, corrections to K41 theory come in powers of $\lambda/L$.
+Similar can be found in MHD turbulence as the self-similarity is broken with the appeareance of outer-scale size $L_\parallel$ in to the scaling equations.
+
+Mallet \& Schekochihin conjectured that $l_\parallel \sim \lambda^\alpha$, i.e., $l_\parallel/\lambda^\alpha$ has a scale-invariant distribution.
+A typical (second) conjecture is that most intense structures are sheets transverse to the local perpendicular direction.
+
+%Note: Some arguments about outer scale structures lead to a prediction on MS17 for alpha=1/2.
+
+\subsection{Recap}
+
+Therefore, in reality, the scaling are expected to be fully $3D$.
+From critical balance and from the assumption of dynamical alignment it then follows that that field's spectra depends as:
+$-2$ in $l_\parallel$ direction,
+$-3/2$ in $\lambda$ direction, and
+$-5/3$ in $\zeta$ direction.
+
+In addition, we have
+\be
+\zeta \sim l_\parallel \frac{\delta Z_\lambda}{v_A} \sim l_\parallel \frac{\delta b_\lambda}{v_A}a,
+\ee
+i.e., $\zeta$ is the typical displacement of a fluid element and a typical perpendicular distance a field line wanders within a structure that is coherent on the parallel scale $l_\parallel$.
+Fluctuations must therefore preseve cohenre in their respective direction at least on scale $\zeta$.
+They are not constrained in the third $\lambda$ direction.
+Finally, they are expected to have an angular uncertainty of the order of the angle $\theta_\lambda$ between the two fields.
+
+Finally, we note that this is picture is not solid yet.
+On the contrast, it relies on the refined dynamical alignment conjecture that itself is not proven to be correct or incorrect yet.
+Another way to think about this conjecture is, that it is used to describe the intermittency.
+For a solid theory of MHD turbulence, a complete theory of intermittenty is therefore needed.
 
 
-\section{Literature}\label{sect:literature}
+
+
+\section{Literature \red{Work-in-progress}}\label{sect:literature}
 
 Objects themselves:
-
-PWN: Woosley 1993 \\
-jets from AGNs: Reynolds 1996 \\
-GRBs: Wardle 1998 \\
-
-
+\begin{itemize}
+    \item PWN: Woosley 1993
+    \item jets from AGNs: Reynolds 1996
+    \item GRBs: Wardle 1998
+\end{itemize}
 
 %--------------------------------------------------
 %plasma turbulence as a generator of non-thermal particles
 \subsection{Non-thermal particles from turbulence}
-Melrose 1980
-Petrosian 2012
-Lazarian 2012
+\begin{itemize}
+    \item Melrose 1980;
+    \item Petrosian 2012;
+    \item Lazarian 2012;
+\end{itemize}
 
 \subsection{Turbulence in astrophysics}
 
-
-turbulence in stellar coronae
+turbulence in stellar coronae:
 Matthaeus 1999, Cranmer 2007
 
-ISM
+ISM:
 Armstrong 1995, Lithwick \& Goldreich 2001
 
-SNRs 
+SNRs:
 Weiler \& Sramek 1988, Roy 2009
 
-PWN
+PWN:
 Porth 2014, Lyutikov 2019
 
-BH disks
+BH disks:
 Balbus \& Hawley 1998, Brandenburg \& Subramanian 2005
 
-jets from AGNs
+jets from AGNs:
 Marscher 2008, MacDonald \& Marscher 2018
 
-radio lobes
+radio lobes:
 Vogt \& Ensslin 2005, O'Sullivan 2009
 
-GRBs
+GRBs:
 Wardle 1998
 Piran 2004, Kumar \& Narayan 2009
 
-Galaxy clusters 
+Galaxy clusters:
 Zweibel \& Heiles 1997, Subramanian 2006
 
-Laser laboratory plasma
+Laser laboratory plasma:
 Sarri 2015
 
 
+\subsection{Magnetically-dominated turbulence}
 
-
-
-
-\subsection{Magnetically dominated turbulence}
 Sustained relativistic turbulence (force-free)
 \citep{Thompson_1998}: extension of Goldreich \& Sridhar 1995 to exterme relativistic limit (no plasma inertia; force-free MHD).
 Anisotropic cascade is formed, dissipation occurs at the scale of current starvation (when not enough charge carriers in plasma to maintain currents from Alf\'en waves).
 
+MHD:
 \citep{Cho_2005}
 Inoue 2011
 \citep{Cho_2014}
 \citep{Zrake_2016}
 
-Relativistic MHD
+Relativistic MHD:
 \citep{Zrake_2012}
 \citep{Zrake_2014}
 
 \subsection{Bright non-thermal synchrotron and inverse Compton signatures}
-pulsar magnetospheres and winds 
+Pulsar magnetospheres and winds:
 Buhler \& Blandford 2014
 
-jets from AGNs Begelman 1984
+Jets from AGNs: Begelman 1984
 
-coronae of accretion disks
+Coronae of accretion disks:
 Yuan \& Narayan 2014
 
 \subsection{Kinetic turbulence}
 
-%Papers we need to cite on kinetic turbulence:\\
-Kinetic turbulence:
 \citep{Zhdankin_2017a} Letter\\
 \citep{Zhdankin_2017b} Paper\\
 \citep{Zhdankin_2018} System size convergence\\
@@ -382,54 +418,53 @@ Kinetic turbulence:
 
 \subsection{Radiative turbulence}
 
-Analytic work on radiative turbulence
-\citep{Uzdensky_2018}
-\citep{Zrake_2018}; GRBs
-\citep{Sobacchi_2019}
-
-PIC simulations:
+\subsubsection{Analytic work on radiative turbulence}
+\citep{Uzdensky_2018}; \\
+\citep{Zrake_2018} (GRBs) \\
+\citep{Sobacchi_2019}; \\
+ 
+\subsubsection{PIC simulations}
 \citep{Zhdankin_2019b} radiative turbulence\\
 
-Fokker-Planck equation in momentum space with radiative cooling term
-\citep{Schlickeiser_1984, Schlickeiser_1985}; not in original list \citep{Schlickeiser_1989}
-\citep{Stawarz_2008}
+
+\subsubsection{Fokker-Planck equation in momentum space with radiative cooling term}
+\citep{Schlickeiser_1984, Schlickeiser_1985}; not in original list \citep{Schlickeiser_1989} \\
+\citep{Stawarz_2008} \\
 
 
 \subsection{radiative PIC simulations}
 
-Reconnection:
-\citep{Jaroschek_2009}
-\citep{Cerutti_2013, Cerutti_2014, Cerutti_2014a}
-\citep{Kagan_2016, Kagan_2016b}
-\citep{Hakobyan_2019}
-\citep{Werner_2019}
-\citep{Schoeffler_2019}
+\subsubsection{Reconnection}
+\citep{Jaroschek_2009} \\
+\citep{Cerutti_2013, Cerutti_2014, Cerutti_2014a} \\
+\citep{Kagan_2016, Kagan_2016b} \\
+\citep{Hakobyan_2019} \\
+\citep{Werner_2019} \\
+\citep{Schoeffler_2019} \\
+
+\subsubsection{Decay of magnetostatic equilibria}
+\citep{Yuan_2016} \\
+\citep{Nalewajko_2018} \\
+
+\subsubsection{Pulsar wind}
+\citep{Cerutti_2017} \\
+
+\subsubsection{Pulsar magnetospheres}
+\citep{Cerutti_2016a} \\
+\citep{Philippov_2018} \\
 
 
-decay of magnetostatic equilibria 
-\citep{Yuan_2016}
-\citep{Nalewajko_2018}
+\subsubsection{Synchrotron and jitter radiative signatures of collisionless shocks}
+\citep{Medvedev_2009} \\
+\citep{Sironi_2009} \\
+\citep{Kirk_2010} \\
+\citep{Nishikawa_2011} \\
 
-pulsar wind
-\citep{Cerutti_2017}
-
-pulsar magnetospheres
-\citep{Cerutti_2016a}
-\citep{Philippov_2018}
-
-
-Synchrotron and jitter radiative signatures of collisionless shocks
-\citep{Medvedev_2009}
-\citep{Sironi_2009}
-\citep{Kirk_2010}
-\citep{Nishikawa_2011}
-
-Radiative turbulence
+\subsubsection{Radiative turbulence}
 \citep{Zhdankin_2019}
 
 
 
-%\section{Results}\label{sect:results}
 
 %\section{Summary}\label{sect:summary}
 
