@@ -195,12 +195,19 @@ S(\ell)^2 = 2\int_0^\infty \left( 1 - \frac{\sin kr}{kr}\right) E(k) dk
 \ee
 If spectrum is a power-law, $E(k) \propto k^\alpha$, then by substitution of $k = x/\ell$, we have $S(\ell)^2 \propto \ell^{-1-\alpha}$.
 
-
 From a statistical viewpoint, if the turbulence is self-similar (i.e., has a single-fractal structure) higher-order structure functions are all connected as 
 \be
 [S(\ell)^n)]^{1/n} \sim [S(\ell)^m)]^{1/m},
 \ee
 for any arbitrary orders $n$ and $m$.
+
+
+A statistical outer scale of the system can be obtained as
+\be
+L_0 = \frac{3\pi}{4 E} \int_0^\infty k^{-1} E(k) dk
+\ee
+
+
 
 
 \section{Basic theoretical background of turbulent cascades}\label{sect:theory}
@@ -238,14 +245,132 @@ that results in
 u_\ell \sim (\varepsilon \ell)^{1/3} \sim \varepsilon^{1/3} k^{-1/3}.
 \ee
 From the definition of the energy spectrum we have that $E(k) k \sim u_\ell^2$ so that
-\be
+\be\label{eq:K41}
 E(k) \sim \frac{u_\ell^2}{k} \sim \frac{(\varepsilon^{1/3} k^{-1/3})^2}{k} \sim \varepsilon^{2/3} k^{-5/3}.
 \ee
 
+The energy is expected to cascade down to smaller scales until the so-called Kolmogorov scale.
+At this scale dissipative processes overcome nonlinear transfer of energy.
+Given a diffusivity $\nu_D$ we obtain a measure of a characteristic lenght as
+\be
+\ell_\nu = \left( \frac{\nu_D^3}{\varepsilon} \right)^{1/4}.
+\ee
 
-\section{Phenomenological MHD turbulence models}\label{sect:theory}
+A critisism against Kolmogrov models is that it does not take into account intermittency.
+An empirical correcction is possible by multiplying RHS of Eq. \eqref{eq:K41} with a so-called intermittency correction factor $(k L_0)^\alpha$ where $\alpha \approx 0.035$ (see Frisch 1995).
 
-Before we start with phenomenological models, let us make a remark of the actual observations.
+
+\section{Alfvenic MHD turbulence}\label{sect:mhd_theory}
+
+Incompressible MHD equations%
+\footnote{
+    Viability of incompressibility requires the fluid compressibility to be small in the inertial range.
+    This assumes that 
+    1) turbulence has no shocks
+    2) no sizable energy is carried by sound waves (i.e. fast MHD mode),
+    3) sonic Mach number, $\mathcal{M}_s = V_L/c_s$ is small and decreases with scale.
+}
+consist of two dynamical equations and two constraints:
+Momentum equation,
+induction equation,
+divergence free constraint of magnetic field,
+and divergence free constraint of velocity field.
+These are expressed as
+%\begin{align}\begin{split}
+%    \partial_t \vec{v} &= -\nabla P/\rho - \nabla (v^2/2) - (\nabla \times \vec{v}) \times \vec{v} + (\nabla \times \vec{b}) \times \vec{b}, \\
+%    \partial_t \vec{b} &= \nabla \times (\vec{v} \times \vec{b}).\\
+%    \nabla \cdot \vec{b} &= 0\\
+%    \nabla \cdot \vec{v} &= 0.
+%\end{split}\end{align}
+\begin{align}\begin{split}
+    \frac{\partial \vec{u}}{\partial t} + \vec{u} \cdot \nabla \vec{u} &= -\nabla P + \vec{B} \cdot \nabla \vec{B} + \nu \nabla^2 \vec{u} \\
+    \frac{\partial \vec{B}}{\partial t} + \vec{u} \cdot \nabla \vec{B} &= \vec{B} \cdot \nabla \vec{u} + \eta \nabla^2 \vec{B} \\
+    \nabla \cdot \vec{B} &= 0\\
+    \nabla \cdot \vec{u} &= 0.
+\end{split}\end{align}
+Here $\vec{u}$ is velocity, $\vec{B} = \vec{B}_0 + \vec{b}$ is magnetic field (mean $+$ fluctuations), $P$ is total pressure (thermal $+$ magnetic), $\nu$ is kinematic viscosity, $\eta$ is magnetic diffusivity.
+Magnetic field is expressed in units of Alfven speed, $b = B_0/\sqrt{4\pi \rho}$.
+
+The above equation can be compressed further by presenting it in terms of the so-called Els\"asser variables, $\vec{z}^\pm = \vec{u} \pm \vec{b}$.
+Then
+\be
+    \frac{\partial \vec{z}^\pm}{\partial t} \mp (\vec{B}_0 \cdot \nabla) \vec{z}^\pm + (\vec{z}^\mp \cdot \nabla) \vec{z}^\pm = -\nabla P  + \nu_- \nabla^2 \vec{z}^\pm  + \nu_+ \nabla^2 \vec{z}^\mp,
+\ee
+where $\nu_\pm \frac{1}{2} (\nu \pm \eta)$.
+Importantly, nonlinear interactions are seen to occur as Alfvenic fluctuations of $z^\mp$ via the nonlinear advective derivative $(\vec{z}^\mp \cdot \nabla) \vec{z}^\mp$.
+
+Alfven fluctuations are therefore characteristic modes of MHD equations.
+This means that all perturbations want to resemble Alfvenic fluctuations.
+A typical picture of MHD turbulence is a mutual interaction of (multiple) Alfven wave packets.
+The interaction of these wave packets can either be weak (small perturbations of waves) or strong (non-linear quick destroyment of wave coherence during a dynamical time).
+It is the Alfvenic part of the MHD perturbations that govern this anisotropic turbulence. 
+Hence, the name Alfvenic turbulence.
+
+
+\section{Weak wave turbulence}
+
+Weak turbulence refers to the picture where wave packets propagate almost freely and collisions between the waves leads to small perturbations in their structure so that perturbation theory is applicable.
+Mathematically, this takes place in the limit of small $\delta z$ that presents a perturbation traveling along the $\vec{B}_0$.
+The nonlinear term describes the interaction of the perturbations.
+Self-interaction of $\delta z^-$ or $\delta z^+$ is absent.
+
+The dominant nonlinear interaction is a three-wave process.
+Dispersion relation and conservation laws for energy and momentum of the waves is therefore,
+\begin{align}\begin{split}
+    \omega_n &= k_{\parallel,n} v_A \\
+    \pm \omega_1 &= \pm \omega_2 \pm \omega_3 \\
+    k_{\parallel,1} &= k_{\parallel,2} + k_{\parallel,3} \\
+    k_{\perp,1} &= k_{\perp,2} + k_{\perp,3} 
+\end{split}\end{align}
+One $\omega_n$ must be zero so let us select $\omega_3=0$ that corresponds to $|k{\parallel,1}| = |k_{\parallel,2}|$.
+There is no restriction on $k_{\perp,1,2}$.
+The cascade takes place by increasing $k_\perp$ only and preserves the frequencies.
+
+In wave turbulence theory the interaction strenght is
+\be
+\chi = \frac{k_\perp \delta z}{k_\parallel v_A},
+\ee
+that describes the ratio of nonlinear shear rate $k_\perp \delta z$ to the wave frequency, $k_\parallel v_A$.
+It also servs as an estimate of the nonlinear term to the mean-field term.
+
+In MHD turbulence the dynamical time scale, $t_\mathrm{dyn} = 1/k_\perp \delta z$ (inverse of shear rate), does not have to be proportional to the cascade time $\tcascd$, as is the case for hydrodynamical turbulence.
+Instead, the cascade time is increased  by a factor of $1/\chi$.
+
+Another way to understand this is to think wave packet perturbations as a random walk.
+Each individual perturbation is $\chi$ in strenght so it takes $(1/\chi)^2$ steps to destroy the coherence of a wavepacket.
+Then the cascade time is
+\be
+\tcascd = \frac{1}{k_\parallel v_A} \left( \frac{1}{\chi} \right)^2 = \frac{k_\parallel v_A}{(k_\perp \delta z)^2}
+\ee
+
+Energy cascade rate, $\varepsilon$, is the energy on each scale divided by the cascade time on that scale.
+This rate is expected to be constant through the inertial scale so that
+\be
+\epsilon = \delta z^2 \frac{(\delta z k_\perp)^2}{v_A k_\parallel}.
+\ee
+Since the perturbation is weak, $k_\parallel$ is a constant here.
+Then the phenomenological cascade rate is determined by $\delta z^2 \sim k_\perp^{-1}$.
+This corresponds to a one-dimensional perpendicular spectrum
+\be
+E(k_\perp) \sim \delta z^2 k_\perp^{-1} \sim k_\perp^{-2}.
+\ee
+See Zakharov 1992, Galtier et al 2000, 2002.
+
+
+Such a weak turbulence model is unstable.
+Analytic work has demonstrated that MHD turbulence tends to become stronger and not weaker during a cascade (Galtier et al 2000).
+Weak wave turbulence is expected to grow anisotropic with $k_\perp/k_\parallel \sim k_\perp$ since $k_\parallel$ is a constant.
+The perturbation strenght, $\chi$ is also expected to become stronger at small scales.
+This is seen from
+\be
+\chi = \frac{\delta z k_\perp}{v_A k_\parallel} \sim k_\perp^{1/2} \rightarrow \infty ~ \mathrm{when }~ k_\perp \rightarrow \infty.
+\ee
+
+
+
+\section{Phenomenological strong MHD turbulence models}\label{sect:theory}
+
+Before we start with phenomenological strong MHD models, let us make a remark of the actual observations.
 Especially the hydrodynamical turbulence is a well-studied problem.
 Our best understanding of this system is still roughly a Kolmogorov-like system that predicts $-5/3$ scaling.
 
@@ -337,11 +462,9 @@ l_{\parallel} \sim v_A \epsilon^{-1/3} \lambda^{2/3}.
 \ee
 Physically $l_{\parallel}$ is the distance an Alfv\'enic pulse travels along the field at speed $v_A$ over time $\tau_{\mathrm{nl}}$.
 
-\subsection{Reduced MHD and Elsasser fields}
-Elsasser fields are given as $\vec{Z} = \vec{u} \pm \vec{b}$.
-Here $b = B_0/\sqrt{4\pi \rho}$.
 
 \subsection{Weak turbulence}
+
 
 Weak turbulence theory stems from a perturbation in a (assumedly) small ratio $\tau_A/\tau_{\mathrm{nl}}$.
 WT scaling originates from
@@ -363,6 +486,7 @@ corresponding to a scale (assuming critical balance)
 \be
 \lambda_{\mathrm{CB}} \sim \epsilon^{1/2} \tau_A^{3/2}.
 \ee
+
 
 \subsection{Critical balance}
 
