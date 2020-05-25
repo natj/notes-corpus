@@ -1,5 +1,8 @@
 %\documentclass[referee]{aa}
-\documentclass{aa}
+\documentclass[usenatbib,twocolumn]{aastex63}
+
+\pdfoutput=1
+\pdfminorversion=5
 
 
 \usepackage[utf8]{inputenc}
@@ -73,7 +76,6 @@
 \lstloadlanguages{C++}
 \newcommand{\codeil}[1]{\lstinline!#1!}
 
-
 \input{defs.tex}
 
 \newcommand{\Cfl}{\hat{c}}
@@ -110,8 +112,18 @@
 \newcommand{\matplotlib}{\textsc{Matplotlib}}
 
 
+\newcommand{\ene}[2]{\mathcal{E}_{#1}^{#2}} %general energy function
+\newcommand{\tcascd}{t_\mathrm{cascd}} %cascade time scale
+
 \newcommand{\todo}[1]{\red{#1}}
 
+\received{MMM D, YYYY}
+\revised{MMM D, YYYY}
+\accepted{\today}
+
+
+\shorttitle{MHD turbulence}
+\shortauthors{N\"attil\"a}
 
 %________________________________________________________________
 \begin{document}
@@ -119,30 +131,137 @@
 
 \title{MHD turbulence}
 
-\author{J.\,N\"attil\"a\inst{1}}
-
-\institute{Nordita, KTH Royal Institute of Technology and Stockholm University, Roslagstullsbacken 23, SE-10691 Stockholm, Sweden. \email{joonas.nattila@su.se}
-}
-
-\date{Received XXX / Accepted XXX}
+\author{J.~\,N\"attil\"a}
+\affiliation{Physics Department and Columbia Astrophysics Laboratory, Columbia University, 538 West 120th Street, New York, NY 10027, USA}
+\affiliation{Center for Computational Astrophysics, Flatiron Institute, 162 Fifth Avenue, New York, NY 10010, USA}
+\email{email: jan2174@columbia.edu}
 
 
-\abstract{
-   Quick historical review on MHD turbulence theories.
-   Theory is heavily influeced by Schekochihin 2018 (MHD Turbulence: A Biased Review).
-}
+
+\begin{abstract}
+Quick historical review on MHD turbulence theories.
+Theory is heavily influeced by Schekochihin 2018 (MHD Turbulence: A Biased Review).
+Verma,
+and Bresnyak
+\end{abstract}
+
 
 \keywords{ Plasmas -- Turbulence}
 
-
-\maketitle
+%\maketitle
 
 %________________________________________________________________
 %\section{Introduction}\label{sec:intro}
 %\citep{birdsall1985}
 
 
-\section{History of MHD turbulence}\label{sect:theory}
+\section{Statistical description of turbulence}\label{sect:turb}
+
+Single realization of a turbulent flow is chaotic and unpredictable.
+Order can be gained by describing the system statistically with averaged quantities.
+According to ergodic hypothesis statistical ensemble measurements can be replaced by time- and volume-averaging;
+this is under the assumption that turbulence is volume-filling and persistent process.
+
+Second order structure function of a physical variable $\vec{X}(\vec{\ell})$ (like $\vec{V}$, $\vec{B}$, etc.) is defined as
+\be
+S(\vec{\ell})^2 = \langle [ X(\vec{\ell}-\delta\vec{\ell}) - X(\vec{\ell}) ]^2 \rangle,
+\ee
+where $\langle \cdot \rangle$ denotes averaging (time, volume, statistical; no stance taken on what the exact nature actually is).
+This quantity captures spatial correlation of the field $\vec{X}$.
+For velocity it reduces to kinetic energy, $S(\vec{v}) = 4 \ene{V}{}$ on a scale $\ell$.
+
+Fourier transformed $S$ can be related to the so-called energy spectrum $E(k)$.
+It describes energy in the wavenumber space such that $dE = E(k) dk$ is the energy at that particular wavenumber (or scale).
+Total energy is obtained by summing over all scales, $\ene{}{} = \int E(k) dk$.
+For a statistically self-similar system we expect a power-law scaling for $E(k)$.
+
+
+Fourier transform of a turbulent quantity $u$ is
+\be
+u(\vec{\ell}) = \int e^{i \vec{k} x} d\hat{u}(\vec{k}).
+\ee
+Square of the transform is called power spectrum,
+\be
+P(\vec{k}) d\vec{k} = \langle | d\hat{u}(\vec{k}) |^2 \rangle.
+\ee
+For isotropic system, i.e., if $P(\vec{k})$ depends only on $|k|$, we can integrate over the shells in k-space to get
+\be
+E(k) = 4\pi k^2 P(k)
+\ee
+
+Spectra and structure functions have one-to-one correspondence
+\be
+S(\ell)^2 = 2\int_0^\infty \left( 1 - \frac{\sin kr}{kr}\right) E(k) dk
+\ee
+If spectrum is a power-law, $E(k) \propto k^\alpha$, then by substitution of $k = x/\ell$, we have $S(\ell)^2 \propto \ell^{-1-\alpha}$.
+
+
+From a statistical viewpoint, if the turbulence is self-similar (i.e., has a single-fractal structure) higher-order structure functions are all connected as 
+\be
+[S(\ell)^n)]^{1/n} \sim [S(\ell)^m)]^{1/m},
+\ee
+for any arbitrary orders $n$ and $m$.
+
+
+\section{Basic theoretical background of turbulent cascades}\label{sect:theory}
+
+Energy dissipation for incompressible flow can be defined per unit mass as $\varepsilon$ with units $\cm^2 \second^{-3}$.
+Kolmogorov model assumes that the statistical properties of turbulence are uniquely determined by the amount of energy available in a stationary homogenous system, i.e. by $\varepsilon$ alone.
+Furthermore, it assumes that energy self-similarly cascades through series of scales known as the inertial range.
+Cascade means that energy is being transferred from one scale to another without dissipation.
+
+Kolmogorov model can be deduced from dimensional analysis alone.
+If the spectrum, $E(k)$, has units of $\cm^3 \second^{-2}$ and wavenumber, $k = 2\pi/\ell$, has units of $\cm^{-1}$ then we must have
+\be
+E(k) = C_K \varepsilon^{2/3} k^{-5/3},
+\ee
+where $C_K$ is a dimensionless Kolmogorov constant.
+The $3D$ powerspectrum $P(k) \sim E(k) k^{-2} \sim k^{-11/3}$.
+
+The physics of this derivation is the following.
+Characteristic velocity on scale $\ell$ is $u_\ell$ and if the energy rate is constant for all scales then
+\be
+\frac{u_\ell^2}{\tcascd} = \varepsilon,
+\ee
+where $\tcascd$ is a cascading time, time it takes for nonlinearities to remove energy from scale $\ell$ and transfer it to smaller scales.
+
+For hydrodynamic cascade we assume that $\tcascd$ is a dynamical time on a particular scale, so that 
+\be
+\tcascd \approx \frac{\ell}{u_\ell}.
+\ee
+By substitituion we then have
+\be
+\varepsilon \sim \frac{u_\ell^2}{\tcascd} \sim \frac{u_\ell^3}{\ell}
+\ee
+that results in
+\be
+u_\ell \sim (\varepsilon \ell)^{1/3} \sim \varepsilon^{1/3} k^{-1/3}.
+\ee
+From the definition of the energy spectrum we have that $E(k) k \sim u_\ell^2$ so that
+\be
+E(k) \sim \frac{u_\ell^2}{k} \sim \frac{(\varepsilon^{1/3} k^{-1/3})^2}{k} \sim \varepsilon^{2/3} k^{-5/3}.
+\ee
+
+
+\section{Phenomenological MHD turbulence models}\label{sect:theory}
+
+Before we start with phenomenological models, let us make a remark of the actual observations.
+Especially the hydrodynamical turbulence is a well-studied problem.
+Our best understanding of this system is still roughly a Kolmogorov-like system that predicts $-5/3$ scaling.
+
+In reality, physical and numerical experiments have never agreed with this theoretical scaling.
+It is a solid fact that the scaling is more close to $-1.7$ \red{CHECK} and not $-1.66$ as would be predicted.
+The situation is even worse for MHD cascades since we can not perform detailed physical experiments of plasma turbulence nor can we simulate large enough MHD systems.%
+\footnote{
+    The problem is computationally very demanding.
+From the simulation perspective, there is a roughly an one order of magnitude of settling scales below the injection scale $\ell_0$ so that inertial range begins at scales of $\lesssim l_0/10$.
+Similarly, dissipation (and grid scale) physics (and numerics) are present at roughly one order of magnitude above the dissipation scale $\ell_\nu$ so that a clean inertial range extends to $\gtrsim 10 \ell_\nu$.
+In order to perform scaling measurements with a inertial range of length at least 2 decades, we then need to simulate a turbulent system of a size of at least $(10\times10\times10^2)^3 \sim (10^4)^3$.
+Current simulations are only starting to probe these scales whereas such a system is only the minimum viable numerical experiment.
+}
+Therefore, one should not get too carried away by the different theoretical models;
+none of them is actually correct.
+
 
 \subsection{Kolmogorovian theory}\label{sect:K41}
 
@@ -364,13 +483,15 @@ Balbus \& Hawley 1998, Brandenburg \& Subramanian 2005
 
 jets from AGNs:
 Marscher 2008, MacDonald \& Marscher 2018
+\citep{MacDonald_2018}
 
 radio lobes:
 Vogt \& Ensslin 2005, O'Sullivan 2009
 
 GRBs:
 Wardle 1998
-Piran 2004, Kumar \& Narayan 2009
+Piran 2004, 
+\citep{Kumar_2009}
 
 Galaxy clusters:
 Zweibel \& Heiles 1997, Subramanian 2006
@@ -402,7 +523,8 @@ Buhler \& Blandford 2014
 Jets from AGNs: Begelman 1984
 
 Coronae of accretion disks:
-Yuan \& Narayan 2014
+\citep{Yuan_2014}
+
 
 \subsection{Kinetic turbulence}
 
