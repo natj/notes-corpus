@@ -139,16 +139,16 @@
 
 
 \begin{abstract}
-    Short review on MHD turbulence theories.
-    We start by defining the needed mathematical tools behind many of the turbulence theorices.
-    Next, we proceed by presenting a simple Kolmogorov fluid turbulence picture ala K41 model.
+    These notes provide a short review of MHD turbulence theories.
+    We start by defining the needed mathematical tools behind many turbulence theories.
+    Next, we present a simple Kolmogorov fluid turbulence picture ala K41 model.
     This is followed by a summary of incompressible MHD equations.
     Perturbing these equations leads naturally to the weak turbulence theory.
     As the assumptions behind the weak turbulence break down, we transition to the unknown strong turbulence regime.
-    Several phenomenological models are reviewed and physical picture behind some established models are reviewed:
-    As a basis we present the Kolmogorov model, its naive extension to MHD by Iroshnikov-Kraichan, and its anisotropic generalization by Goldreich \& Sridhar.
-    Related concepts discussed include different cascade time scales, concept of critical balance, and possible dynamical alignement as a cure of intermittency.
-    Text is heavily based on review by Schekochihin 2018 (MHD Turbulence: A Biased Review), Verma 2004 (Statistical theory of magnetohydrodynamic turbulence), Beresnyak 2019 (MHD Turbulence), and Biskamp 2003 (Magnetohydrodynamic Turbulence).
+    Several phenomenological models are reviewed, and the physical picture behind some established models is reviewed:
+    As a basis, we present the Kolmogorov model, its naive extension to MHD by Iroshnikov-Kraichan, and its anisotropic generalization by Goldreich \& Sridhar.
+    Related concepts discussed include different cascade time scales, the concept of critical balance, and possible dynamical alignment as a cure for intermittency.
+    Text is heavily based on a review by Schekochihin 2018 (MHD Turbulence: A Biased Review), Verma 2004 (Statistical Theory of Magnetohydrodynamic Turbulence), Beresnyak 2019 (MHD Turbulence), and Biskamp 2003 (Magnetohydrodynamic Turbulence).
 \end{abstract}
 
 
@@ -163,10 +163,10 @@
 
 \section{Statistical background of turbulence cascades}\label{sect:turb}
 
-Single realization of a turbulent flow is chaotic and unpredictable.
+The single realization of a turbulent flow is chaotic and unpredictable.
 Some order can be gained by describing the system statistically by taking ensemble averages of different quantities (averaging over many realizations of the same systems).
-According to ergodic hypothesis statistical ensemble averages are replacable by time- or volume-averaging;
-this is under the assumption that turbulence is volume-filling and persistent process.
+According to the ergodic hypothesis, statistical ensemble averages are replaceable by time- or volume-averaging;
+this is under the assumption that turbulence is a volume-filling and persistent process.
 
 A spatial average of a quantity $u$ is defined as
 \be
@@ -174,7 +174,7 @@ A spatial average of a quantity $u$ is defined as
 \ee
 where $V_\Omega$ denotes the volume of $\Omega$.
 Temporal averaging is similarly $\bar{u} = \lim_{T\rightarrow\infty} \frac{1}{T} \int_0^T u(t) dt$.
-Thanks to the ergodicity we typically use $\tilde{\ldots}$ (or $\bar{\ldots}$) to mimick the role of full ensemble average $\langle \ldots \rangle$.
+Thanks to the ergodicity, we typically use $\tilde{\ldots}$ (or $\bar{\ldots}$) to mimic the role of full ensemble average $\langle \ldots \rangle$.
 
 Fourier transforms of a turbulent quantity $u$ are defined as
 \begin{align}\begin{split}
@@ -186,23 +186,23 @@ where $D$ is the space dimensionality.
 Note that the transformation is performed independently for each vector component.
 
 Fourier transformed $\langle \hat{u}(\vec{k}) \rangle$ can be related to the so-called energy spectrum $E(k)$.
-It describes energy in the wavenumber space such that $dE = E(k) dk$ is the energy at that particular wavenumber (or scale).
-Total energy is obtained by summing over all scales, $\ene{}{} = \int E(k) dk$.
-For a statistically self-similar system we expect a power-law scaling for $E(k)$.
+It describes the energy in the wavenumber space such that $dE = E(k) dk$ is the energy at that particular wavenumber (or scale).
+The total energy is obtained by summing over all scales, $\ene{}{} = \int E(k) dk$.
+We expect a power-law scaling for $E(k)$ for a statistically self-similar system.
 
-Square of the Fourier transform is called a power spectrum (giving power spectral density),
+The square of the Fourier transform is called a power spectrum (giving power spectral density),
 \be
 P(\vec{k}) d\vec{k} = \langle | \hat{u}(\vec{k}) |^2 \rangle.
 \ee
 Energy here should be viewed in a generalized sense of the $L^2$ norm, $||\ldots||^2$.
-For isotropic system, i.e., if $P(\vec{k})$ depends only on $|k|$, we can integrate over the shells in k-space to get the energy spectrum
+For an isotropic system, i.e., if $P(\vec{k})$ depends only on $|k|$, we can integrate over the shells in k-space to get the energy spectrum
 \be
 E(k) = 4\pi k^2 P(k)
 \ee
 
 More general statistical quantities like structure functions and correlation functions are discussed in Sect.~\ref{sect:adv_stat}.
 
-%With the help of energy scale distribution we can define the energy carrying scale.
+%With the help of energy scale distribution, we can define the energy-carrying scale.
 %This statistical outer scale of the system can be obtained as
 %\be
 %L_0 = \frac{3\pi}{4 E} \int_0^\infty k^{-1} E(k) dk
@@ -213,9 +213,9 @@ More general statistical quantities like structure functions and correlation fun
 \section{Basic theoretical background of turbulent cascades}\label{sect:theory}
 
 Energy dissipation for incompressible flow can be defined per unit mass as $\varepsilon$ with units $\cm^2 \second^{-3}$.
-Kolmogorov model assumes that the statistical properties of turbulence are uniquely determined by the amount of energy available in a stationary homogenous system, i.e. by $\varepsilon$ alone.
-Furthermore, it assumes that energy self-similarly cascades through series of scales known as the inertial range.
-Cascade means that energy is being transferred from one scale to another without dissipation.
+Kolmogorov model assumes that the statistical properties of turbulence are uniquely determined by the amount of energy available in a stationary homogenous system, i.e., by $\varepsilon$ alone.
+Furthermore, it assumes that energy self-similarly cascades through a series of scales known as the inertial range.
+Cascade means energy is transferred from one scale to another without dissipation.
 
 Kolmogorov model can be deduced from dimensional analysis alone.
 If the spectrum, $E(k)$, has units of $\cm^3 \second^{-2}$ and wavenumber, $k = 2\pi/\ell$, has units of $\cm^{-1}$ then we must have
@@ -226,13 +226,13 @@ where $C_K$ is a dimensionless Kolmogorov constant.
 The $3D$ powerspectrum $P(k) \sim E(k) k^{-2} \sim k^{-11/3}$.
 
 The physics of this derivation is the following.
-Characteristic velocity on scale $\ell$ is $u_\ell$ and if the energy rate is constant for all scales then
+Characteristic velocity on scale $\ell$ is $u_\ell$ and if the energy rate is constant for all scales, then
 \be
 \frac{u_\ell^2}{\tcascd} = \varepsilon,
 \ee
-where $\tcascd$ is a cascading time, time it takes for nonlinearities to remove energy from scale $\ell$ and transfer it to smaller scales.
+where $\tcascd$ is a cascading time, the time it takes for nonlinearities to remove energy from scale $\ell$ and transfer it to smaller scales.
 
-For hydrodynamic cascade we assume that $\tcascd$ is a dynamical time on a particular scale, so that 
+For hydrodynamic cascade, we assume that $\tcascd$ is a dynamical time on a particular scale so that 
 \be
 \tcascd \approx \frac{\ell}{u_\ell}.
 \ee
@@ -244,7 +244,7 @@ that results in
 \be
 u_\ell \sim (\varepsilon \ell)^{1/3} \sim \varepsilon^{1/3} k^{-1/3}.
 \ee
-From the definition of the energy spectrum (band-integrated over Fourier spectrum) we have that 
+From the definition of the energy spectrum (band-integrated over the Fourier spectrum) we have that 
 %$E(k) k \sim u_\ell^2$ 
 \be
 u_\ell^2 \sim E_\ell \sim \int_{k_\ell}^{k_{\ell+1}} E_k dk \sim E_k k_n
@@ -255,15 +255,15 @@ E(k) \sim \frac{u_\ell^2}{k} \sim \frac{(\varepsilon^{1/3} k^{-1/3})^2}{k} \sim 
 \ee
 This agrees with the result of the dimensional derivation above.
 
-The energy is expected to cascade down to smaller scales until the so-called Kolmogorov scale.
-At this scale dissipative processes overcome nonlinear transfer of energy.
-Given a diffusivity $\nu_D$ we obtain a measure of a characteristic lenght as
+The energy is expected to cascade to smaller scales until the so-called Kolmogorov scale.
+At this scale, dissipative processes overcome the nonlinear transfer of energy.
+Given a diffusivity $\nu_D$, we obtain a measure of a characteristic length as
 \be
 \ell_\nu = \left( \frac{\nu_D^3}{\varepsilon} \right)^{1/4}.
 \ee
 
-A critisism against Kolmogrov models is that it does not take into account intermittency.
-An empirical correcction is possible by multiplying RHS of Eq. \eqref{eq:K41} with a so-called intermittency correction factor $(k L_0)^\alpha$ where $\alpha \approx 0.035$ (see Frisch 1995).
+A criticism against the Kolmogorov model is that it does not consider intermittency.
+An empirical correction is possible by multiplying RHS of Eq. \eqref{eq:K41} with a so-called intermittency correction factor $(k L_0)^\alpha$ where $\alpha \approx 0.035$ (see Frisch 1995).
 
 
 \section{Alfvenic MHD turbulence}\label{sect:mhd_theory}
@@ -273,14 +273,14 @@ Incompressible MHD equations%
     Viability of incompressibility requires the fluid compressibility to be small in the inertial range.
     This assumes that 
     1) turbulence has no shocks
-    2) no sizable energy is carried by sound waves (i.e. fast MHD mode),
+    2) no sizable energy is carried by sound waves (i.e., fast MHD mode),
     3) sonic Mach number, $\mathcal{M}_s = V_L/c_s$ is small and decreases with scale.
 }
 consist of two dynamical equations and two constraints:
 Momentum equation,
 induction equation,
-divergence free constraint of magnetic field,
-and divergence free constraint of velocity field.
+divergence-free constraint of magnetic field,
+and divergence-free constraint of the velocity field.
 These are expressed as
 %\begin{align}\begin{split}
 %    \partial_t \vec{v} &= -\nabla P/\rho - \nabla (v^2/2) - (\nabla \times \vec{v}) \times \vec{v} + (\nabla \times \vec{b}) \times \vec{b}, \\
@@ -295,11 +295,11 @@ These are expressed as
     \nabla \cdot \vec{u} &= 0.
 \end{split}\end{align}
 Here $\vec{u}$ is velocity, $\vec{B} = \vec{B}_0 + \vec{b}$ is magnetic field (mean $+$ fluctuations), $P$ is total pressure (thermal $+$ magnetic), $\nu$ is kinematic viscosity, $\eta$ is magnetic diffusivity.
-Magnetic field is expressed in units of Alfven speed, $b = B_0/\sqrt{4\pi \rho}$.
+The magnetic field is expressed in units of Alfven speed, $b = B_0/\sqrt{4\pi \rho}$.
 
 The above equation can be compressed further by presenting it in terms of the so-called Els\"asser variables, $\vec{z}^\pm = \vec{u} \pm \vec{b}$.
 They represent amplitudes of Alfvenic fluctuations with positive and negative correlations.
-Note that no pure wave exist in turbulent medium but the interaction can be conveniently written in terms of these variables.
+Note that no pure wave exists in a turbulent medium, but the interaction can be conveniently written regarding these variables.
 Then
 \be
     \frac{\partial \vec{z}^\pm}{\partial t} \mp (\vec{B}_0 \cdot \nabla) \vec{z}^\pm + (\vec{z}^\mp \cdot \nabla) \vec{z}^\pm = -\nabla P  + \nu_- \nabla^2 \vec{z}^\pm  + \nu_+ \nabla^2 \vec{z}^\mp,
@@ -323,7 +323,7 @@ Importantly, nonlinear interactions are seen to occur as Alfvenic fluctuations o
 %\end{split}\end{align}
 
 
-Alfven fluctuations are therefore characteristic modes of MHD equations.
+Alfven fluctuations are, therefore, characteristic modes of MHD equations.
 This means that all perturbations want to resemble Alfvenic fluctuations.
 A typical picture of MHD turbulence is a mutual interaction of (multiple) Alfven wave packets moving with Alfven velocities along the guide field.
 The interaction of these wave packets can either be weak (small perturbations of waves) or strong (non-linear quick destroyment of wave coherence during a dynamical time).
@@ -334,13 +334,13 @@ Hence, the name Alfvenic turbulence.
 
 \section{Weak wave turbulence}
 
-Weak turbulence refers to the picture where wave packets propagate almost freely and collisions between the waves leads to small perturbations in their structure so that perturbation theory is applicable.
+Weak turbulence refers to the picture where wave packets propagate almost freely, and collisions between the waves lead to small perturbations in their structure so that perturbation theory is applicable.
 Mathematically, this takes place in the limit of small $\vec{\delta z}$ that represents a perturbation traveling along the $\vec{B}_0$.
 The nonlinear term describes the interaction of the perturbations.
 Notably, self-interaction of $\vec{\delta z}^-$ or $\vec{\delta z}^+$ is absent.
 
 The dominant nonlinear interaction is a three-wave process.
-Dispersion relation and conservation laws for energy and momentum of the waves is therefore,
+Dispersion relation and conservation laws for energy and momentum of the waves are, therefore,
 \begin{align}\begin{split}
     \omega_n &= k_{\parallel,n} v_A \\
     \pm \omega_1 &= \pm \omega_2 \pm \omega_3 \\
@@ -351,24 +351,24 @@ One $\omega_n$ must be zero so let us select $\omega_3=0$ that corresponds to $|
 There is no restriction on $k_{\perp,1,2}$.
 The cascade takes place by increasing $k_\perp$ only and preserves the frequencies.
 
-In wave turbulence theory the interaction strenght is
+In wave turbulence theory, the interaction strength is
 \be
 \chi = \frac{k_\perp \delta z}{k_\parallel v_A},
 \ee
 that describes the ratio of nonlinear shear rate $k_\perp \delta z$ to the wave frequency, $k_\parallel v_A$.
-It also servs as an estimate of the nonlinear term to the mean-field term.
+It also serves as an estimate of the nonlinear term to the mean-field term.
 
-In MHD turbulence the dynamical time scale, $t_\mathrm{dyn} = 1/k_\perp \delta z$ (inverse of shear rate), does not have to be proportional to the cascade time $\tcascd$, as is the case for hydrodynamical turbulence.
-Instead, the cascade time is increased  by factors of $1/\chi$.
+In MHD turbulence, the dynamical time scale, $t_\mathrm{dyn} = 1/k_\perp \delta z$ (inverse of shear rate), does not have to be proportional to the cascade time $\tcascd$, as is the case for hydrodynamical turbulence.
+Instead, the cascade time is increased by factors of $1/\chi$.
 
-Another way to understand this is to think wave packet perturbations as a random walk.
-Each individual perturbation is $\chi$ in strenght so it takes $(1/\chi)^2$ steps to destroy the coherence of a wavepacket.
-Then the cascade time is
+Another way to understand this is to think of wave packet perturbations as a random walk.
+Each individual perturbation is $\chi$ in strength, so it takes $(1/\chi)^2$ steps to destroy the coherence of a wavepacket.
+Then, the cascade time is
 \be
 \tcascd = \frac{1}{k_\parallel v_A} \left( \frac{1}{\chi} \right)^2 = \frac{k_\parallel v_A}{(k_\perp \delta z)^2}
 \ee
 
-Energy cascade rate, $\varepsilon$, is the energy on each scale divided by the cascade time on that scale.
+The energy cascade rate, $\varepsilon$, is the energy on each scale divided by the cascade time on that scale.
 This rate is expected to be constant through the inertial scale so that
 \be
 \epsilon = \delta z^2 \frac{(\delta z k_\perp)^2}{v_A k_\parallel}.
@@ -383,9 +383,9 @@ See Zakharov 1992, Galtier et al 2000, 2002.
 
 
 Such a weak turbulence model is unstable.
-Analytic work has demonstrated that MHD turbulence tends to become stronger and not weaker during a cascade (Galtier et al 2000).
+Analytic work has demonstrated that MHD turbulence tends to become stronger and not weaker during a cascade (Galtier et al., 2000).
 Weak wave turbulence is expected to grow anisotropic with $k_\perp/k_\parallel \sim k_\perp$ since $k_\parallel$ is a constant.
-The perturbation strenght, $\chi$ is also expected to become stronger at small scales.
+The perturbation strength, $\chi$, is also expected to become stronger at small scales.
 This is seen from
 \be
 \chi = \frac{\delta z k_\perp}{v_A k_\parallel} \sim k_\perp^{1/2} \rightarrow \infty ~ \mathrm{when }~ k_\perp \rightarrow \infty.
@@ -395,19 +395,19 @@ This is seen from
 
 \section{Phenomenological strong MHD turbulence models}\label{sect:theory}
 
-Before we start with phenomenological strong MHD models, let us make a remark of the actual observations.
+Before we start with phenomenological strong MHD models, let us remark on the actual observations.
 Especially the hydrodynamical turbulence is a well-studied problem.
 Our best understanding of this system is still roughly a Kolmogorov-like system that predicts $-5/3$ scaling.
 
-In reality, physical and numerical experiments have never agreed with this theoretical scaling.
-It is a solid fact that the scaling is more close to $-1.7$ \red{CHECK} and not $-1.66$ as would be predicted.
-The situation is even worse for MHD cascades since we can not perform detailed physical experiments of plasma turbulence nor can we simulate large enough MHD systems.%
+Physical and numerical experiments have never agreed with this theoretical scaling.
+%It is a solid fact that the scaling is closer to $-1.7$ \red{CHECK} and not $-1.66$ as predicted.
+The situation is even worse for MHD cascades since we can not perform detailed physical experiments of plasma turbulence, nor can we simulate large enough MHD systems.%
 \footnote{
     The problem is computationally very demanding.
-From the simulation perspective, there is a roughly an one order of magnitude of settling scales below the injection scale $\ell_0$ so that inertial range begins at scales of $\lesssim l_0/10$.
-Similarly, dissipation (and grid scale) physics (and numerics) are present at roughly one order of magnitude above the dissipation scale $\ell_\nu$ so that a clean inertial range extends to $\gtrsim 10 \ell_\nu$.
-In order to perform scaling measurements with a inertial range of length at least 2 decades, we then need to simulate a turbulent system of a size of at least $(10\times10\times10^2)^3 \sim (10^4)^3$.
-Current simulations are only starting to probe these scales whereas such a system is only the minimum viable numerical experiment.
+From the simulation perspective, there is roughly one order of magnitude of settling scales below the injection scale $\ell_0$ so that the inertial range begins at scales of $\lesssim l_0/10$.
+Similarly, dissipation (and grid-scale) physics (and numerics) are present at roughly one order of magnitude above the dissipation scale $\ell_\nu$ so that a clean inertial range extends to $\gtrsim 10 \ell_\nu$.
+To perform scaling measurements with an inertial range of length at least 2 decades, we then need to simulate a turbulent system of a size of at least $(10\times10\times10^2)^3 \sim (10^4)^3$.
+Current simulations only start to probe these scales, whereas such a system is only the minimum viable numerical experiment.
 }
 Therefore, one should not get too carried away by the different theoretical models;
 none of them is actually correct.
@@ -416,18 +416,18 @@ none of them is actually correct.
 \subsection{Kolmogorovian theory}\label{sect:K41}
 
 Energy is pumped into a homogenous conducting medium with a fixed rate $\epsilon$.
-Dimensionless analysis gives for the energy spectrum \citep{Kolmogorov_1941}
+The dimensionless analysis gives for the energy spectrum \citep{Kolmogorov_1941}
 \be
 E(k) \sim \epsilon^{2/3} k^{-5/3}.
 \ee
-Same can be written in terms of average velocity increments
+The same can be written in terms of average velocity increments
 \be
 \delta u_\lambda \sim (\epsilon \lambda)^{1/3}.
 \ee
 
 \subsection{Iroshnikov-Kraichan theory}\label{sect:K65}
 
-If the $\vec{B}$ field has an important role in energy transfer, then similar dimensionless analysis gives (Iroshnikov Kraichnan 1965)
+If the $\vec{B}$ field has an important role in energy transfer, then a similar dimensionless analysis gives (Iroshnikov Kraichnan 1965)
 \be
 E(k) \sim (\epsilon v_A)^{1/2} k^{-3/2}
 \ee
@@ -439,9 +439,9 @@ for the Alf\'ven speed with density $\rho$
 \be
 v_A = \frac{B}{\sqrt{4\pi \rho}}.
 \ee
-The reasoning is based on the fact that Alf\'ven time, $\tau_A \sim 1/k v_A$ is the time which interactions occur so the energy must come with a combination $\epsilon v_A$.
+The reasoning is based on the fact that Alf\'ven time, $\tau_A \sim 1/k v_A$, is the time at which interactions occur, so the energy must come with a combination $\epsilon v_A$.
 
-The theory is incorrect because it assumes a uniform scale $k$ whereas in reality in a presence of a strong guide field $\vec{B}_0$ the scales split into $k_{\parallel}$ and $k_{\perp}$.
+The theory is incorrect because it assumes a uniform scale $k$ whereas in reality, in the presence of a strong guide field $\vec{B}_0$, the scales split into $k_{\parallel}$ and $k_{\perp}$.
 Therefore, the time scale in the assumption is wrong.
 
 
@@ -452,7 +452,7 @@ Parallel direction propagation velocity corresponds to Alf\'ven waves with
 \be
 \tau_A = \frac{l_{\parallel}}{v_A},
 \ee
-whereas perpendicular variation is governed by nonlinear intearctions with characteristic times
+whereas perpendicular variation is governed by nonlinear interactions with characteristic times
 \be
 \tau_{\mathrm{nl}} \sim \frac{l_{\perp}}{\delta u_{\lambda}}.
 \ee
@@ -475,7 +475,7 @@ E(k_\perp) \sim \epsilon^{2/3} k_{\perp}^{-5/3},
 \ee
 yielding a Kolmogorov-like scaling for the perpendicular scales.
 
-Simultaneously, along the field the velocity increment satisfy
+Simultaneously, along the field, the velocity increment satisfy
 \be
 \frac{\delta u_{\parallel}^2}{\tau_c} \sim \epsilon \quad\mathrm{and}\quad
 \tau_c \sim \tau_A \sim \frac{l_{\parallel}}{v_A}
@@ -484,7 +484,7 @@ so that
 \be
 \delta u_{l \parallel} \sim \left( \frac{\epsilon l_{\parallel}}{v_A} \right)^{1/2}.
 \ee
-From here it follows
+From here, it follows
 \be
 l_{\parallel} \sim v_A \epsilon^{-1/3} \lambda^{2/3}.
 \ee
@@ -505,8 +505,8 @@ This gives a scaling
 E(k_{\perp}) \sim \left( \frac{\epsilon}{\tau_A} \right)^{1/2} k_{\perp}^{-2}.
 \ee
 
-Eventually weak turbulence will transition to strong turbulence.
-For balanced turbulence this happens when the perturbation parameter becomes of order unity,
+Eventually, weak turbulence will transition to strong turbulence.
+For balanced turbulence, this happens when the perturbation parameter becomes of order unity,
 \be
 \frac{\tau_A}{\tau_{\mathrm{nl}}} \sim \frac{\tau_A^{3/4} \epsilon^{1/4}}{\lambda^{1/2}} \sim 1
 \ee
@@ -530,14 +530,14 @@ An Alfv\'enic perturbation decorrelates in roughly one wave period.
 \subsection{Dynamical alignement}
 
 Dynamic alignment derives from the same assumption of MHD tendency towards Alfv\'enic nature.
-In an Alfv\'en wave $\vec{u}_\perp$ and $\vec{b}_\perp$ are the same, i.e., plasma flows drag field with them or the field accelerates flows to relax under tension.
+In an Alfv\'en wave, $\vec{u}_\perp$ and $\vec{b}_\perp$ are the same, i.e., plasma flows drag field with them or the field accelerates flows to relax under tension.
 However, if the two fields are exactly parallel, there would be no non-linearity.
 
-Boldyrev's theory on dynamical alignement states that the angle, $\theta_{\lambda}$ between the two fields can not be known more precisely than 
+Boldyrev's theory on dynamical alignment states that the angle, $\theta_{\lambda}$ between the two fields can not be known more precisely than 
 \be
 \sin \theta_{\lambda} \sim \theta_\lambda \sim \frac{\delta b}{v_A} \ll 1
 \ee
-Then the non-linear time is modified to be
+Then, the non-linear time is modified to be
 \be
 \tau_{\mathrm{nl}} \sim \frac{\lambda}{\delta z_\lambda^\mp \sin\theta_\lambda}
 \ee
@@ -554,19 +554,19 @@ Yet another way to rewrite the scaling relations in terms of the critical balanc
 \be
 E(k_\perp) \sim \epsilon^{2/3} \lambda_{\mathrm{CB}}^{1/6} k_\perp^{-3/2},
 \ee
-that follows the prediction for the spectrum by Perez et al 2012, 2014b.
+that follows the prediction for the spectrum by Perez et al. 2012, 2014b.
 This is sometimes known as aligned turbulence.
 
 
 \subsection{Intermittency}
 
-Classical turbulence theories rely on self-similarity of the structures. 
-Intermittency means that this assumption is broken and instead we introduce all three length scale directions: 
+Classical turbulence theories rely on the self-similarity of the structures. 
+Intermittency means that this assumption is broken, and instead, we introduce all three length scale directions: 
 perpendicular $\lambda$, parallel $l_\parallel$, and fluctuation direction $\zeta$.
 
-Intermittency states that eddies are not completely space-filling, but have more rare fluctuations on top of the ``typical'' ones.
+Intermittency states that eddies are not completely space-filling but have rare fluctuations on top of the ``typical'' ones.
 In hydrodynamic turbulence, corrections to K41 theory come in powers of $\lambda/L$.
-Similar can be found in MHD turbulence as the self-similarity is broken with the appeareance of outer-scale size $L_\parallel$ in to the scaling equations.
+Similar can be found in MHD turbulence as the self-similarity is broken with the appearance of outer-scale size $L_\parallel$ in the scaling equations.
 
 Mallet \& Schekochihin conjectured that $l_\parallel \sim \lambda^\alpha$, i.e., $l_\parallel/\lambda^\alpha$ has a scale-invariant distribution.
 A typical (second) conjecture is that most intense structures are sheets transverse to the local perpendicular direction.
@@ -575,8 +575,8 @@ A typical (second) conjecture is that most intense structures are sheets transve
 
 \subsection{Phenomenological unified picture of Schekochihin}
 
-In reality, the scaling are expected to be fully $3D$.
-From critical balance and from the assumption of dynamical alignment it then follows that that field's spectra depends as:
+In reality, the scaling is expected to be fully $3D$.
+From critical balance and the assumption of dynamical alignment, it then follows that that field's spectra depend on:
 $-2$ in $l_\parallel$ direction,
 $-3/2$ in $\lambda$ direction, and
 $-5/3$ in $\zeta$ direction.
@@ -586,14 +586,14 @@ In addition, we have
 \zeta \sim l_\parallel \frac{\delta z_\lambda}{v_A} \sim l_\parallel \frac{\delta b_\lambda}{v_A}a,
 \ee
 i.e., $\zeta$ is the typical displacement of a fluid element and a typical perpendicular distance a field line wanders within a structure that is coherent on the parallel scale $l_\parallel$.
-Fluctuations must therefore preseve coherence in their respective direction at least on scale $\zeta$.
+Fluctuations must, therefore, preserve coherence in their respective direction, at least on scale $\zeta$.
 They are not constrained in the third $\lambda$ direction.
 Finally, they are expected to have an angular uncertainty of the order of the angle $\theta_\lambda$ between the two fields.
 
-Finally, we note that this is picture is not solid yet.
-On the contrast, it relies on the refined dynamical alignment conjecture that itself is not proven to be correct or incorrect yet.
-Another way to think about this conjecture is, that it is used to describe the intermittency.
-For a solid theory of MHD turbulence, a complete theory of intermittenty is therefore needed.
+Finally, we note that this picture is not solid yet.
+In contrast, it relies on the refined dynamical alignment conjecture that itself has not proven correct or incorrect.
+Another way to think about this conjecture is that it is used to describe intermittency.
+Therefore, a complete theory of intermittency is needed for a solid theory of MHD turbulence.
 
 
 
@@ -601,54 +601,54 @@ For a solid theory of MHD turbulence, a complete theory of intermittenty is ther
 
 \red{TODO: deviations from above: compressibility, relativistic motions, }
 
-Astrophysical plasmas that are magnetically dominated and undergo a strong non-linear driving can show various deviations from the above assumptions.
+Astrophysical plasmas that are magnetically dominated and undergo strong non-linear driving can show deviations from the above assumptions.
 Most notably, these include relativistic bulk motions that can induce a dynamically important electric field.
 For highly conductive flows $E \approx \frac{u}{c} B$.
-For non-relativistic flows electric field remains small, $E \ll B$.
+The electric field remains small for non-relativistic flows, $E \ll B$.
 If the driving scale motions are relativistic, the electric field can become large enough to become dynamically important itself.
 
-Same is true for the current as the plasma can become charge starved.
-From Maxwell's equations we have that
+The same applies to the current, as the plasma can become charge-starved.
+From Maxwell's equations, we have that
 \be
 \nabla \times \vec{B} = \frac{4\pi}{c} \vec{J} + \frac{1}{c} \frac{\partial E}{\partial t}.
 \ee
-For non-relativistic plasma we can ignore the last term since it is $\propto (u/c)^2$.
+We can ignore the last term for non-relativistic plasma since it is $\propto (u/c)^2$.
 Therefore, 
 \be
 \vec{J} = \frac{c}{4\pi} \nabla\times\vec{B}.
 \ee
 Hence, both $\vec{E}$ and $\vec{J}$ are dependent variables.
-For relativistic flows current can become charge starved and become dynamically imporant too.
+For relativistic flows, current can become charge-starved and dynamically important.
 
-Relativistic bulk motions can also lead to introduction of compressible modes.
-For magnetized plasmas Alfven speed, $v_A = B/\sqrt{4\pi\rho}$ plays the role of sound speed in the medium.
+Relativistic bulk motions can also lead to the introduction of compressible modes.
+For magnetized plasmas, Alfven speed, $v_A = B/\sqrt{4\pi\rho}$ plays the role of sound speed in the medium.
 The fluid is incompressible if $u \ll v_A$.
-For relativistic plasma with strong non-linear driving strenght both velocities become comparable, $u \sim v_A$.
+For relativistic plasma with strong non-linear driving strength, both velocities become comparable, $u \sim v_A$.
 
 
 Magnetized plasma can support a set of different wave modes.
-Most notable is the Alfven wave that is incompressible mode.
+Most notable is the Alfven wave, which is the incompressible mode.
 For Alfven wave $u_\parallel = u_\perp = b_\perp = 0$ but $\delta u_\perp \ne 0$ and $\delta b_\perp \ne 0$.
 
 
-Cho and Lazarian (2002, 2003) suggest that Alfven mode has an independent cascade, slow mod eis passive to Alfven cascade, and has the same spectra and isotropy, and fast mode has an independent isotropic acoustic/wave turbulence cascade.
+Cho and Lazarian (2002, 2003) suggest that Alfven mode has an independent cascade, slow mod is passive to Alfven cascade and has the same spectra and isotropy, and fast mode has an independent isotropic acoustic/wave turbulence cascade.
 Kowal and Lazarian 2010 report steeper $k^{-2}$ spectra for fast modes.
 
 Realistic compressible turbulence is strongly dependent on the way it is driven;
 this defines the initial wave content and degree of compressibility.
 
 Density is primarily perturbed by the slow mode.
-In a magnetized plasma with slow mode perturbations the slow mode is mainly along $\vec{B}_0$.
+In a magnetized plasma with slow mode perturbations, the slow mode is mainly along $\vec{B}_0$.
 Beresnyak 2005
 Alfven modes only mix these perturbations by shearing motions.
 
-See decaying MHD turbulence that is driven by initial random magnetic fields (e.g. Biskamp 2003) that is qualitatively similar to reconnection turbulence.
+See decaying MHD turbulence that is driven by initial random magnetic fields (e.g., Biskamp 2003) that is qualitatively similar to reconnection turbulence.
 
 
 Coupling between fluid and magnetic field gives field lines stiffness and elasticity.
 This turns unstable perturbations into propagating Alfven waves.
-The coupling is not perfect since resistivity allows some slippage of field across the fluid can take place.
-This allows one to tap to the reservoir of free magnetic energy more efficiently.
+The coupling is not perfect since resistivity allows some slippage of the field across the fluid to take place.
+This allows one to tap into the reservoir of free magnetic energy more efficiently.
 
 The driving mechanism is the attractive force of parallel current elements.
 
@@ -663,24 +663,24 @@ General order $p$ structure function of a physical variable $\vec{X}(\vec{x})$ (
 S^X_p(r) = \langle [ X(\vec{x}-\vec{r}) - X(\vec{x}) ]^p \rangle,
 \ee
 where $\langle \ldots \rangle$ denotes averaging (time, volume, ensemble). %; no stance taken on what the exact nature actually is).
-This quantity captures spatial correlation of the field $\vec{X}$.
+This quantity captures the spatial correlation of the field $\vec{X}$.
 %For velocity it reduces to kinetic energy, $S^u = 4 E_K$ on a given scale.
 
-Physically structure functions can be thought of as a measures of gradients, since Taylor expanding
+Physically structure functions can be thought of as a measure of gradients since Taylor expanding
 \be
 u(\vec{x} + \vec{r}) - u(\vec{x}) \sim \frac{\partial u}{\partial x} r.
 \ee
-Especially useful is the second order structure function, $S_2$ that can be thought of as a measure of energy fluctuations,
+Especially useful is the second-order structure function, $S_2$, which can be thought of as a measure of energy fluctuations,
 \be
 S_2^u(r) = \langle [ u(\vec{x}-\vec{r}) - u(\vec{x}) ]^2 \rangle.
 \ee
-Indeed, spectra and structure functions actually have one-to-one correspondence
+Indeed, spectra and structure functions have a one-to-one correspondence
 \be
 S_2(\ell) = 2\int_0^\infty \left( 1 - \frac{\sin kr}{kr}\right) E(k) dk
 \ee
 If spectrum is a power-law, $E(k) \propto k^\alpha$, then by substitution of $k = x/\ell$, we have $S_2(\ell) \propto \ell^{-1-\alpha}$.
 
-From a statistical viewpoint, if the turbulence is self-similar (i.e., has a single-fractal structure) higher-order structure functions are all connected as 
+From a statistical viewpoint, if the turbulence is self-similar (i.e., has a single-fractal structure), higher-order structure functions are all connected as 
 \be
 [S_n(r))]^{1/n} \sim [S_m(r))]^{1/m},
 \ee
@@ -689,22 +689,22 @@ for any arbitrary orders $n$ and $m$.
 \subsection{Correlation functions}
 
 Correlation functions are typically used to study temporal behavior.
-They can, however, be also generalized to spatial correlations.
-Similar to structure functions we can connect spectra and correlation functions together.
+They can, however, also be generalized to spatial correlations.
+Similar to structure functions, we can connect spectra and correlation functions together.
 
 \red{TODO: Autocorrelation}
 
 %try2 on structure functions
-Two-point correlation function is
+The two-point correlation function is
 \be
 \langle u_i(\vec{r}) u_j(\vec{r'})\rangle = C_{ij}(\vec{r}-\vec{r}') = C_{ij}(\vec{r})
 \ee
-Isotropic two-point correlation function reduces to
+The isotropic two-point correlation function reduces to
 \be
 C_{ij}(\vec{r}) = C^{(1)}(r) r_i r_j + C^{(2)}(r) \delta_{ij}.
 \ee
 Energy and other second-order quantities play an important role in MHD turbulence.
-For homogeneous system these are defined as
+For homogeneous systems, these are defined as
 \be
 \langle X_i(\vec{k}) Y_j(\vec{k}'\rangle = C_{ij}^{XY}(\vec{k}) [2\pi]^D \delta(\vec{k} + \vec{k}')
 \ee
@@ -782,7 +782,7 @@ Sarri 2015
 
 Sustained relativistic turbulence (force-free)
 \citep{Thompson_1998}: extension of Goldreich \& Sridhar 1995 to exterme relativistic limit (no plasma inertia; force-free MHD).
-Anisotropic cascade is formed, dissipation occurs at the scale of current starvation (when not enough charge carriers in plasma to maintain currents from Alf\'en waves).
+An anisotropic cascade is formed, and dissipation occurs at the scale of current starvation (when there are not enough charge carriers in plasma to maintain currents from Alf\'en waves).
 
 MHD:
 \citep{Cho_2005}
@@ -883,13 +883,13 @@ Coronae of accretion disks:
 
 \section{Notes on von Neumann: Recent theories of turbulence}
 
-Earliest note of turbulence is by Reynolds 1883:
-he studied a flow of water in a cylindrical pipe and concluded that flow is laminar below a certain critical velocity.
+The earliest note of turbulence is by Reynolds 1883:
+He studied the flow of water in a cylindrical pipe and concluded that the flow is laminar below a certain critical velocity.
 When the limit was exceeded, the flow became turbulent with highly irregular and rapidly changing streamlines.
 
-Physically he found that in the laminar state the pressure gradient is proportional to flow velocity $U$ and (kinematic) viscosity $\nu$.
-In the turbulent regime the system is more akin to a $U^2$ dependency while $\nu$-dependency is less developed.
-Reynolds also found empirically that (within some limits) only the combination of $R = \frac{L U}{\nu}$ of the variables mattered in determining whether the critical point has been reached.
+Physically, he found that in the laminar state, the pressure gradient is proportional to flow velocity $U$ and (kinematic) viscosity $\nu$.
+In the turbulent regime, the system is more akin to a $U^2$ dependency while $\nu$-dependency is less developed.
+Reynolds also found empirically that (within some limits) only the combination of $R = \frac{L U}{\nu}$ of the variables mattered in determining whether the critical point had been reached.
 This is the only dimensionless combination of the above variables.
 It is now generally agreed that (if no special precautions are taken) $R$ is around $1000$ to $2000$ when the critical limit is reached.
 
@@ -897,43 +897,43 @@ Turbulence is a phenomenon of instability.
 Laminar solutions of Navier-Stokes eq. ceases to be (at least the most) stable one for high enough $R$.
 Turbulent flow represents one or more solutions of higher stability.
 In fact, there is no reason to believe that one solution is favored; 
-Instead the turbulent solutions represent an ensemble of statistical properties.
+Instead, the turbulent solutions represent an ensemble of statistical properties.
 
-Coutte flow investigated by von Mises, Hopf, Noether.
-Mathematically the most simple form.
+Coutte flow was investigated by von Mises, Hopf, and Noether.
+Mathematically, the most simple form.
 Taylor 1922 obtained complete solutions of cylindrical Couette flows.
 
 Studies of stability theories will only tell when the laminar solution breaks down.
 The turbulent properties themselves are only understood by understanding all the nonlinear solutions of the NS eqs.
 
 Solutions of NS are quite essentially non-linear.
-Turbulence is introduced with large $R$, hence its solutions are related to the asymptotic $R \rightarrow \infty$.
+Turbulence is introduced with large $R$, hence, its solutions are related to the asymptotic $R \rightarrow \infty$.
 This corresponds to $\nu \rightarrow 0$.
-For $\nu \rightarrow 0$ a bad singularity occurs as $\nu \nabla^2 (\nabla^2 \phi)$ (order 4, degree 1) disappears and hence the Jacobian$(\nabla^2 \phi, \phi)$ (order 3, degree 2) emerges as dominant.
+For $\nu \rightarrow 0$, a bad singularity occurs as $\nu \nabla^2 (\nabla^2 \phi)$ (order 4, degree 1) disappears, and hence the Jacobian$(\nabla^2 \phi, \phi)$ (order 3, degree 2) emerges as dominant.
 \footnote{
     Order refers to differentiation, degree to algebraic character.
-    The term is leading the solution by virtue of its order.
-    Thus, the character of the equation (which is controlled by the leading term; by virtue of its higher order of differentiation) changes simultaneously in all relevant aspects (both order and degree change).
+    The term is leading the solution by its order.
+    Thus, the character of the equation (which is controlled by the leading term by virtue of its higher order of differentiation) changes simultaneously in all relevant aspects (both order and degree change).
 }
-Mathematical nature of NS were studied by Oseen 1914, 1927), and Leray 1933.
+The mathematical nature of NS was studied by Oseen 1914, 1927) and Leray 1933.
 
 Turbulence is crucially dimensionality dependent.
-Firstly, because solutions of partial differential equations depend on the connection between the equations term orders and space dimensionality;
-NS eqs have the same order as space and they cross the critical lower bound for regularity when dimensionality changes from $2$ to $3$.
-Secondly, in 2D the vorticity is conserved; it is only created at the boundary and then diffuses into the fluid.
-In 3D vortex-filament-strength is conserved but since the flow may lengthen and convovle the vortex filaments, the actual vorticity in a given volume may increase.
-So a vorticity-increasing mechanism is available in 3D.
+Firstly, because solutions of partial differential equations depend on the connection between the equations' term orders and space dimensionality;
+NS eqs have the same order as space, and they cross the critical lower bound for regularity when dimensionality changes from $2$ to $3$.
+Secondly, in 2D, the vorticity is conserved; it is only created at the boundary and then diffuses into the fluid.
+In 3D vortex filaments, strength is conserved, but since the flow may lengthen and convolve the vortex filaments, the actual vorticity in a given volume may increase.
+So, a vorticity-increasing mechanism is available in 3D.
 
 Kolmogorov-Onsager-Weizsacker result originates from a remarkable dimensionality analysis of turbulent quantities:
-Only quantity that can matter for energy flow is rate of dissipation $W$ ($=$ energy/mass/time).
+The only quantity that can matter for energy flow is the rate of dissipation $W$ ($=$ energy/mass/time).
 Correlations/fluctuations in the flow are captured with $B = \langle u(x+r) - u(x) \rangle$ ($= \cm^2 \second^{-2}$).
 Only combination of $r$, $W$, and $B$ is 
 \begin{equation}
     B(r) = C W^{2/3} r^{2/}
 \end{equation}
-Let $F(k)dk$ be the energy contained in the frequency-interval from $k$ to $k+dk$.
-$F(k)$ is frequency spectrum of the energy.
-Therefore, $B(r)$ and $F(k)$ are Fourier-transforms of each other.
+Let $F(k)dk$ be the energy contained in the frequency interval from $k$ to $k+dk$.
+$F(k)$ is the frequency spectrum of the energy.
+Therefore, $B(r)$ and $F(k)$ are Fourier transforms of each other.
 Hence, $F(k) \propto k^{-5/3}$ is equivalent to $B(r) \propto r^{2/3}$ (sum of the exponents must be $-1$).
 \footnote{
     $F(k) dk = F(r) (\partial k/\partial r) dr$ where $\partial k/\partial r = \partial_r r^{-1} = \ln r$ .
@@ -955,7 +955,7 @@ In general, $k$ is the frequency that corresponds to $\ell$ such that
 \begin{equation}
 2\pi/k = \ell_k.
 \end{equation}
-Same is true for energy, 
+The same is true for energy, 
 \begin{equation}
     \langle (u_k)^2 \rangle = A \int_k^\infty k^{-5/3} dk = \frac{3}{2} A k^{-2/3}
 \end{equation}
@@ -967,7 +967,7 @@ Therefore, we can also obtain a Reynolds number at a scale $k$ of
 \begin{equation}
     R_k = \frac{L_k V_k}{\nu} = 2\pi (3/2)^{1/2} A^{1/2} \nu^{-1} k^{-4/3}
 \end{equation}
-Since turbulent motions can not exist for small Reynolds numbers the cutoff at $k = k_\nu$ coincides with $R_{k_\nu} = 1$
+Since turbulent motions can not exist for small Reynolds numbers, the cutoff at $k = k_\nu$ coincides with $R_{k_\nu} = 1$
 
 Therefore, from $W/\nu$ we obtain
 \begin{equation}
@@ -977,7 +977,7 @@ and
 \begin{equation}
     A = (3/2) W^{2/3}
 \end{equation}
-Minimum size of turbulence is therefore
+The minimum size of turbulence is, therefore
 \begin{equation}
     \ell_{k_\nu} = \ell_0 (R/2\pi)^{-3/4}
 \end{equation}
@@ -990,21 +990,21 @@ On the disruption of an MHD cascade due to magnetic reconnection
 
 \subsection{Interpretation of hydromagnetic eddies}
 
-General picture of turbulence consist of turbulent eddies cascading to smaller scales, enabling forward-transfer of energy in Fourier space. 
+The general picture of turbulence consists of turbulent eddies cascading to smaller scales, enabling the forward transfer of energy in Fourier space. 
 But what are the eddies?
 
-In MHD turbulence Alfv\'en waves are thought to be responsible of the nonlinear interaction.
-However, Alfv\'en waves, by definition, are linear eigenmodes of the system, and can not therefore produce the energy transfer.
-Instead, the energy transfer is enabled by an inherently nonlinear magnetic shear mode---a local field line twist---produced by nonlinear interaction of two overlapping orthogonally polarized waves.
+In MHD turbulence, Alfv\'en waves are thought to be responsible for the nonlinear interaction.
+However, Alfv\'en waves, by definition, are linear eigenmodes of the system and can not produce the energy transfer.
+Instead, the energy transfer is enabled by an inherently nonlinear magnetic shear mode---a local field line twist---produced by the nonlinear interaction of two overlapping orthogonally polarized waves.
 This shear is supported by a local electric field current region, $\delta B_\perp \sim \nabla \times J_z$.
 Therefore, we can think of these magnetic field shear regions, localized $J_z$ fluctuations, as the turbulent "eddies".
 
 \subsection{Tendency towards Alfv\'enic states }
 
-%For strongly anisotropic fluctuations the principal contribution is given by the shear-Alfv\'en mode.
+%For strongly anisotropic fluctuations, the principal contribution is given by the shear-Alfv\'en mode.
 
-Ideal reduced MHD system has two conserved quantities, the energy, $E$, and the cross-helicity, $H^C$.
-Assuming that energy is dissipated faster than the cross-helicity, we can ask what field configuration minimizes the energy at a given cross-helicity.
+An ideal reduced MHD system has two conserved quantities, the energy, $E$, and the cross-helicity, $H^C$.
+Assuming energy is dissipated faster than the cross-helicity, we can ask what field configuration minimizes the energy at a given cross-helicity.
 This configuration corresponds to a state where the magnetic and velocity fluctuations, $\vec{b}\equiv \delta \vec{B}_\perp$, and $\vec{v}\equiv \delta \vec{V}_\perp$, tend to either align or counter-align.
 These are the so-called Alfv\'enic  states, $\vec{b} = \pm \vec{v}$ because they can be described with Els\"asser  variables, $\vec{z}^\pm = \vec{v} \pm \vec{b}$ that are independently exact solutions of the reduced MHD system and physically present an Alfv\'en mode traveling along the dominant guide field.
 
@@ -1012,15 +1012,15 @@ These are the so-called Alfv\'enic  states, $\vec{b} = \pm \vec{v}$ because they
 
 \subsection{Dynamical alignment}
 
-If large-scale magnetic field is aligned with $z$ direction then the resulting turbulent structures are created in the $x-y$ plane.
-If there is indeed a tendency for $\vec{v}$ and $\vec{b}$ to align, then locally the isotropy in the 2D slice perpendicular to the dominant field is broken.
-If both quantities, $\vec{v}$ and $\vec{b}$ are aligned, say along the $y$ direction then the resulting ribbon has a thickness $a$ in the $x$ direction, width $\zeta$ in $y$ direction, and length $l$ in $z$ direction.
+If a large-scale magnetic field is aligned with the $z$ direction, the resulting turbulent structures are created in the $x-y$ plane.
+If there is indeed a tendency for $\vec{v}$ and $\vec{b}$ to align, then locally, the isotropy in the 2D slice perpendicular to the dominant field is broken.
+If both quantities, $\vec{v}$ and $\vec{b}$ are aligned, say along the $y$ direction, then the resulting ribbon has a thickness $a$ in the $x$ direction, width $\zeta$ in $y$ direction, and length $l$ in $z$ direction.
 
 Such alignment leads to reduction of the nonlinear interaction strength, $(\vec{z}^\mp \cdot \nabla)\vec{z}^\pm$, because the projection of the two quantities and their gradients, $\vec{b}\cdot\delta\vec{v}_\perp \sim b_y v_x$, is reduced by the anisotropy factor $\sin\theta = a/\zeta$.
-To put it other way, the magnetic field experiences less shearing from the velocity fields.
+In other words, the magnetic field experiences less shearing from the velocity fields.
 
-A subtle, often less-clearly communicated detail is what actually aligns?
-Originally the alignment by Boldyrev was envisioned to take place between the velocity and magnetic fluctuations, $\vec{b} \cdot \nabla \vec{v}$ but later this was shown to be dimensionally incorrect. 
+A subtle, often less clearly communicated detail is what aligns.
+Originally, the alignment by Boldyrev was envisioned to take place between the velocity and magnetic fluctuations, $\vec{b} \cdot \nabla \vec{v}$, but later this was shown to be dimensionally incorrect. 
 Instead, the alignment is, in reality, thought now to occur between the Els\"asser  variables. %, $\vec{z}^\mp \cdot \nabla \vec{z}^\pm$.
 
 
@@ -1030,12 +1030,12 @@ This would be an alternative formulation for the dynamical alignment that relies
 
 \subsection{Dynamically aligned turbulent cascade}
 
-In order to preserve a powerlaw scaling form for the spectrum, the cascading eddies should have an (outer-)scale dependent anisotropy, $\sin\theta \sim (a/L)^{1/4}$.
+To preserve a power-law scaling form for the spectrum, the cascading eddies should have an (outer-) scale-dependent anisotropy, $\sin\theta \sim (a/L)^{1/4}$.
 Since the alignment reduces the nonlinear interaction strength, the cascade becomes necessarily shallower.
 For a general intermittency-correction of type $(a/L)^{-\delta}$ with $\delta = 1/4$ we obtain a slope of $p = -3/2$.
 
-For all we care, the cascade could take place with whatever intermittency correction parameter $\delta$ and it would only affect the index of the spectrum.
-The crucial point to consider is, however, if the alignment can have other effects for the cascade.
+For all we care, the cascade could occur with whatever intermittency correction parameter $\delta$, and it would only affect the index of the spectrum.
+However, the crucial point to consider is if the alignment can have other effects on the cascade.
 
 
 
@@ -1043,17 +1043,17 @@ The crucial point to consider is, however, if the alignment can have other effec
 
 Turbulent dynamics favors the formation of eddies that have a morphology of anisotropic current sheets.
 %An anisotropic eddy in this picture is basically an elongated current sheet.
-However, current sheets with large aspect ratio are prone to tearing instability.
-Therefore, it can be possible that magnetic reconnection resulting from the sheet tearing will alter the turbulent energy cascade.
+However, current sheets with large aspect ratios are prone to tearing instability.
+Therefore, magnetic reconnection resulting from the sheet tearing may alter the turbulent energy cascade.
 
-Magnetic reconnection takes place as a thin, elongated current sheet breaks up into magnetic islands.
-Notably, this tearing can completely disrupt the energy transfer at a scale $a_{tear}$ where the process takes place.
+Magnetic reconnection occurs as a thin, elongated current sheet breaks into magnetic islands.
+Notably, this tearing can completely disrupt the energy transfer at a scale $a_{tear}$ where the process occurs.
 This means that the turbulent energy transfer would not proceed by passing energy from one scale to another but instead distributing the reconnecting magnetic energy between multiple scales, $<a_{tear}$.
 
 This will result in what I call a \textit{disruption of the turbulent energy cascade}.
-Existing work (Loureiro \& Boldyrev 2017; Boldyrev \& Loureiro 2017) consider reconnection as an alternative nonlinear energy transfer mechanism. 
+Existing work (Loureiro \& Boldyrev 2017; Boldyrev \& Loureiro 2017) considers reconnection as an alternative nonlinear energy transfer mechanism. 
 This might, however, not be the case since reconnection does not cleanly pass energy from one scale to the next in the Fourier space.
-Boldyrev \& Loureiro 2017; Mallet et al 2017 assumed that the spectrum can be calculated by replacing the nonlinear turnover time by the tearing time at all scales smaller than $a_{tear}$.
+Boldyrev \& Loureiro 2017; Mallet et al. 2017 assumed that the spectrum can be calculated by replacing the nonlinear turnover time with the tearing time at all scales smaller than $a_{tear}$.
 This gives an energy spectrum $E(k_\perp) \sim k_\perp^{-11/5}$ (assuming a $\tanh$-profile for the current sheets).
 
 Crucially, we need to consider at what scale can this take place?
@@ -1064,25 +1064,25 @@ Crucially, we need to consider at what scale can this take place?
 
 The tearing rate is (assuming $\tanh$-profile for simplicity) $\gamma_{tear} \sim \eta^{1/2} b_a^{1/2} a^{-3/2}$ and it occurs at a wave number $k_{tear} \sim \eta^{1/4} b_a^{-1/4} a^{-5/4}$.
 As the scale $a$ decreases, the nonlinear eddy turnover rate increases slower than the tearing rate.
-Therefore, at small scale the tearing will become important.
+Therefore, at a small scale, the tearing will become important.
 The transition scale is $a_{tear}/L \sim S^{-4/7}$ where $S = V_A L/\eta$ is the magnetic Reynolds number (actually Lundquist number to be more accurate).
 Kolmogorov-like dissipation scale of turbulence, on the contrary, is $a_\eta/L \sim S^{-3/2}$ (scale at which eddy turnover rate becomes comparable to the dissipation rate $\gamma_\eta \sim \eta/a^2$).
 
 The tearing is estimated to become important at $S \gtrsim 10^6$ (Boldyrev \& Loureiro 2017).
-In order to estimate the scale on which the tearing can become important we need to know the magnetic diffusion, $\eta$.
-The obtained scale $a_{tear}$ should then be compared to the plasma skindepth and the Kolmogorov dissipation scale to determine if the tearing will be important.
+To estimate the scale on which the tearing can become important, we need to know the magnetic diffusion, $\eta$.
+The obtained scale $a_{tear}$ should then be compared to the plasma skin depth and the Kolmogorov dissipation scale to determine if the tearing will be important.
 \red{What is $a_{tear}$?}
 
 \subsection{Strength of the reconnecting magnetic field component}
 
 The magnitude of the turbulent magnetic fluctuations at scale $a$ can be estimated from the constant energy flux, $b_a^2 (b_a/a)(a/L)^{\delta} \sim \varepsilon$.
 The initial energy flux at the outer scale is $\varepsilon = b_0^3 /L$.
-So at a scale $a$ we have 
+So, at a scale of $a$, we have 
 %$b_a^3 = (b_0^3/L) (a) (a/L)^{-\delta}$.
 $(b_a/b_0)^2 = (a/L)^{2/3 -2\delta/3}$.
 
 For $\delta = 1/4$ we get at the tearing scale $(b_a/b_0)^2 = (a/L)^{1/2} \sim S^{-4/14} \sim 10^{-2}$.
-If the initial wave amplitude is, say, $b_0 \sim B_z/100$ then the disruption occurs via a reconnection with ultra-strong guide field, $b/B_z \sim 10^{-6}$.
+If the initial wave amplitude is, say, $b_0 \sim B_z/100$, then the disruption occurs via a reconnection with ultra-strong guide field, $b/B_z \sim 10^{-6}$.
 
 
 
@@ -1095,10 +1095,10 @@ Then the nonlinear eddy turnover rate is $\gamma_{nl} \sim (a/L))^\delta b_a/a \
 
 \subsection{Tearing in kinetic Alfv\'en wave turbulence}
 
-Boldyrev claim that tearing is similar to MHD when $\eta \rightarrow \gamma d_e^2$, where $d_e$ is the electron skindepth.
+Boldyrev claims that tearing resembles MHD when $\eta \rightarrow \gamma d_e^2$, where $d_e$ is the electron skin depth.
 
 Tearing rate is $\gamma_{tear} \sim b_a d_e^2/a^3$.
-Inner-scale of the mode is at $\delta_{in} \sim d_e$.
+The inner scale of the mode is at $\delta_{in} \sim d_e$.
 
 
 
