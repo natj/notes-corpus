@@ -236,9 +236,9 @@ For hydrodynamic cascade we assume that $\tcascd$ is a dynamical time on a parti
 \be
 \tcascd \approx \frac{\ell}{u_\ell}.
 \ee
-By substitituion we then have
+By substitution, we then have
 \be
-\varepsilon \sim \frac{u_\ell^2}{\tcascd} \sim \frac{u_\ell^3}{\ell}
+\varepsilon \sim \frac{u_\ell^2}{\tcascd} \sim \frac{u_\ell^3}{\ell},
 \ee
 that results in
 \be
@@ -335,7 +335,7 @@ Hence, the name Alfvenic turbulence.
 \section{Weak wave turbulence}
 
 Weak turbulence refers to the picture where wave packets propagate almost freely and collisions between the waves leads to small perturbations in their structure so that perturbation theory is applicable.
-Mathematically, this takes place in the limit of small $\vec{\delta z}$ that presents a perturbation traveling along the $\vec{B}_0$.
+Mathematically, this takes place in the limit of small $\vec{\delta z}$ that represents a perturbation traveling along the $\vec{B}_0$.
 The nonlinear term describes the interaction of the perturbations.
 Notably, self-interaction of $\vec{\delta z}^-$ or $\vec{\delta z}^+$ is absent.
 
@@ -864,8 +864,6 @@ Coronae of accretion disks:
 \citep{Zhdankin_2019}
 
 
-
-
 %\section{Summary}\label{sect:summary}
 
 %\section*{Acknowledgments}
@@ -879,9 +877,231 @@ Coronae of accretion disks:
 %\begin{thebibliography}{62}
 %\end{thebibliography}
 
-%\clearpage
+\clearpage
 %\onecolumn
-%\begin{appendix}
-%\end{appendix}
+\begin{appendix}
+
+\section{Notes on von Neumann: Recent theories of turbulence}
+
+Earliest note of turbulence is by Reynolds 1883:
+he studied a flow of water in a cylindrical pipe and concluded that flow is laminar below a certain critical velocity.
+When the limit was exceeded, the flow became turbulent with highly irregular and rapidly changing streamlines.
+
+Physically he found that in the laminar state the pressure gradient is proportional to flow velocity $U$ and (kinematic) viscosity $\nu$.
+In the turbulent regime the system is more akin to a $U^2$ dependency while $\nu$-dependency is less developed.
+Reynolds also found empirically that (within some limits) only the combination of $R = \frac{L U}{\nu}$ of the variables mattered in determining whether the critical point has been reached.
+This is the only dimensionless combination of the above variables.
+It is now generally agreed that (if no special precautions are taken) $R$ is around $1000$ to $2000$ when the critical limit is reached.
+
+Turbulence is a phenomenon of instability.
+Laminar solutions of Navier-Stokes eq. ceases to be (at least the most) stable one for high enough $R$.
+Turbulent flow represents one or more solutions of higher stability.
+In fact, there is no reason to believe that one solution is favored; 
+Instead the turbulent solutions represent an ensemble of statistical properties.
+
+Coutte flow investigated by von Mises, Hopf, Noether.
+Mathematically the most simple form.
+Taylor 1922 obtained complete solutions of cylindrical Couette flows.
+
+Studies of stability theories will only tell when the laminar solution breaks down.
+The turbulent properties themselves are only understood by understanding all the nonlinear solutions of the NS eqs.
+
+Solutions of NS are quite essentially non-linear.
+Turbulence is introduced with large $R$, hence its solutions are related to the asymptotic $R \rightarrow \infty$.
+This corresponds to $\nu \rightarrow 0$.
+For $\nu \rightarrow 0$ a bad singularity occurs as $\nu \nabla^2 (\nabla^2 \phi)$ (order 4, degree 1) disappears and hence the Jacobian$(\nabla^2 \phi, \phi)$ (order 3, degree 2) emerges as dominant.
+\footnote{
+    Order refers to differentiation, degree to algebraic character.
+    The term is leading the solution by virtue of its order.
+    Thus, the character of the equation (which is controlled by the leading term; by virtue of its higher order of differentiation) changes simultaneously in all relevant aspects (both order and degree change).
+}
+Mathematical nature of NS were studied by Oseen 1914, 1927), and Leray 1933.
+
+Turbulence is crucially dimensionality dependent.
+Firstly, because solutions of partial differential equations depend on the connection between the equations term orders and space dimensionality;
+NS eqs have the same order as space and they cross the critical lower bound for regularity when dimensionality changes from $2$ to $3$.
+Secondly, in 2D the vorticity is conserved; it is only created at the boundary and then diffuses into the fluid.
+In 3D vortex-filament-strength is conserved but since the flow may lengthen and convovle the vortex filaments, the actual vorticity in a given volume may increase.
+So a vorticity-increasing mechanism is available in 3D.
+
+Kolmogorov-Onsager-Weizsacker result originates from a remarkable dimensionality analysis of turbulent quantities:
+Only quantity that can matter for energy flow is rate of dissipation $W$ ($=$ energy/mass/time).
+Correlations/fluctuations in the flow are captured with $B = \langle u(x+r) - u(x) \rangle$ ($= \cm^2 \second^{-2}$).
+Only combination of $r$, $W$, and $B$ is 
+\begin{equation}
+    B(r) = C W^{2/3} r^{2/}
+\end{equation}
+Let $F(k)dk$ be the energy contained in the frequency-interval from $k$ to $k+dk$.
+$F(k)$ is frequency spectrum of the energy.
+Therefore, $B(r)$ and $F(k)$ are Fourier-transforms of each other.
+Hence, $F(k) \propto k^{-5/3}$ is equivalent to $B(r) \propto r^{2/3}$ (sum of the exponents must be $-1$).
+\footnote{
+    $F(k) dk = F(r) (\partial k/\partial r) dr$ where $\partial k/\partial r = \partial_r r^{-1} = \ln r$ .
+    \red{so???}
+}
+
+Specific energy content $E$ (energy per unit mass) and rate of dissipation $W$ (energy per unit mass per time) are obtained from
+\begin{equation}
+    E = \int F(k) dk
+\end{equation}
+and
+\begin{equation}
+    W = \nu \int 2 F(k) k^2 dk
+\end{equation}
+
+For Kolmogorov turbulence we obtain $W = 2 \nu A \int_0^{k_s} k^{1/3} dk = \frac{3}{2} \nu A k_s^{4/3}$.
+
+In general, $k$ is the frequency that corresponds to $\ell$ such that 
+\begin{equation}
+2\pi/k = \ell_k.
+\end{equation}
+Same is true for energy, 
+\begin{equation}
+    \langle (u_k)^2 \rangle = A \int_k^\infty k^{-5/3} dk = \frac{3}{2} A k^{-2/3}
+\end{equation}
+Hence, the typical velocity is
+\begin{equation}
+    V_k = \sqrt{(u_k)^2} = \sqrt{\frac{3}{2}} \sqrt{A} k^{-1/3}
+\end{equation}
+Therefore, we can also obtain a Reynolds number at a scale $k$ of
+\begin{equation}
+    R_k = \frac{L_k V_k}{\nu} = 2\pi (3/2)^{1/2} A^{1/2} \nu^{-1} k^{-4/3}
+\end{equation}
+Since turbulent motions can not exist for small Reynolds numbers the cutoff at $k = k_\nu$ coincides with $R_{k_\nu} = 1$
+
+Therefore, from $W/\nu$ we obtain
+\begin{equation}
+k_s = (W/\nu^3)^{1/4}
+\end{equation}
+and
+\begin{equation}
+    A = (3/2) W^{2/3}
+\end{equation}
+Minimum size of turbulence is therefore
+\begin{equation}
+    \ell_{k_\nu} = \ell_0 (R/2\pi)^{-3/4}
+\end{equation}
+
+
+
+\section{General thoughts on alignment and reconnection-mediated cascades}
+On the disruption of an MHD cascade due to magnetic reconnection
+
+
+\subsection{Interpretation of hydromagnetic eddies}
+
+General picture of turbulence consist of turbulent eddies cascading to smaller scales, enabling forward-transfer of energy in Fourier space. 
+But what are the eddies?
+
+In MHD turbulence Alfv\'en waves are thought to be responsible of the nonlinear interaction.
+However, Alfv\'en waves, by definition, are linear eigenmodes of the system, and can not therefore produce the energy transfer.
+Instead, the energy transfer is enabled by an inherently nonlinear magnetic shear mode---a local field line twist---produced by nonlinear interaction of two overlapping orthogonally polarized waves.
+This shear is supported by a local electric field current region, $\delta B_\perp \sim \nabla \times J_z$.
+Therefore, we can think of these magnetic field shear regions, localized $J_z$ fluctuations, as the turbulent "eddies".
+
+\subsection{Tendency towards Alfv\'enic states }
+
+%For strongly anisotropic fluctuations the principal contribution is given by the shear-Alfv\'en mode.
+
+Ideal reduced MHD system has two conserved quantities, the energy, $E$, and the cross-helicity, $H^C$.
+Assuming that energy is dissipated faster than the cross-helicity, we can ask what field configuration minimizes the energy at a given cross-helicity.
+This configuration corresponds to a state where the magnetic and velocity fluctuations, $\vec{b}\equiv \delta \vec{B}_\perp$, and $\vec{v}\equiv \delta \vec{V}_\perp$, tend to either align or counter-align.
+These are the so-called Alfv\'enic  states, $\vec{b} = \pm \vec{v}$ because they can be described with Els\"asser  variables, $\vec{z}^\pm = \vec{v} \pm \vec{b}$ that are independently exact solutions of the reduced MHD system and physically present an Alfv\'en mode traveling along the dominant guide field.
+
+
+
+\subsection{Dynamical alignment}
+
+If large-scale magnetic field is aligned with $z$ direction then the resulting turbulent structures are created in the $x-y$ plane.
+If there is indeed a tendency for $\vec{v}$ and $\vec{b}$ to align, then locally the isotropy in the 2D slice perpendicular to the dominant field is broken.
+If both quantities, $\vec{v}$ and $\vec{b}$ are aligned, say along the $y$ direction then the resulting ribbon has a thickness $a$ in the $x$ direction, width $\zeta$ in $y$ direction, and length $l$ in $z$ direction.
+
+Such alignment leads to reduction of the nonlinear interaction strength, $(\vec{z}^\mp \cdot \nabla)\vec{z}^\pm$, because the projection of the two quantities and their gradients, $\vec{b}\cdot\delta\vec{v}_\perp \sim b_y v_x$, is reduced by the anisotropy factor $\sin\theta = a/\zeta$.
+To put it other way, the magnetic field experiences less shearing from the velocity fields.
+
+A subtle, often less-clearly communicated detail is what actually aligns?
+Originally the alignment by Boldyrev was envisioned to take place between the velocity and magnetic fluctuations, $\vec{b} \cdot \nabla \vec{v}$ but later this was shown to be dimensionally incorrect. 
+Instead, the alignment is, in reality, thought now to occur between the Els\"asser  variables. %, $\vec{z}^\mp \cdot \nabla \vec{z}^\pm$.
+
+
+Turbulence can also be hypothesized to form by a tendency of each scale to form structures that act to \textit{minimize} the nonlinear interaction and to equilibrate with a forcing (incoming spectral energy flux that needs to be passed on).
+This would be an alternative formulation for the dynamical alignment that relies on the tendency of each scale to form Alfvenic structures to the best of their ability, as each scale is perturbed by the shearing motion of the larger scales. 
+
+
+\subsection{Dynamically aligned turbulent cascade}
+
+In order to preserve a powerlaw scaling form for the spectrum, the cascading eddies should have an (outer-)scale dependent anisotropy, $\sin\theta \sim (a/L)^{1/4}$.
+Since the alignment reduces the nonlinear interaction strength, the cascade becomes necessarily shallower.
+For a general intermittency-correction of type $(a/L)^{-\delta}$ with $\delta = 1/4$ we obtain a slope of $p = -3/2$.
+
+For all we care, the cascade could take place with whatever intermittency correction parameter $\delta$ and it would only affect the index of the spectrum.
+The crucial point to consider is, however, if the alignment can have other effects for the cascade.
+
+
+
+\subsection{Reconnection-driven cascade disruption}
+
+Turbulent dynamics favors the formation of eddies that have a morphology of anisotropic current sheets.
+%An anisotropic eddy in this picture is basically an elongated current sheet.
+However, current sheets with large aspect ratio are prone to tearing instability.
+Therefore, it can be possible that magnetic reconnection resulting from the sheet tearing will alter the turbulent energy cascade.
+
+Magnetic reconnection takes place as a thin, elongated current sheet breaks up into magnetic islands.
+Notably, this tearing can completely disrupt the energy transfer at a scale $a_{tear}$ where the process takes place.
+This means that the turbulent energy transfer would not proceed by passing energy from one scale to another but instead distributing the reconnecting magnetic energy between multiple scales, $<a_{tear}$.
+
+This will result in what I call a \textit{disruption of the turbulent energy cascade}.
+Existing work (Loureiro \& Boldyrev 2017; Boldyrev \& Loureiro 2017) consider reconnection as an alternative nonlinear energy transfer mechanism. 
+This might, however, not be the case since reconnection does not cleanly pass energy from one scale to the next in the Fourier space.
+Boldyrev \& Loureiro 2017; Mallet et al 2017 assumed that the spectrum can be calculated by replacing the nonlinear turnover time by the tearing time at all scales smaller than $a_{tear}$.
+This gives an energy spectrum $E(k_\perp) \sim k_\perp^{-11/5}$ (assuming a $\tanh$-profile for the current sheets).
+
+Crucially, we need to consider at what scale can this take place?
+
+
+\subsection{Onset of tearing instability}
+
+
+The tearing rate is (assuming $\tanh$-profile for simplicity) $\gamma_{tear} \sim \eta^{1/2} b_a^{1/2} a^{-3/2}$ and it occurs at a wave number $k_{tear} \sim \eta^{1/4} b_a^{-1/4} a^{-5/4}$.
+As the scale $a$ decreases, the nonlinear eddy turnover rate increases slower than the tearing rate.
+Therefore, at small scale the tearing will become important.
+The transition scale is $a_{tear}/L \sim S^{-4/7}$ where $S = V_A L/\eta$ is the magnetic Reynolds number (actually Lundquist number to be more accurate).
+Kolmogorov-like dissipation scale of turbulence, on the contrary, is $a_\eta/L \sim S^{-3/2}$ (scale at which eddy turnover rate becomes comparable to the dissipation rate $\gamma_\eta \sim \eta/a^2$).
+
+The tearing is estimated to become important at $S \gtrsim 10^6$ (Boldyrev \& Loureiro 2017).
+In order to estimate the scale on which the tearing can become important we need to know the magnetic diffusion, $\eta$.
+The obtained scale $a_{tear}$ should then be compared to the plasma skindepth and the Kolmogorov dissipation scale to determine if the tearing will be important.
+\red{What is $a_{tear}$?}
+
+\subsection{Strength of the reconnecting magnetic field component}
+
+The magnitude of the turbulent magnetic fluctuations at scale $a$ can be estimated from the constant energy flux, $b_a^2 (b_a/a)(a/L)^{\delta} \sim \varepsilon$.
+The initial energy flux at the outer scale is $\varepsilon = b_0^3 /L$.
+So at a scale $a$ we have 
+%$b_a^3 = (b_0^3/L) (a) (a/L)^{-\delta}$.
+$(b_a/b_0)^2 = (a/L)^{2/3 -2\delta/3}$.
+
+For $\delta = 1/4$ we get at the tearing scale $(b_a/b_0)^2 = (a/L)^{1/2} \sim S^{-4/14} \sim 10^{-2}$.
+If the initial wave amplitude is, say, $b_0 \sim B_z/100$ then the disruption occurs via a reconnection with ultra-strong guide field, $b/B_z \sim 10^{-6}$.
+
+
+
+Eddy turnover rate is $\gamma_{nl} \propto b_a/a^2$.
+Energy flux is $\varepsilon \sim b_a^3/a^2 \sim \gamma_a E_a = \mathrm{const}$.
+Then the nonlinear eddy turnover rate is $\gamma_{nl} \sim (a/L))^\delta b_a/a \sim \varepsilon^{1/3} L^{-1/6} a^{-1/2}$.
+
+
+
+
+\subsection{Tearing in kinetic Alfv\'en wave turbulence}
+
+Boldyrev claim that tearing is similar to MHD when $\eta \rightarrow \gamma d_e^2$, where $d_e$ is the electron skindepth.
+
+Tearing rate is $\gamma_{tear} \sim b_a d_e^2/a^3$.
+Inner-scale of the mode is at $\delta_{in} \sim d_e$.
+
+
+
+\end{appendix}
 
 \end{document}
