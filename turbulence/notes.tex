@@ -1,5 +1,5 @@
 %\documentclass[referee]{aa}
-\documentclass[usenatbib,twocolumn]{aastex63}
+\documentclass[usenatbib,twocolumn, twocolappendix]{aastex63}
 
 \pdfoutput=1
 \pdfminorversion=5
@@ -118,8 +118,8 @@
 \newcommand{\todo}[1]{\red{#1}}
 
 \received{MMM D, YYYY}
-\revised{MMM D, YYYY}
-\accepted{\today}
+\revised{\today}
+\accepted{MMM D, YYYY}
 
 
 \shorttitle{MHD turbulence}
@@ -134,21 +134,20 @@
 \author{J.~\,N\"attil\"a}
 \affiliation{Physics Department and Columbia Astrophysics Laboratory, Columbia University, 538 West 120th Street, New York, NY 10027, USA}
 \affiliation{Center for Computational Astrophysics, Flatiron Institute, 162 Fifth Avenue, New York, NY 10010, USA}
-\email{email: jan2174@columbia.edu}
+\email{email: nattila.joonas@gmail.com}
 
 
 
 \begin{abstract}
-    These notes provide a short review of MHD turbulence theories.
+    These notes provide a short review of magnetohydrodynamic (MHD) turbulence.
     We start by defining the needed mathematical tools behind many turbulence theories.
-    Next, we present a simple Kolmogorov fluid turbulence picture ala K41 model.
+    Next, we present a simple fluid turbulence picture \'a~la Kolmogorov 1941.
     This is followed by a summary of incompressible MHD equations.
     Perturbing these equations leads naturally to the weak turbulence theory.
     As the assumptions behind the weak turbulence break down, we transition to the unknown strong turbulence regime.
-    Several phenomenological models are reviewed, and the physical picture behind some established models is reviewed:
-    As a basis, we present the Kolmogorov model, its naive extension to MHD by Iroshnikov-Kraichan, and its anisotropic generalization by Goldreich \& Sridhar.
-    Related concepts discussed include different cascade time scales, the concept of critical balance, and possible dynamical alignment as a cure for intermittency.
-    Text is heavily based on a review by Schekochihin 2018 (MHD Turbulence: A Biased Review), Verma 2004 (Statistical Theory of Magnetohydrodynamic Turbulence), Beresnyak 2019 (MHD Turbulence), and Biskamp 2003 (Magnetohydrodynamic Turbulence).
+    Several phenomenological models that seek to model the strong turbulence regime are reviewed, and the physical picture behind some established models is discussed:
+    as a basis, we present the Kolmogorov model, its na\"ive extension to MHD by Iroshnikov \& Kraichan, and its anisotropic generalization by Goldreich \& Sridhar.
+    Related concepts discussed include different cascade time scales, the concept of critical balance, and possible dynamical alignment.
 \end{abstract}
 
 
@@ -160,13 +159,66 @@
 %\section{Introduction}\label{sec:intro}
 %\citep{birdsall1985}
 
+\section{Introduction}
+
+Turbulence is often understood as a ``chaotic'' state of a fluid.
+The simplest thought experiment we can make is to ask what constitutes a chaotic and non-chaotic configuration?
+Non-chaotic systems should depict some kind of order and simplicity---we call such fluid configurations laminar:
+laminar flows have smooth and regular flow patterns in them.
+A counter-example of an ordered \& ``simple'' configuration can be devised by thinking of a fluid with perturbations on multiple scales.
+Such irregular and complex flow patterns are often called turbulent.
+While this is not exactly true---there is some order in turbulent flows---it gives a good mental picture to start thinking about turbulence as a physical phenomenon.
+
+
+\subsection{History (based on Von Neumann's analysis)}
+
+The earliest scientific note of turbulence is by Reynolds in 1883:
+he studied the flow of water in a cylindrical pipe and concluded that the flow is laminar below a certain critical velocity.
+When the limit was exceeded, the flow became turbulent with highly irregular and rapidly changing streamlines.
+
+Physically, he found that in the laminar state, the pressure gradient is proportional to flow velocity $U$ and (kinematic) viscosity $\nu$.
+In the turbulent regime, the system is more akin to a $U^2$ dependency while $\nu$-dependency is less developed.
+Reynolds also found empirically that (within some limits) only the combination of $R_e = \frac{L U}{\nu}$ of the variables mattered in determining whether the critical point had been reached.
+This is also the only possible dimensionless combination of the above variables.
+It is now generally agreed that (if no special precautions are taken) $R_e$ is around $1000$ to $2000$ when the critical transition threshold is reached and the flow becomes turbulent. 
+
+
+From the mathematical viewpoint, turbulence is a phenomenon of instability.
+This means that the laminar solution of Navier-Stokes equations cease to be (at least the most) stable one for high enough $R$.
+Turbulent flow represents one or more solutions of higher stability.
+In fact, there is no reason to believe that one solution is favored; 
+instead, the turbulent solutions represent an ensemble of statistical properties.
+
+Studies of stability theories will only tell when the laminar solution breaks down.
+The turbulent properties themselves are only understood by understanding all the nonlinear solutions of the Navier-Stokes equations.
+This makes ``solving'' turbulence a very hard problem!
+
+Solutions of Navier-Stokes equations are quite essentially non-linear.
+Turbulence is introduced with large $R_e$, hence, its solutions are related to the asymptotic $R_e \rightarrow \infty$.
+This corresponds to $\nu \rightarrow 0$.
+For no dissipation ($\nu \rightarrow 0$), a bad singularity occurs as the diffusion term ($\nu \nabla^2 (\nabla^2 \phi)$; order 4, degree 1) disappears, and hence the non-linear term ($\mathcal{J}(\nabla^2 \phi, \phi)$; order 3, degree 2) emerges as the dominant.%
+\footnote{
+    Order refers to differentiation, degree to algebraic character.
+    The term is leading the solution by its order.
+    Thus, the character of the equation (which is controlled by the leading term by virtue of its higher order of differentiation) changes simultaneously in all relevant aspects (both order and degree change).
+}
+This already implies that the nature of the solutions must be changed since the underlying mathematical equations change so drastically. 
+The mathematical nature of Navier-Stokes equations was studied by Oseen (1914, 1927) and Leray (1933).
+
+
+
+
+The following text, describing the MHD turbulence in more detail, is heavily based on a review by Schekochihin 2018 (MHD Turbulence: A Biased Review), Verma 2004 (Statistical Theory of Magnetohydrodynamic Turbulence), Beresnyak 2019 (MHD Turbulence), and Biskamp 2003 (Magnetohydrodynamic Turbulence).
+
+
+
 
 \section{Statistical background of turbulence cascades}\label{sect:turb}
 
 The single realization of a turbulent flow is chaotic and unpredictable.
 Some order can be gained by describing the system statistically by taking ensemble averages of different quantities (averaging over many realizations of the same systems).
 According to the ergodic hypothesis, statistical ensemble averages are replaceable by time- or volume-averaging;
-this is under the assumption that turbulence is a volume-filling and persistent process.
+this is under the assumption that turbulence is a volume-filling and temporally-persistent process.
 
 A spatial average of a quantity $u$ is defined as
 \be
@@ -267,6 +319,20 @@ An empirical correction is possible by multiplying RHS of Eq. \eqref{eq:K41} wit
 
 
 \section{Alfvenic MHD turbulence}\label{sect:mhd_theory}
+
+
+The general picture of fluid turbulence consists of turbulent eddies cascading to smaller scales, enabling the forward transfer of energy in Fourier space. 
+But what are the ``magnetic'' eddies?
+In MHD turbulence, Alfv\'en waves are thought to be responsible for the nonlinear interaction.
+These are not fluid vortices (eddies) but magnetic twists (Alfv\'en waves).
+
+However, Alfv\'en waves, by definition, are linear eigenmodes of the system (i.e., waves) and can not cause the energy transfer.
+Instead, the energy transfer is enabled by an inherently nonlinear magnetic shear mode---a local field line twist---produced by the nonlinear interaction of two overlapping orthogonally polarized waves.
+This shear is supported by a local electric field current region, $\delta B_\perp \sim \nabla \times J_z$.
+Therefore, we can think of these magnetic field shear regions, localized $J_z$ fluctuations, another integral part of MHD turbulence.
+Therefore, MHD turbulence should have both eddies (magnetic twists) and intermittent structures (current sheets) that contribute to the energy transfer.
+
+
 
 Incompressible MHD equations%
 \footnote{
@@ -529,6 +595,29 @@ An Alfv\'enic perturbation decorrelates in roughly one wave period.
 
 \subsection{Dynamical alignement}
 
+
+An ideal reduced MHD system has two conserved quantities, the energy, $E$, and the cross-helicity, $H^C$.
+Assuming energy is dissipated faster than the cross-helicity, we can ask what field configuration minimizes the energy at a given cross-helicity.
+This configuration corresponds to a state where the magnetic and velocity fluctuations, $\vec{b}\equiv \delta \vec{B}_\perp$, and $\vec{v}\equiv \delta \vec{V}_\perp$, tend to either align or counter-align.
+These are the so-called Alfv\'enic  states, $\vec{b} = \pm \vec{v}$ because they can be described with Els\"asser  variables, $\vec{z}^\pm = \vec{v} \pm \vec{b}$ that are independently exact solutions of the reduced MHD system and physically present an Alfv\'en mode traveling along the dominant guide field.
+
+
+If a large-scale magnetic field is aligned with the $z$ direction, the resulting turbulent structures are created in the $x-y$ plane.
+If there is indeed a tendency for $\vec{v}$ and $\vec{b}$ to align, then locally, the isotropy in the 2D slice perpendicular to the dominant field is broken.
+If both quantities, $\vec{v}$ and $\vec{b}$ are aligned, say along the $y$ direction, then the resulting ribbon has a thickness $a$ in the $x$ direction, width $\zeta$ in $y$ direction, and length $l$ in $z$ direction.
+
+Such alignment leads to reduction of the nonlinear interaction strength, $(\vec{z}^\mp \cdot \nabla)\vec{z}^\pm$, because the projection of the two quantities and their gradients, $\vec{b}\cdot\delta\vec{v}_\perp \sim b_y v_x$, is reduced by the anisotropy factor $\sin\theta = a/\zeta$.
+In other words, the magnetic field experiences less shearing from the velocity fields.
+
+A subtle, often less clearly communicated detail is what aligns.
+Originally, the alignment by Boldyrev was envisioned to take place between the velocity and magnetic fluctuations, $\vec{b} \cdot \nabla \vec{v}$, but later this was shown to be dimensionally incorrect. 
+Instead, the alignment is, in reality, thought now to occur between the Els\"asser  variables. %, $\vec{z}^\mp \cdot \nabla \vec{z}^\pm$.
+
+Turbulence can also be hypothesized to form by a tendency of each scale to form structures that act to \textit{minimize} the nonlinear interaction and to equilibrate with a forcing (incoming spectral energy flux that needs to be passed on).
+This would be an alternative formulation for the dynamical alignment that relies on the tendency of each scale to form Alfvenic structures to the best of their ability, as each scale is perturbed by the shearing motion of the larger scales. 
+
+
+
 Dynamic alignment derives from the same assumption of MHD tendency towards Alfv\'enic nature.
 In an Alfv\'en wave, $\vec{u}_\perp$ and $\vec{b}_\perp$ are the same, i.e., plasma flows drag field with them or the field accelerates flows to relax under tension.
 However, if the two fields are exactly parallel, there would be no non-linearity.
@@ -596,61 +685,44 @@ Another way to think about this conjecture is that it is used to describe interm
 Therefore, a complete theory of intermittency is needed for a solid theory of MHD turbulence.
 
 
+\section{Reconnection-driven cascade disruption}
 
-\section{Deviations from incompressibility and non-relativistic assumptions}\label{sect:kin_theory}
+Turbulent dynamics favors the formation of structures that have a morphology of anisotropic current sheets.
+%An anisotropic eddy in this picture is basically an elongated current sheet.
+However, current sheets with large aspect ratios are prone to tearing instability.
+Therefore, magnetic reconnection resulting from the sheet tearing may alter the turbulent energy cascade.
 
-\red{TODO: deviations from above: compressibility, relativistic motions, }
+Magnetic reconnection occurs as a thin, elongated current sheet breaks into magnetic islands.
+Notably, this tearing can completely disrupt the energy transfer at a scale $a_{tear}$ where the process occurs.
+This means that the turbulent energy transfer would not proceed by passing energy from one scale to another but instead distributing the reconnecting magnetic energy between multiple scales, $<a_{tear}$.
 
-Astrophysical plasmas that are magnetically dominated and undergo strong non-linear driving can show deviations from the above assumptions.
-Most notably, these include relativistic bulk motions that can induce a dynamically important electric field.
-For highly conductive flows $E \approx \frac{u}{c} B$.
-The electric field remains small for non-relativistic flows, $E \ll B$.
-If the driving scale motions are relativistic, the electric field can become large enough to become dynamically important itself.
+This will result in what I call a \textit{disruption of the turbulent energy cascade}.
+Existing work (Loureiro \& Boldyrev 2017; Boldyrev \& Loureiro 2017) considers reconnection as an alternative nonlinear energy transfer mechanism. 
+This might, however, not be the case since reconnection does not cleanly pass energy from one scale to the next in the Fourier space.
 
-The same applies to the current, as the plasma can become charge-starved.
-From Maxwell's equations, we have that
-\be
-\nabla \times \vec{B} = \frac{4\pi}{c} \vec{J} + \frac{1}{c} \frac{\partial E}{\partial t}.
-\ee
-We can ignore the last term for non-relativistic plasma since it is $\propto (u/c)^2$.
-Therefore, 
-\be
-\vec{J} = \frac{c}{4\pi} \nabla\times\vec{B}.
-\ee
-Hence, both $\vec{E}$ and $\vec{J}$ are dependent variables.
-For relativistic flows, current can become charge-starved and dynamically important.
-
-Relativistic bulk motions can also lead to the introduction of compressible modes.
-For magnetized plasmas, Alfven speed, $v_A = B/\sqrt{4\pi\rho}$ plays the role of sound speed in the medium.
-The fluid is incompressible if $u \ll v_A$.
-For relativistic plasma with strong non-linear driving strength, both velocities become comparable, $u \sim v_A$.
+As an example, Boldyrev \& Loureiro 2017; Mallet et al. 2017 assumed that the spectrum can be calculated by replacing the nonlinear turnover time with the tearing time at all scales smaller than $a_{tear}$.
+This gives an energy spectrum $E(k_\perp) \sim k_\perp^{-11/5}$ (assuming a $\tanh$-profile for the current sheets).
+Crucially, we need to consider at what scale can this take place?
 
 
-Magnetized plasma can support a set of different wave modes.
-Most notable is the Alfven wave, which is the incompressible mode.
-For Alfven wave $u_\parallel = u_\perp = b_\perp = 0$ but $\delta u_\perp \ne 0$ and $\delta b_\perp \ne 0$.
+%\section{Summary}\label{sect:summary}
+
+%\section*{Acknowledgments}
+%JN would like to thank XXX stimulating discussions on numerics and plasma simulations. 
+%The simulations were performed on resources provided by the Swedish National Infrastructure for Computing (SNIC) at PDC and HPC2N.
 
 
-Cho and Lazarian (2002, 2003) suggest that Alfven mode has an independent cascade, slow mod is passive to Alfven cascade and has the same spectra and isotropy, and fast mode has an independent isotropic acoustic/wave turbulence cascade.
-Kowal and Lazarian 2010 report steeper $k^{-2}$ spectra for fast modes.
+\bibliographystyle{aa}
+\bibliography{refs}
 
-Realistic compressible turbulence is strongly dependent on the way it is driven;
-this defines the initial wave content and degree of compressibility.
+%\begin{thebibliography}{62}
+%\end{thebibliography}
 
-Density is primarily perturbed by the slow mode.
-In a magnetized plasma with slow mode perturbations, the slow mode is mainly along $\vec{B}_0$.
-Beresnyak 2005
-Alfven modes only mix these perturbations by shearing motions.
-
-See decaying MHD turbulence that is driven by initial random magnetic fields (e.g., Biskamp 2003) that is qualitatively similar to reconnection turbulence.
+\clearpage
+%\onecolumn
+\begin{appendix}
 
 
-Coupling between fluid and magnetic field gives field lines stiffness and elasticity.
-This turns unstable perturbations into propagating Alfven waves.
-The coupling is not perfect since resistivity allows some slippage of the field across the fluid to take place.
-This allows one to tap into the reservoir of free magnetic energy more efficiently.
-
-The driving mechanism is the attractive force of parallel current elements.
 
 
 \section{More advanced statistical quantities}\label{sect:adv_stat}
@@ -724,7 +796,65 @@ E^X (k) = C^{XX}(\vec{k}) k^{D-1} \frac{S_D (D-1)}{2(2\pi)^D}.
 \ee
 
 
-\section{Literature \red{Work-in-progress}}\label{sect:literature}
+\section{Deviations from incompressibility and non-relativistic assumptions}\label{sect:kin_theory}
+
+%\red{TODO: deviations from above: compressibility, relativistic motions, }
+
+Astrophysical plasmas that are magnetically dominated and undergo strong non-linear driving can show deviations from the above assumptions.
+Most notably, these include relativistic bulk motions that can induce a dynamically important electric field.
+For highly conductive flows $E \approx \frac{u}{c} B$.
+The electric field remains small for non-relativistic flows, $E \ll B$.
+If the driving scale motions are relativistic, the electric field can become large enough to become dynamically important itself.
+
+The same applies to the current, as the plasma can become charge-starved.
+From Maxwell's equations, we have that
+\be
+\nabla \times \vec{B} = \frac{4\pi}{c} \vec{J} + \frac{1}{c} \frac{\partial E}{\partial t}.
+\ee
+We can ignore the last term for non-relativistic plasma since it is $\propto (u/c)^2$.
+Therefore, 
+\be
+\vec{J} = \frac{c}{4\pi} \nabla\times\vec{B}.
+\ee
+Hence, both $\vec{E}$ and $\vec{J}$ are dependent variables.
+For relativistic flows, current can become charge-starved and dynamically important.
+
+Relativistic bulk motions can also lead to the introduction of compressible modes.
+For magnetized plasmas, Alfven speed, $v_A = B/\sqrt{4\pi\rho}$ plays the role of sound speed in the medium.
+The fluid is incompressible if $u \ll v_A$.
+For relativistic plasma with strong non-linear driving strength, both velocities become comparable, $u \sim v_A$.
+
+
+Magnetized plasma can support a set of different wave modes.
+Most notable is the Alfven wave, which is the incompressible mode.
+For Alfven wave $u_\parallel = u_\perp = b_\perp = 0$ but $\delta u_\perp \ne 0$ and $\delta b_\perp \ne 0$.
+
+
+Cho and Lazarian (2002, 2003) suggest that Alfven mode has an independent cascade, slow mod is passive to Alfven cascade and has the same spectra and isotropy, and fast mode has an independent isotropic acoustic/wave turbulence cascade.
+Kowal and Lazarian 2010 report steeper $k^{-2}$ spectra for fast modes.
+
+Realistic compressible turbulence is strongly dependent on the way it is driven;
+this defines the initial wave content and degree of compressibility.
+
+Density is primarily perturbed by the slow mode.
+In a magnetized plasma with slow mode perturbations, the slow mode is mainly along $\vec{B}_0$.
+Beresnyak 2005
+Alfven modes only mix these perturbations by shearing motions.
+
+See decaying MHD turbulence that is driven by initial random magnetic fields (e.g., Biskamp 2003) that is qualitatively similar to reconnection turbulence.
+
+
+Coupling between fluid and magnetic field gives field lines stiffness and elasticity.
+This turns unstable perturbations into propagating Alfven waves.
+The coupling is not perfect since resistivity allows some slippage of the field across the fluid to take place.
+This allows one to tap into the reservoir of free magnetic energy more efficiently.
+
+The driving mechanism is the attractive force of parallel current elements.
+
+
+
+
+\section{Literature List \red{Work-in-progress}}\label{sect:literature}
 
 Objects themselves:
 \begin{itemize}
@@ -804,118 +934,68 @@ Coronae of accretion disks:
 \citep{Yuan_2014}
 
 
-\subsection{Kinetic turbulence}
-
-\citep{Zhdankin_2017a} Letter\\
-\citep{Zhdankin_2017b} Paper\\
-\citep{Zhdankin_2018} System size convergence\\
-\citep{Zhdankin_2019a} electron-proton plasma\\
-\citep{Zhdankin_2019b} radiative turbulence\\
-\citep{Comisso_2018} acceleration\\
-\citep{Wong_2019} acceleration\\
-\citep{Nattila_2019} Runko and turbulence\\
-\citep{Comisso_2019} acceleration\\
-
-\subsection{Radiative turbulence}
-
-\subsubsection{Analytic work on radiative turbulence}
-\citep{Uzdensky_2018}; \\
-\citep{Zrake_2018} (GRBs) \\
-\citep{Sobacchi_2019}; \\
- 
-\subsubsection{PIC simulations}
-\citep{Zhdankin_2019b} radiative turbulence\\
-
-
-\subsubsection{Fokker-Planck equation in momentum space with radiative cooling term}
-\citep{Schlickeiser_1984, Schlickeiser_1985}; not in original list \citep{Schlickeiser_1989} \\
-\citep{Stawarz_2008} \\
-
-
-\subsection{radiative PIC simulations}
-
-\subsubsection{Reconnection}
-\citep{Jaroschek_2009} \\
-\citep{Cerutti_2013, Cerutti_2014, Cerutti_2014a} \\
-\citep{Kagan_2016, Kagan_2016b} \\
-\citep{Hakobyan_2019} \\
-\citep{Werner_2019} \\
-\citep{Schoeffler_2019} \\
-
-\subsubsection{Decay of magnetostatic equilibria}
-\citep{Yuan_2016} \\
-\citep{Nalewajko_2018} \\
-
-\subsubsection{Pulsar wind}
-\citep{Cerutti_2017} \\
-
-\subsubsection{Pulsar magnetospheres}
-\citep{Cerutti_2016a} \\
-\citep{Philippov_2018} \\
+%\subsection{Kinetic turbulence}
+%
+%\citep{Zhdankin_2017a} Letter\\
+%\citep{Zhdankin_2017b} Paper\\
+%\citep{Zhdankin_2018} System size convergence\\
+%\citep{Zhdankin_2019a} electron-proton plasma\\
+%\citep{Zhdankin_2019b} radiative turbulence\\
+%\citep{Comisso_2018} acceleration\\
+%\citep{Wong_2019} acceleration\\
+%\citep{Nattila_2019} Runko and turbulence\\
+%\citep{Comisso_2019} acceleration\\
+%
+%\subsection{Radiative turbulence}
+%
+%\subsubsection{Analytic work on radiative turbulence}
+%\citep{Uzdensky_2018}; \\
+%\citep{Zrake_2018} (GRBs) \\
+%\citep{Sobacchi_2019}; \\
+% 
+%\subsubsection{PIC simulations}
+%\citep{Zhdankin_2019b} radiative turbulence\\
+%
+%
+%\subsubsection{Fokker-Planck equation in momentum space with radiative cooling term}
+%\citep{Schlickeiser_1984, Schlickeiser_1985}; not in original list \citep{Schlickeiser_1989} \\
+%\citep{Stawarz_2008} \\
 
 
-\subsubsection{Synchrotron and jitter radiative signatures of collisionless shocks}
-\citep{Medvedev_2009} \\
-\citep{Sironi_2009} \\
-\citep{Kirk_2010} \\
-\citep{Nishikawa_2011} \\
+%\subsection{radiative PIC simulations}
+%
+%\subsubsection{Reconnection}
+%\citep{Jaroschek_2009} \\
+%\citep{Cerutti_2013, Cerutti_2014, Cerutti_2014a} \\
+%\citep{Kagan_2016, Kagan_2016b} \\
+%\citep{Hakobyan_2019} \\
+%\citep{Werner_2019} \\
+%\citep{Schoeffler_2019} \\
 
-\subsubsection{Radiative turbulence}
-\citep{Zhdankin_2019}
+%\subsubsection{Decay of magnetostatic equilibria}
+%\citep{Yuan_2016} \\
+%\citep{Nalewajko_2018} \\
+%
+%\subsubsection{Pulsar wind}
+%\citep{Cerutti_2017} \\
+%
+%\subsubsection{Pulsar magnetospheres}
+%\citep{Cerutti_2016a} \\
+%\citep{Philippov_2018} \\
+%
+%
+%\subsubsection{Synchrotron and jitter radiative signatures of collisionless shocks}
+%\citep{Medvedev_2009} \\
+%\citep{Sironi_2009} \\
+%\citep{Kirk_2010} \\
+%\citep{Nishikawa_2011} \\
+%
+%\subsubsection{Radiative turbulence}
+%\citep{Zhdankin_2019}
 
-
-%\section{Summary}\label{sect:summary}
-
-%\section*{Acknowledgments}
-%JN would like to thank XXX stimulating discussions on numerics and plasma simulations. 
-%The simulations were performed on resources provided by the Swedish National Infrastructure for Computing (SNIC) at PDC and HPC2N.
-
-
-\bibliographystyle{aa}
-\bibliography{refs}
-
-%\begin{thebibliography}{62}
-%\end{thebibliography}
-
-\clearpage
-%\onecolumn
-\begin{appendix}
 
 \section{Notes on von Neumann: Recent theories of turbulence}
 
-The earliest note of turbulence is by Reynolds 1883:
-He studied the flow of water in a cylindrical pipe and concluded that the flow is laminar below a certain critical velocity.
-When the limit was exceeded, the flow became turbulent with highly irregular and rapidly changing streamlines.
-
-Physically, he found that in the laminar state, the pressure gradient is proportional to flow velocity $U$ and (kinematic) viscosity $\nu$.
-In the turbulent regime, the system is more akin to a $U^2$ dependency while $\nu$-dependency is less developed.
-Reynolds also found empirically that (within some limits) only the combination of $R = \frac{L U}{\nu}$ of the variables mattered in determining whether the critical point had been reached.
-This is the only dimensionless combination of the above variables.
-It is now generally agreed that (if no special precautions are taken) $R$ is around $1000$ to $2000$ when the critical limit is reached.
-
-Turbulence is a phenomenon of instability.
-Laminar solutions of Navier-Stokes eq. ceases to be (at least the most) stable one for high enough $R$.
-Turbulent flow represents one or more solutions of higher stability.
-In fact, there is no reason to believe that one solution is favored; 
-Instead, the turbulent solutions represent an ensemble of statistical properties.
-
-Coutte flow was investigated by von Mises, Hopf, and Noether.
-Mathematically, the most simple form.
-Taylor 1922 obtained complete solutions of cylindrical Couette flows.
-
-Studies of stability theories will only tell when the laminar solution breaks down.
-The turbulent properties themselves are only understood by understanding all the nonlinear solutions of the NS eqs.
-
-Solutions of NS are quite essentially non-linear.
-Turbulence is introduced with large $R$, hence, its solutions are related to the asymptotic $R \rightarrow \infty$.
-This corresponds to $\nu \rightarrow 0$.
-For $\nu \rightarrow 0$, a bad singularity occurs as $\nu \nabla^2 (\nabla^2 \phi)$ (order 4, degree 1) disappears, and hence the Jacobian$(\nabla^2 \phi, \phi)$ (order 3, degree 2) emerges as dominant.
-\footnote{
-    Order refers to differentiation, degree to algebraic character.
-    The term is leading the solution by its order.
-    Thus, the character of the equation (which is controlled by the leading term by virtue of its higher order of differentiation) changes simultaneously in all relevant aspects (both order and degree change).
-}
-The mathematical nature of NS was studied by Oseen 1914, 1927) and Leray 1933.
 
 Turbulence is crucially dimensionality dependent.
 Firstly, because solutions of partial differential equations depend on the connection between the equations' term orders and space dimensionality;
@@ -988,46 +1068,6 @@ The minimum size of turbulence is, therefore
 On the disruption of an MHD cascade due to magnetic reconnection
 
 
-\subsection{Interpretation of hydromagnetic eddies}
-
-The general picture of turbulence consists of turbulent eddies cascading to smaller scales, enabling the forward transfer of energy in Fourier space. 
-But what are the eddies?
-
-In MHD turbulence, Alfv\'en waves are thought to be responsible for the nonlinear interaction.
-However, Alfv\'en waves, by definition, are linear eigenmodes of the system and can not produce the energy transfer.
-Instead, the energy transfer is enabled by an inherently nonlinear magnetic shear mode---a local field line twist---produced by the nonlinear interaction of two overlapping orthogonally polarized waves.
-This shear is supported by a local electric field current region, $\delta B_\perp \sim \nabla \times J_z$.
-Therefore, we can think of these magnetic field shear regions, localized $J_z$ fluctuations, as the turbulent "eddies".
-
-\subsection{Tendency towards Alfv\'enic states }
-
-%For strongly anisotropic fluctuations, the principal contribution is given by the shear-Alfv\'en mode.
-
-An ideal reduced MHD system has two conserved quantities, the energy, $E$, and the cross-helicity, $H^C$.
-Assuming energy is dissipated faster than the cross-helicity, we can ask what field configuration minimizes the energy at a given cross-helicity.
-This configuration corresponds to a state where the magnetic and velocity fluctuations, $\vec{b}\equiv \delta \vec{B}_\perp$, and $\vec{v}\equiv \delta \vec{V}_\perp$, tend to either align or counter-align.
-These are the so-called Alfv\'enic  states, $\vec{b} = \pm \vec{v}$ because they can be described with Els\"asser  variables, $\vec{z}^\pm = \vec{v} \pm \vec{b}$ that are independently exact solutions of the reduced MHD system and physically present an Alfv\'en mode traveling along the dominant guide field.
-
-
-
-\subsection{Dynamical alignment}
-
-If a large-scale magnetic field is aligned with the $z$ direction, the resulting turbulent structures are created in the $x-y$ plane.
-If there is indeed a tendency for $\vec{v}$ and $\vec{b}$ to align, then locally, the isotropy in the 2D slice perpendicular to the dominant field is broken.
-If both quantities, $\vec{v}$ and $\vec{b}$ are aligned, say along the $y$ direction, then the resulting ribbon has a thickness $a$ in the $x$ direction, width $\zeta$ in $y$ direction, and length $l$ in $z$ direction.
-
-Such alignment leads to reduction of the nonlinear interaction strength, $(\vec{z}^\mp \cdot \nabla)\vec{z}^\pm$, because the projection of the two quantities and their gradients, $\vec{b}\cdot\delta\vec{v}_\perp \sim b_y v_x$, is reduced by the anisotropy factor $\sin\theta = a/\zeta$.
-In other words, the magnetic field experiences less shearing from the velocity fields.
-
-A subtle, often less clearly communicated detail is what aligns.
-Originally, the alignment by Boldyrev was envisioned to take place between the velocity and magnetic fluctuations, $\vec{b} \cdot \nabla \vec{v}$, but later this was shown to be dimensionally incorrect. 
-Instead, the alignment is, in reality, thought now to occur between the Els\"asser  variables. %, $\vec{z}^\mp \cdot \nabla \vec{z}^\pm$.
-
-
-Turbulence can also be hypothesized to form by a tendency of each scale to form structures that act to \textit{minimize} the nonlinear interaction and to equilibrate with a forcing (incoming spectral energy flux that needs to be passed on).
-This would be an alternative formulation for the dynamical alignment that relies on the tendency of each scale to form Alfvenic structures to the best of their ability, as each scale is perturbed by the shearing motion of the larger scales. 
-
-
 \subsection{Dynamically aligned turbulent cascade}
 
 To preserve a power-law scaling form for the spectrum, the cascading eddies should have an (outer-) scale-dependent anisotropy, $\sin\theta \sim (a/L)^{1/4}$.
@@ -1036,27 +1076,6 @@ For a general intermittency-correction of type $(a/L)^{-\delta}$ with $\delta = 
 
 For all we care, the cascade could occur with whatever intermittency correction parameter $\delta$, and it would only affect the index of the spectrum.
 However, the crucial point to consider is if the alignment can have other effects on the cascade.
-
-
-
-\subsection{Reconnection-driven cascade disruption}
-
-Turbulent dynamics favors the formation of eddies that have a morphology of anisotropic current sheets.
-%An anisotropic eddy in this picture is basically an elongated current sheet.
-However, current sheets with large aspect ratios are prone to tearing instability.
-Therefore, magnetic reconnection resulting from the sheet tearing may alter the turbulent energy cascade.
-
-Magnetic reconnection occurs as a thin, elongated current sheet breaks into magnetic islands.
-Notably, this tearing can completely disrupt the energy transfer at a scale $a_{tear}$ where the process occurs.
-This means that the turbulent energy transfer would not proceed by passing energy from one scale to another but instead distributing the reconnecting magnetic energy between multiple scales, $<a_{tear}$.
-
-This will result in what I call a \textit{disruption of the turbulent energy cascade}.
-Existing work (Loureiro \& Boldyrev 2017; Boldyrev \& Loureiro 2017) considers reconnection as an alternative nonlinear energy transfer mechanism. 
-This might, however, not be the case since reconnection does not cleanly pass energy from one scale to the next in the Fourier space.
-Boldyrev \& Loureiro 2017; Mallet et al. 2017 assumed that the spectrum can be calculated by replacing the nonlinear turnover time with the tearing time at all scales smaller than $a_{tear}$.
-This gives an energy spectrum $E(k_\perp) \sim k_\perp^{-11/5}$ (assuming a $\tanh$-profile for the current sheets).
-
-Crucially, we need to consider at what scale can this take place?
 
 
 \subsection{Onset of tearing instability}
@@ -1089,8 +1108,6 @@ If the initial wave amplitude is, say, $b_0 \sim B_z/100$, then the disruption o
 Eddy turnover rate is $\gamma_{nl} \propto b_a/a^2$.
 Energy flux is $\varepsilon \sim b_a^3/a^2 \sim \gamma_a E_a = \mathrm{const}$.
 Then the nonlinear eddy turnover rate is $\gamma_{nl} \sim (a/L))^\delta b_a/a \sim \varepsilon^{1/3} L^{-1/6} a^{-1/2}$.
-
-
 
 
 \subsection{Tearing in kinetic Alfv\'en wave turbulence}
